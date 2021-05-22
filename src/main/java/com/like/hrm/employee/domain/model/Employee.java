@@ -25,6 +25,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
+ * Aggregate Root
+ * 
  * <p> 직원정보 </p>
  * 
  * @author CB457

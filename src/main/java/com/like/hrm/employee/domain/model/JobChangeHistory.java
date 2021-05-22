@@ -15,10 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateConverter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.core.domain.AuditEntity;
+import com.like.core.util.LocalDateUtil;
 import com.like.core.vo.DatePeriod;
 
 import lombok.AccessLevel;
@@ -56,15 +58,7 @@ public class JobChangeHistory extends AuditEntity implements Serializable {
 	
 	@Column(name="JOB_CODE")
 	private String jobCode;	
-	
-	/*
-	@Column(name="FROM_DT")
-	private LocalDate fromDate;
 		
-	@Column(name="TO_DT")
-	private LocalDate toDate;
-	*/
-	
 	@Embedded
 	private DatePeriod period;
 	
@@ -80,9 +74,9 @@ public class JobChangeHistory extends AuditEntity implements Serializable {
 		this.period 	= period;				
 	}		
 	
-	public boolean isEnabled(LocalDate date) {
-		return  ( date.isAfter(this.period.getFrom()) || date.isEqual(this.period.getFrom()) ) 
-			 && ( date.isBefore(this.period.getTo()) || date.isEqual(this.period.getTo()) ) ? true : false;		
+	public boolean isEnabled(LocalDate date) {				
+		return LocalDateUtil.isAfterOrEqual(date, this.period.getFrom())
+			&& LocalDateUtil.isBeforeOrEqual(date, this.period.getTo()) ? true : false;		
 	}
 	
 	public void expire(LocalDate date) {
