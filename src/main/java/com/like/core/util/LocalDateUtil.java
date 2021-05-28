@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class LocalDateUtil {	
 	
+	public static LocalDate MAX_DATE = LocalDate.of(9999, 12, 31);
+	
 	public static boolean isBeforeOrEqual(LocalDate date, LocalDate compareToDate) {	    	    
 	    return !date.isAfter(compareToDate);
 	}

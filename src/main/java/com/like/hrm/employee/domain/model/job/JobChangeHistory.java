@@ -1,4 +1,4 @@
-package com.like.hrm.employee.domain.model;
+package com.like.hrm.employee.domain.model.job;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,13 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateConverter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.core.domain.AuditEntity;
 import com.like.core.util.LocalDateUtil;
 import com.like.core.vo.DatePeriod;
+import com.like.hrm.employee.domain.model.Employee;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -87,15 +87,15 @@ public class JobChangeHistory extends AuditEntity implements Serializable {
 		}
 	}
 	
-	public boolean equal(String jobType, String jobCode) {
+	boolean equal(String jobType, String jobCode) {
 		return this.jobType.equals(jobType) && this.jobCode.equals(jobCode) ? true : false;
 	}
 	
-	public boolean equalJobType(String jobType) {
+	boolean equalJobType(String jobType) {
 		return this.jobType.equals(jobType) ? true : false;
 	}
 	
-	public boolean equalJobCode(String jobCode) {
+	boolean equalJobCode(String jobCode) {
 		return this.jobCode.equals(jobCode) ? true : false;
 	}
 	

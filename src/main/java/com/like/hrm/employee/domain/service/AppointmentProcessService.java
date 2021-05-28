@@ -13,10 +13,10 @@ import com.like.hrm.appointment.domain.model.AppointmentCode;
 import com.like.hrm.appointment.domain.model.AppointmentList;
 import com.like.hrm.appointment.domain.repository.AppointmentCodeRepository;
 import com.like.hrm.code.domain.model.enums.HrmTypeEnum;
-import com.like.hrm.employee.domain.model.DeptChangeHistory;
 import com.like.hrm.employee.domain.model.Employee;
-import com.like.hrm.employee.domain.model.JobChangeHistory;
-import com.like.hrm.employee.domain.model.StatusChangeHistory;
+import com.like.hrm.employee.domain.model.dept.DeptChangeHistory;
+import com.like.hrm.employee.domain.model.job.JobChangeHistory;
+import com.like.hrm.employee.domain.model.status.StatusChangeHistory;
 import com.like.hrm.employee.domain.repository.EmployeeRepository;
 
 @Service

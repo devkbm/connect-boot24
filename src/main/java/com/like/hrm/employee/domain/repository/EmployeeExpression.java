@@ -10,10 +10,10 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.like.dept.domain.model.QDept;
 import com.like.hrm.employee.domain.model.Employee;
-import com.like.hrm.employee.domain.model.QDeptChangeHistory;
 import com.like.hrm.employee.domain.model.QEmployee;
-import com.like.hrm.employee.domain.model.QJobChangeHistory;
-import com.like.hrm.employee.domain.model.QStatusChangeHistory;
+import com.like.hrm.employee.domain.model.dept.QDeptChangeHistory;
+import com.like.hrm.employee.domain.model.job.QJobChangeHistory;
+import com.like.hrm.employee.domain.model.status.QStatusChangeHistory;
 
 public class EmployeeExpression {
 

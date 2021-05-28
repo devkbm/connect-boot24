@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.hrm.employee.boundary.EmployeeDTO;
-import com.like.hrm.employee.domain.model.Family;
+import com.like.hrm.employee.domain.model.family.Family;
 import com.like.hrm.employee.service.EmployeeFamilyService;
 
 @RestController

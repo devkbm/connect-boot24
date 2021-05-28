@@ -1,4 +1,4 @@
-package com.like.hrm.employee.domain.model.vo;
+package com.like.hrm.employee.domain.model.status;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -8,8 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-
-import com.like.hrm.employee.domain.model.StatusChangeHistory;
 
 import lombok.NoArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.like.hrm.employee.domain.model;
+package com.like.hrm.employee.domain.model.dept;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -20,7 +20,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.core.domain.AuditEntity;
+import com.like.core.util.LocalDateUtil;
 import com.like.core.vo.DatePeriod;
+import com.like.hrm.employee.domain.model.Employee;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -86,8 +88,8 @@ public class DeptChangeHistory extends AuditEntity implements Serializable {
 	 * @return
 	 */
 	public boolean isEnabled(LocalDate date) {		
-		return ( date.isAfter(this.period.getFrom()) || date.isEqual(this.period.getFrom()) ) 
-		 	&& ( date.isBefore(this.period.getTo()) || date.isEqual(this.period.getTo()) ) ? true : false;		
+		return LocalDateUtil.isAfterOrEqual(date, this.period.getFrom())
+			&& LocalDateUtil.isBeforeOrEqual(date, this.period.getTo()) ? true : false;		
 	}
 	
 	/**
@@ -95,7 +97,8 @@ public class DeptChangeHistory extends AuditEntity implements Serializable {
 	 * 예외) 종료일이 시작일보다 이전일 경우 시작일로 변경
 	 * @param date 종료일
 	 */
-	public void expire(LocalDate date) {
+	public void expire(LocalDate date) {		
+		
 		if (date.isAfter(this.period.getFrom())) {
 			this.period = new DatePeriod(this.period.getFrom(), date);
 		} else {
@@ -103,7 +106,7 @@ public class DeptChangeHistory extends AuditEntity implements Serializable {
 		}
 	}
 	
-	public boolean equalDeptHistory(Employee employee, String deptType, String deptCode) {
+	boolean equalDeptHistory(Employee employee, String deptType, String deptCode) {
 		boolean rtn = false;
 		
 		if ( this.employee.equals(employee) 
@@ -115,15 +118,15 @@ public class DeptChangeHistory extends AuditEntity implements Serializable {
 		return rtn;
 	}
 	
-	public boolean equal(String deptType, String deptCode) {
+	boolean equal(String deptType, String deptCode) {
 		return this.deptType.equals(deptType) && this.deptCode.equals(deptCode) ? true : false;
 	}
 	
-	public boolean equalDeptType(String deptType) {
+	boolean equalDeptType(String deptType) {
 		return this.deptType.equals(deptType) ? true : false;
 	}
 	
-	public boolean equalDeptCode(String deptCode) {
+	boolean equalDeptCode(String deptCode) {
 		return this.deptCode.equals(deptCode) ? true : false;
 	}
 				

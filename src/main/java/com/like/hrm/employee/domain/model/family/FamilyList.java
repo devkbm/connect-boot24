@@ -1,4 +1,4 @@
-package com.like.hrm.employee.domain.model.vo;
+package com.like.hrm.employee.domain.model.family;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-
-import com.like.hrm.employee.domain.model.Family;
 
 public class FamilyList {
 

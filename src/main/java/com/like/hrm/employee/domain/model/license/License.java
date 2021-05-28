@@ -1,9 +1,9 @@
-package com.like.hrm.employee.domain.model;
+package com.like.hrm.employee.domain.model.license;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.core.domain.AuditEntity;
-import com.like.core.vo.DatePeriod;
+import com.like.hrm.employee.domain.model.Employee;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -26,7 +26,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * <p>부서 이력 관리 클래스</p>
+ * <p>자격 면허 관리</p>
  * 
  * Unique Index : EMP_ID, DEPT_TYPE, DEPT_CODE <br>
  * [상세] <br>
@@ -36,88 +36,78 @@ import lombok.NoArgsConstructor;
  * 
  */
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"employee"})
-@EqualsAndHashCode(callSuper = false, of = {"id"})
+@EqualsAndHashCode(callSuper = false, of = {"licenseId"})
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "HRMEMPSCHOOLCAREER")
+@Table(name = "HRMEMPLICENSE")
 @EntityListeners(AuditingEntityListener.class)
-public class SchoolCareer extends AuditEntity implements Serializable {
+public class License extends AuditEntity implements Serializable {
 	
 	private static final long serialVersionUID = 5879415854289672377L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID")
-	private Long id;
+	@Column(name="ID", nullable = false)
+	private Long licenseId;
 		
 	/**
-	 * 학력유형
+	 * 자격면허유형
 	 */
-	@Column(name="SCHOOL_CAREER_TYPE")
-	private String schoolCareerType;
+	@Column(name="LICENSE_TYPE", nullable = false)
+	private String licenseType;
 	
 	/**
-	 * 학교코드
+	 * 자격면허코드
 	 */
-	@Column(name="SCHOOL_CODE")
-	private String schoolCode;
-	
-	
-	@Embedded
-	DatePeriod period;
+	@Column(name="LICENSE_CODE", nullable = false)
+	private String licenseCode;
 	
 	/**
-	 * 전공학과명
+	 * 취득일자
 	 */
-	@Column(name="MAJOR_NAME")
-	private String majorName;
+	@Column(name="DATE_OF_ACQUISITION", nullable = true)
+	private LocalDate dateOfAcquisition;
 	
 	/**
-	 * 복수전공학과명
+	 * 인증기관
 	 */
-	@Column(name="PLURAL_MAJOR_NAME")
-	private String pluralMajorName;
+	@Column(name="CERTIFICATION_AUTHORITY", nullable = true)
+	private String certificationAuthority;
 	
 	/**
-	 * 소재지
-	 */	
-	@Column(name="LOCATION")
-	private String location;
-	
-	/**
-	 * 수업연한
+	 * 필수여부
 	 */
-	@Column(name="LESSON_YEAR")
-	private Integer lessonYear;
+	@Column(name="MANDATORY_YN", nullable = false)
+	private Boolean isMandatory;
 	
 	/**
 	 * 설명
 	 */
-	@Column(name="CMT")
+	@Column(name="CMT", nullable = true)
 	private String comment;
-		
-	// 시작일, 종료일, 전공학과명, 복수전공학과명, 학교소재지, 수업연한, 입사학력여부, 수고권대학여부, 야간여부, 이공계여부, 이미지
 	
+	// 취득일자, 자격면허, 자격면허인가번호, 발행기관, 필수면허번호여부, 이미지
+		
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "EMP_ID", nullable=false, updatable=false)
 	private Employee employee;
 	
-	public SchoolCareer(Employee employee
-				    ,String schoolCareerType
-				    ,String schoolCode
-				    ,String comment) {
+	public License(Employee employee
+				  ,String licenseType
+				  ,String licenseCode
+				  ,String comment) {
 		this.employee = employee;
-		this.schoolCareerType = schoolCareerType;
-		this.schoolCode = schoolCode;
+		this.licenseType = licenseType;
+		this.licenseCode = licenseCode;
 		this.comment = comment;
 	}
 	
-	public void modifyEntity(String schoolCareerType
-		    				,String schoolCode
+	public void modifyEntity(String licenseType
+							,String licenseCode
 							,String comment) {
-		this.schoolCareerType = schoolCareerType;
-		this.schoolCode = schoolCode;
+		this.licenseType = licenseType;
+		this.licenseCode = licenseCode;
 		this.comment = comment;		
 	}
 				

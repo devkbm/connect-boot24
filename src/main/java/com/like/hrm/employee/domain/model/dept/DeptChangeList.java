@@ -1,4 +1,4 @@
-package com.like.hrm.employee.domain.model.vo;
+package com.like.hrm.employee.domain.model.dept;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -8,8 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-
-import com.like.hrm.employee.domain.model.DeptChangeHistory;
 
 import lombok.NoArgsConstructor;
 

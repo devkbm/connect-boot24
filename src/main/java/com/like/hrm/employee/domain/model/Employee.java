@@ -13,12 +13,12 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.like.core.domain.AuditEntity;
-import com.like.hrm.employee.domain.model.vo.DeptChangeList;
-import com.like.hrm.employee.domain.model.vo.FamilyList;
-import com.like.hrm.employee.domain.model.vo.JobChangeList;
-import com.like.hrm.employee.domain.model.vo.LicenseList;
-import com.like.hrm.employee.domain.model.vo.SchoolCareerList;
-import com.like.hrm.employee.domain.model.vo.StatusChangeList;
+import com.like.hrm.employee.domain.model.dept.DeptChangeList;
+import com.like.hrm.employee.domain.model.family.FamilyList;
+import com.like.hrm.employee.domain.model.job.JobChangeList;
+import com.like.hrm.employee.domain.model.license.LicenseList;
+import com.like.hrm.employee.domain.model.schoolcareer.SchoolCareerList;
+import com.like.hrm.employee.domain.model.status.StatusChangeList;
 
 import lombok.AccessLevel;
 import lombok.Getter;

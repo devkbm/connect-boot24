@@ -7,10 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.like.core.vo.DatePeriod;
 import com.like.hrm.employee.boundary.EmployeeDTO;
-import com.like.hrm.employee.domain.model.DeptChangeHistory;
 import com.like.hrm.employee.domain.model.Employee;
-import com.like.hrm.employee.domain.model.JobChangeHistory;
-import com.like.hrm.employee.domain.model.StatusChangeHistory;
+import com.like.hrm.employee.domain.model.dept.DeptChangeHistory;
+import com.like.hrm.employee.domain.model.job.JobChangeHistory;
+import com.like.hrm.employee.domain.model.status.StatusChangeHistory;
 import com.like.hrm.employee.domain.repository.EmployeeRepository;
 import com.like.hrm.employee.domain.service.EmployeeIdGenerator;
 
@@ -58,7 +58,7 @@ public class EmployeeService {
 	}
 	
 	public void saveDeptChangeHistory(EmployeeDTO.NewDept dto) {
-		Employee emp = getEmployeeInfo(dto.getEmployeeId());
+		Employee emp = findEmployee(dto.getEmployeeId());
 						
 		DeptChangeHistory deptChangeHistory = new DeptChangeHistory(emp
 																   ,dto.getDeptType()
@@ -71,7 +71,7 @@ public class EmployeeService {
 	}
 	
 	public void saveJobChangeHistory(EmployeeDTO.NewJob dto) {
-		Employee emp = getEmployeeInfo(dto.getEmployeeId());			
+		Employee emp = findEmployee(dto.getEmployeeId());			
 		
 		JobChangeHistory jobChangeHistory = new JobChangeHistory(emp
 																,dto.getJobType()
@@ -83,7 +83,7 @@ public class EmployeeService {
 	}
 	
 	public void saveStatusChangeHistory(EmployeeDTO.NewStatus dto) {
-		Employee emp = getEmployeeInfo(dto.getEmployeeId());
+		Employee emp = findEmployee(dto.getEmployeeId());
 		
 		StatusChangeHistory statusChangeHistory = new StatusChangeHistory(emp
 																		 ,dto.getAppointmentCode()
@@ -94,8 +94,7 @@ public class EmployeeService {
 		repository.save(emp);
 	}	
 	
-	private Employee getEmployeeInfo(String empId) {
-		return repository.findById(empId)
-				 .orElseThrow(() -> new EntityNotFoundException(empId + " 사번이 존재하지 않습니다."));
+	private Employee findEmployee(String empId) {
+		return repository.findById(empId).orElseThrow(() -> new EntityNotFoundException(empId + " 사번이 존재하지 않습니다."));
 	}
 }

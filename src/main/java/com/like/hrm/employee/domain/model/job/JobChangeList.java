@@ -1,4 +1,4 @@
-package com.like.hrm.employee.domain.model.vo;
+package com.like.hrm.employee.domain.model.job;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -8,8 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-
-import com.like.hrm.employee.domain.model.JobChangeHistory;
 
 import lombok.NoArgsConstructor;
 
@@ -96,4 +94,5 @@ public class JobChangeList {
 		
 		return rtn;
 	}
+		
 }

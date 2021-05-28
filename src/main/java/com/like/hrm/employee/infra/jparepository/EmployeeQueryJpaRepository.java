@@ -6,12 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import com.like.hrm.employee.boundary.EmployeeDTO.SearchEmployee;
 import com.like.hrm.employee.domain.model.Employee;
-import com.like.hrm.employee.domain.model.QDeptChangeHistory;
 import com.like.hrm.employee.domain.model.QEmployee;
-import com.like.hrm.employee.domain.model.QJobChangeHistory;
-import com.like.hrm.employee.domain.model.QLicense;
-import com.like.hrm.employee.domain.model.QSchoolCareer;
-import com.like.hrm.employee.domain.model.QStatusChangeHistory;
+import com.like.hrm.employee.domain.model.dept.QDeptChangeHistory;
+import com.like.hrm.employee.domain.model.job.QJobChangeHistory;
+import com.like.hrm.employee.domain.model.license.QLicense;
+import com.like.hrm.employee.domain.model.schoolcareer.QSchoolCareer;
+import com.like.hrm.employee.domain.model.status.QStatusChangeHistory;
 import com.like.hrm.employee.domain.repository.EmployeeQueryRepository;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;

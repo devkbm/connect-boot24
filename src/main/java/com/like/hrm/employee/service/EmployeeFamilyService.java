@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.like.hrm.employee.boundary.EmployeeDTO;
 import com.like.hrm.employee.domain.model.Employee;
-import com.like.hrm.employee.domain.model.Family;
+import com.like.hrm.employee.domain.model.family.Family;
 import com.like.hrm.employee.domain.repository.EmployeeRepository;
 
 @Transactional

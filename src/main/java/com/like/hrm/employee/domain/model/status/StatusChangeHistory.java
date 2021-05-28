@@ -1,4 +1,4 @@
-package com.like.hrm.employee.domain.model;
+package com.like.hrm.employee.domain.model.status;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -20,6 +20,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.core.domain.AuditEntity;
 import com.like.core.vo.DatePeriod;
+import com.like.hrm.employee.domain.model.Employee;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -86,12 +87,12 @@ public class StatusChangeHistory extends AuditEntity implements Serializable {
 	 * @param date
 	 * @return
 	 */
-	public boolean isEnabled(LocalDate date) {
+	boolean isEnabled(LocalDate date) {
 		return  ( date.isAfter(this.period.getFrom()) || date.isEqual(this.period.getFrom()) ) 
 			 && ( date.isBefore(this.period.getTo()) || date.isEqual(this.period.getTo()) ) ? true : false;		
 	}
 	
-	public void expire(LocalDate date) {
+	void expire(LocalDate date) {
 		if (date.isAfter(this.period.getFrom())) {
 			this.period = new DatePeriod(this.period.getFrom(), date);
 		} else {
