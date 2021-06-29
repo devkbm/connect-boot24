@@ -1,0 +1,8 @@
+# 쿠키 저장 없이 로그인
+curl http://localhost:8090/common/user/login -H "Content-Type: application/json" -d "{ \"username\" : \"1\" , \"password\" : \"1234\" }"
+
+# 쿠키 저장 로그인
+curl http://localhost:8090/common/user/login --cookie-jar cjar -H "Content-Type: application/json" -d "{ \"username\" : \"1\" , \"password\" : \"1234\" }"
+
+# 내 정보 조회
+curl http://localhost:8090/common/user/myinfo --cookie cjar
