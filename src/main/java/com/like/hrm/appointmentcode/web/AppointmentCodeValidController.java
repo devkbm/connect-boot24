@@ -1,4 +1,4 @@
-package com.like.hrm.appointment.web;
+package com.like.hrm.appointmentcode.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
-import com.like.hrm.appointment.domain.model.AppointmentCode;
-import com.like.hrm.appointment.domain.repository.AppointmentCodeRepository;
+import com.like.hrm.appointmentcode.domain.AppointmentCode;
+import com.like.hrm.appointmentcode.domain.AppointmentCodeRepository;
 
 @RestController
 public class AppointmentCodeValidController {

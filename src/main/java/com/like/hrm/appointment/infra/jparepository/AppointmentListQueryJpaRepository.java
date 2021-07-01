@@ -8,9 +8,10 @@ import com.like.hrm.appointment.boundary.AppointmentListDTO.SearchAppointmentLis
 import com.like.hrm.appointment.boundary.QQueryAppointmentList;
 import com.like.hrm.appointment.boundary.QueryAppointmentList;
 import com.like.hrm.appointment.domain.model.AppointmentList;
-import com.like.hrm.appointment.domain.model.QAppointmentCode;
+
 import com.like.hrm.appointment.domain.model.QAppointmentList;
 import com.like.hrm.appointment.domain.repository.AppointmentListQueryRepository;
+import com.like.hrm.appointmentcode.domain.QAppointmentCode;
 import com.like.hrm.employee.domain.model.QEmployee;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 

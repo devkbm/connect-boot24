@@ -1,16 +1,17 @@
-package com.like.hrm.appointment.infra.jparepository;
+package com.like.hrm.appointmentcode.infra;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.like.hrm.appointment.boundary.AppointmentCodeDTO.SearchCode;
-import com.like.hrm.appointment.boundary.AppointmentCodeDTO.SearchCodeDetail;
-import com.like.hrm.appointment.domain.model.AppointmentCode;
-import com.like.hrm.appointment.domain.model.AppointmentCodeDetail;
-import com.like.hrm.appointment.domain.model.QAppointmentCode;
-import com.like.hrm.appointment.domain.model.QAppointmentCodeDetail;
-import com.like.hrm.appointment.domain.repository.AppointmentCodeQueryRepository;
+
+import com.like.hrm.appointmentcode.boundary.AppointmentCodeDTO.SearchCode;
+import com.like.hrm.appointmentcode.boundary.AppointmentCodeDTO.SearchCodeDetail;
+import com.like.hrm.appointmentcode.domain.AppointmentCode;
+import com.like.hrm.appointmentcode.domain.AppointmentCodeDetail;
+import com.like.hrm.appointmentcode.domain.AppointmentCodeQueryRepository;
+import com.like.hrm.appointmentcode.domain.QAppointmentCode;
+import com.like.hrm.appointmentcode.domain.QAppointmentCodeDetail;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository

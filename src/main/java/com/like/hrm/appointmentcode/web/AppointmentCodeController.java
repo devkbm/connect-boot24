@@ -1,4 +1,4 @@
-package com.like.hrm.appointment.web;
+package com.like.hrm.appointmentcode.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
-import com.like.hrm.appointment.boundary.AppointmentCodeDTO;
-import com.like.hrm.appointment.domain.model.AppointmentCode;
-import com.like.hrm.appointment.domain.model.AppointmentCodeDetail;
-import com.like.hrm.appointment.service.AppointmentCodeService;
+import com.like.hrm.appointmentcode.boundary.AppointmentCodeDTO;
+import com.like.hrm.appointmentcode.domain.AppointmentCode;
+import com.like.hrm.appointmentcode.domain.AppointmentCodeDetail;
+import com.like.hrm.appointmentcode.service.AppointmentCodeService;
 
 @RestController
 public class AppointmentCodeController {

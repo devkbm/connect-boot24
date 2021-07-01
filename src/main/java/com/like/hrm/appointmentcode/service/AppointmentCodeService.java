@@ -1,4 +1,4 @@
-package com.like.hrm.appointment.service;
+package com.like.hrm.appointmentcode.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +8,11 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.like.hrm.appointment.boundary.AppointmentCodeDTO;
 import com.like.hrm.appointment.boundary.AppointmentListDTO;
-import com.like.hrm.appointment.domain.model.AppointmentCode;
-import com.like.hrm.appointment.domain.model.AppointmentCodeDetail;
-import com.like.hrm.appointment.domain.repository.AppointmentCodeRepository;
+import com.like.hrm.appointmentcode.boundary.AppointmentCodeDTO;
+import com.like.hrm.appointmentcode.domain.AppointmentCode;
+import com.like.hrm.appointmentcode.domain.AppointmentCodeDetail;
+import com.like.hrm.appointmentcode.domain.AppointmentCodeRepository;
 
 @Service
 @Transactional

@@ -1,4 +1,4 @@
-package com.like.hrm.appointment.domain.model;
+package com.like.hrm.appointmentcode.domain;
 
 import java.io.Serializable;
 
@@ -77,7 +77,7 @@ public class AppointmentCodeDetail extends AuditEntity implements Serializable {
 								,HrmTypeEnum changeType
 								,String changeTypeDetail
 								,Integer sequence) {
-		this.id = appointmentCode.code + changeType.toString() + changeTypeDetail;
+		this.id = appointmentCode.getCode() + changeType.toString() + changeTypeDetail;
 		this.appointmentCode = appointmentCode;
 		this.changeType = changeType;
 		this.changeTypeDetail = changeTypeDetail;

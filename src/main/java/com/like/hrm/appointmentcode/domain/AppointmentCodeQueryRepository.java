@@ -1,10 +1,8 @@
-package com.like.hrm.appointment.domain.repository;
+package com.like.hrm.appointmentcode.domain;
 
 import java.util.List;
 
-import com.like.hrm.appointment.boundary.AppointmentCodeDTO;
-import com.like.hrm.appointment.domain.model.AppointmentCode;
-import com.like.hrm.appointment.domain.model.AppointmentCodeDetail;
+import com.like.hrm.appointmentcode.boundary.AppointmentCodeDTO;
 
 public interface AppointmentCodeQueryRepository {
 

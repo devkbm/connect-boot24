@@ -20,10 +20,10 @@ import com.like.hrm.appointment.boundary.AppointmentListDTO;
 import com.like.hrm.appointment.boundary.AppointmentListDTO.SaveAppointmentList;
 import com.like.hrm.appointment.boundary.QueryAppointmentList;
 import com.like.hrm.appointment.domain.model.AppointmentList;
-import com.like.hrm.appointment.service.AppointmentCodeQueryService;
-import com.like.hrm.appointment.service.AppointmentCodeService;
 import com.like.hrm.appointment.service.AppointmentListCommandService;
 import com.like.hrm.appointment.service.AppointmentListQueryService;
+import com.like.hrm.appointmentcode.service.AppointmentCodeQueryService;
+import com.like.hrm.appointmentcode.service.AppointmentCodeService;
 
 import lombok.extern.slf4j.Slf4j;
 

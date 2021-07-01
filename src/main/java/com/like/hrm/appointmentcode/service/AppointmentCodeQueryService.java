@@ -1,4 +1,4 @@
-package com.like.hrm.appointment.service;
+package com.like.hrm.appointmentcode.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.commoncode.domain.repository.CommonCodeQueryRepository;
-import com.like.hrm.appointment.boundary.AppointmentCodeDTO;
 import com.like.hrm.appointment.boundary.ChangeableCodeDTO;
-import com.like.hrm.appointment.boundary.AppointmentCodeDTO.SearchCodeDetail;
-import com.like.hrm.appointment.domain.model.AppointmentCode;
-import com.like.hrm.appointment.domain.model.AppointmentCodeDetail;
-import com.like.hrm.appointment.domain.repository.AppointmentCodeQueryRepository;
+import com.like.hrm.appointmentcode.boundary.AppointmentCodeDTO;
+import com.like.hrm.appointmentcode.boundary.AppointmentCodeDTO.SearchCodeDetail;
+import com.like.hrm.appointmentcode.domain.AppointmentCode;
+import com.like.hrm.appointmentcode.domain.AppointmentCodeDetail;
+import com.like.hrm.appointmentcode.domain.AppointmentCodeQueryRepository;
 import com.like.hrm.code.domain.model.enums.HrmTypeEnum;
 
 @Service

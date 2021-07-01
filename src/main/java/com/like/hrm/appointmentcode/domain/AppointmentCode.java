@@ -1,4 +1,4 @@
-package com.like.hrm.appointment.domain.model;
+package com.like.hrm.appointmentcode.domain;
 
 import java.io.Serializable;
 import java.util.HashMap;

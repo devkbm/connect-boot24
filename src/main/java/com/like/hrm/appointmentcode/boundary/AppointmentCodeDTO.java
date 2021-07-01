@@ -1,4 +1,4 @@
-package com.like.hrm.appointment.boundary;
+package com.like.hrm.appointmentcode.boundary;
 
 import java.io.Serializable;
 
@@ -6,10 +6,10 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.util.StringUtils;
 
-import com.like.hrm.appointment.domain.model.AppointmentCode;
-import com.like.hrm.appointment.domain.model.AppointmentCodeDetail;
-import com.like.hrm.appointment.domain.model.QAppointmentCode;
-import com.like.hrm.appointment.domain.model.QAppointmentCodeDetail;
+import com.like.hrm.appointmentcode.domain.AppointmentCode;
+import com.like.hrm.appointmentcode.domain.AppointmentCodeDetail;
+import com.like.hrm.appointmentcode.domain.QAppointmentCode;
+import com.like.hrm.appointmentcode.domain.QAppointmentCodeDetail;
 import com.like.hrm.code.domain.model.enums.HrmTypeEnum;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
