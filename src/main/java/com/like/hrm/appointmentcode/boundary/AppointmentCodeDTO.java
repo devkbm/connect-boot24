@@ -10,7 +10,7 @@ import com.like.hrm.appointmentcode.domain.AppointmentCode;
 import com.like.hrm.appointmentcode.domain.AppointmentCodeDetail;
 import com.like.hrm.appointmentcode.domain.QAppointmentCode;
 import com.like.hrm.appointmentcode.domain.QAppointmentCodeDetail;
-import com.like.hrm.code.domain.model.enums.HrmTypeEnum;
+import com.like.hrm.hrmtypecode.domain.HrmTypeEnum;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 

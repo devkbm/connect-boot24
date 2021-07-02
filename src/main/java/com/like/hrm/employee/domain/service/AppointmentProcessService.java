@@ -12,12 +12,12 @@ import com.like.hrm.appointment.domain.model.AppointmentChangeInfo;
 import com.like.hrm.appointment.domain.model.AppointmentList;
 import com.like.hrm.appointmentcode.domain.AppointmentCode;
 import com.like.hrm.appointmentcode.domain.AppointmentCodeRepository;
-import com.like.hrm.code.domain.model.enums.HrmTypeEnum;
 import com.like.hrm.employee.domain.model.Employee;
 import com.like.hrm.employee.domain.model.dept.DeptChangeHistory;
 import com.like.hrm.employee.domain.model.job.JobChangeHistory;
 import com.like.hrm.employee.domain.model.status.StatusChangeHistory;
 import com.like.hrm.employee.domain.repository.EmployeeRepository;
+import com.like.hrm.hrmtypecode.domain.HrmTypeEnum;
 
 @Service
 public class AppointmentProcessService {

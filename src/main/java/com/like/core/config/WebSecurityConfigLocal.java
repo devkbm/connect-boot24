@@ -44,6 +44,11 @@ import com.like.user.service.SpringSecurityUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 로컬 테스트용 Spring Secury 설정
+ * CSRF 설정 제거
+ *
+ */
 @Slf4j
 @Configuration
 @EnableWebSecurity
@@ -85,10 +90,7 @@ public class WebSecurityConfigLocal extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		
-		http.csrf()
-				.ignoringAntMatchers(CSRF_IGNORE)				
-				.csrfTokenRepository(csrfTokenRepository()).and()				
-				.addFilterAfter(new CustomCsrfFilter(), CsrfFilter.class)				
+		http.csrf().disable()							
 			.cors().configurationSource(corsConfigurationSource()).and()
 			.headers().frameOptions().disable().and()	// h2-console 테스트를 위한 설정
 			.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()

@@ -13,7 +13,7 @@ import com.like.hrm.appointmentcode.boundary.AppointmentCodeDTO.SearchCodeDetail
 import com.like.hrm.appointmentcode.domain.AppointmentCode;
 import com.like.hrm.appointmentcode.domain.AppointmentCodeDetail;
 import com.like.hrm.appointmentcode.domain.AppointmentCodeQueryRepository;
-import com.like.hrm.code.domain.model.enums.HrmTypeEnum;
+import com.like.hrm.hrmtypecode.domain.HrmTypeEnum;
 
 @Service
 @Transactional(readOnly = true)

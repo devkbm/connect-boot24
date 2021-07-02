@@ -17,7 +17,7 @@ import com.like.hrm.appointment.domain.model.AppointmentList;
 import com.like.hrm.appointment.domain.model.AppointmentRegister;
 import com.like.hrm.appointment.domain.model.QAppointmentList;
 import com.like.hrm.appointmentcode.domain.AppointmentCodeDetail;
-import com.like.hrm.code.domain.model.enums.HrmTypeEnum;
+import com.like.hrm.hrmtypecode.domain.HrmTypeEnum;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
