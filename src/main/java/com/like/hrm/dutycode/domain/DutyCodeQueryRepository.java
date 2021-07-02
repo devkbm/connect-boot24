@@ -1,9 +1,8 @@
-package com.like.hrm.duty.domain.repository;
+package com.like.hrm.dutycode.domain;
 
 import java.util.List;
 
-import com.like.hrm.duty.boundary.DutyCodeDTO;
-import com.like.hrm.duty.domain.model.DutyCode;
+import com.like.hrm.dutycode.boundary.DutyCodeDTO;
 
 public interface DutyCodeQueryRepository {
 	List<DutyCode> getDutyCodeList(DutyCodeDTO.SearchDutyCode condition);

@@ -1,4 +1,4 @@
-package com.like.hrm.duty.boundary;
+package com.like.hrm.dutycode.boundary;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.like.hrm.duty.domain.model.DutyCode;
-import com.like.hrm.duty.domain.model.QDutyCode;
+import com.like.hrm.dutycode.domain.DutyCode;
+import com.like.hrm.dutycode.domain.QDutyCode;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
@@ -42,7 +42,7 @@ public class DutyCodeDTO {
 		}
 		
 		private BooleanExpression likeDutyCode(String dutyCode) {
-			if (StringUtils.isEmpty(dutyCode)) {
+			if (!StringUtils.hasText(dutyCode)) {
 				return null;
 			}
 			
@@ -50,7 +50,7 @@ public class DutyCodeDTO {
 		}
 		
 		private BooleanExpression likeDutyName(String dutyName) {
-			if (StringUtils.isEmpty(dutyName)) {
+			if (!StringUtils.hasText(dutyName)) {
 				return null;
 			}
 			

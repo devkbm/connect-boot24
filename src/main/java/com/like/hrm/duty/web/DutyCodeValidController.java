@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
-import com.like.hrm.duty.domain.repository.DutyCodeRepository;
+import com.like.hrm.dutycode.domain.DutyCodeRepository;
 
 @RestController
 public class DutyCodeValidController {

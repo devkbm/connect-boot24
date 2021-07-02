@@ -1,4 +1,4 @@
-package com.like.hrm.duty.domain.model;
+package com.like.hrm.dutycode.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

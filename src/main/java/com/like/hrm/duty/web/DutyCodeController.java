@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
-import com.like.hrm.duty.boundary.DutyCodeDTO;
-import com.like.hrm.duty.domain.model.DutyCode;
 import com.like.hrm.duty.service.DutyCodeCommandService;
+import com.like.hrm.dutycode.boundary.DutyCodeDTO;
+import com.like.hrm.dutycode.domain.DutyCode;
 
 import lombok.extern.slf4j.Slf4j;
 

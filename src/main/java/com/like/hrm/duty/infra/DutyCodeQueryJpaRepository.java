@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.like.hrm.duty.boundary.DutyCodeDTO.SearchDutyCode;
-import com.like.hrm.duty.domain.model.DutyCode;
-import com.like.hrm.duty.domain.model.QDutyCode;
-import com.like.hrm.duty.domain.repository.DutyCodeQueryRepository;
+import com.like.hrm.dutycode.boundary.DutyCodeDTO.SearchDutyCode;
+import com.like.hrm.dutycode.domain.DutyCode;
+import com.like.hrm.dutycode.domain.DutyCodeQueryRepository;
+import com.like.hrm.dutycode.domain.QDutyCode;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository

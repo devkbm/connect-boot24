@@ -3,13 +3,13 @@ package com.like.hrm.duty.domain.service;
 import java.util.List;
 
 import com.like.hrm.duty.domain.model.DutyApplication;
-import com.like.hrm.duty.domain.model.DutyCode;
-import com.like.hrm.duty.domain.model.DutyCodeRule;
 import com.like.hrm.duty.domain.model.DutyApplicationInputLimitRule;
 import com.like.hrm.duty.domain.repository.DutyApplicationInputLimitRuleRepository;
 import com.like.hrm.duty.domain.repository.DutyApplicationQueryRepository;
 import com.like.hrm.duty.domain.repository.DutyApplicationRepository;
-import com.like.hrm.duty.domain.repository.DutyCodeRepository;
+import com.like.hrm.dutycode.domain.DutyCode;
+import com.like.hrm.dutycode.domain.DutyCodeRepository;
+import com.like.hrm.dutycode.domain.DutyCodeRule;
 
 public class DutyApplicationValidatorService {
 

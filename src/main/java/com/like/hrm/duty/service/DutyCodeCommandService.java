@@ -3,9 +3,9 @@ package com.like.hrm.duty.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.like.hrm.duty.boundary.DutyCodeDTO;
-import com.like.hrm.duty.domain.model.DutyCode;
-import com.like.hrm.duty.domain.repository.DutyCodeRepository;
+import com.like.hrm.dutycode.boundary.DutyCodeDTO;
+import com.like.hrm.dutycode.domain.DutyCode;
+import com.like.hrm.dutycode.domain.DutyCodeRepository;
 
 @Service
 @Transactional

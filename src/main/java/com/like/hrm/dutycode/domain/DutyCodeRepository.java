@@ -1,9 +1,7 @@
-package com.like.hrm.duty.domain.repository;
+package com.like.hrm.dutycode.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-
-import com.like.hrm.duty.domain.model.DutyCode;
 
 public interface DutyCodeRepository extends JpaRepository<DutyCode, String>, QuerydslPredicateExecutor<DutyCode> {
 

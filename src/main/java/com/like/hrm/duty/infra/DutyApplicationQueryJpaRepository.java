@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.like.hrm.duty.boundary.DutyApplicationDTO.SearchDutyApplication;
 import com.like.hrm.duty.domain.model.DutyApplication;
-import com.like.hrm.duty.domain.model.DutyCode;
 import com.like.hrm.duty.domain.model.QDutyApplication;
 import com.like.hrm.duty.domain.repository.DutyApplicationQueryRepository;
+import com.like.hrm.dutycode.domain.DutyCode;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository

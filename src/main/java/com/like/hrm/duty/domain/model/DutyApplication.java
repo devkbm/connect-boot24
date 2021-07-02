@@ -31,6 +31,9 @@ import lombok.NoArgsConstructor;
 /**
  * Aggregation Root
  *  
+ * 근태시작일시 ~ 종료일시의 시간이 포함되려면 연속된 근태여야 함 </br>
+ * 연속된 근태가 아닐 경우 DutyApplicationDate에서 구분이 불가능
+ *  
  * @author CB457 
  */
 @Builder(builderClassName = "dtoBuilder", builderMethodName = "dtoBuilder")

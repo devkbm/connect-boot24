@@ -1,4 +1,4 @@
-package com.like.hrm.duty.domain.model;
+package com.like.hrm.dutycode.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;

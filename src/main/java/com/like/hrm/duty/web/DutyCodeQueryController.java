@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
-import com.like.hrm.duty.boundary.DutyCodeDTO;
-import com.like.hrm.duty.domain.model.DutyCode;
 import com.like.hrm.duty.service.DutyCodeQueryService;
+import com.like.hrm.dutycode.boundary.DutyCodeDTO;
+import com.like.hrm.dutycode.domain.DutyCode;
 
 @RestController
 public class DutyCodeQueryController {
