@@ -32,7 +32,7 @@ public class HrmRelationCodeQueryJpaRepository implements HrmRelationCodeQueryRe
 	public List<SaveHrmRelationCode> getRelationCodeList(SearchHrmRelationCode condition) {
 		QHrmType qHrmType2 = QHrmType.hrmType1;
 		QHrmTypeDetailCode qHrmTypeDetailCode2 = QHrmTypeDetailCode.hrmTypeDetailCode;
-		
+		/*
 		return queryFactory
 				.select(new QSaveHrmRelationCode(
 						qHrmRelationCode.relationId
@@ -60,6 +60,8 @@ public class HrmRelationCodeQueryJpaRepository implements HrmRelationCodeQueryRe
 					.on(qHrmRelationCode.childDetailId.eq(qHrmTypeDetailCode2.id))
 				.where(condition.getBooleanBuilder())
 				.fetch();
+				*/
+		return null;
 	}
 	
 	

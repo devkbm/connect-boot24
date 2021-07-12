@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 
 
 import com.like.hrm.hrmtypecode.domain.HrmTypeDetailCode;
+import com.like.hrm.hrmtypecode.domain.HrmTypeDetailCodeId;
 import com.like.hrm.hrmtypecode.domain.QHrmTypeDetailCode;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -40,7 +41,7 @@ public class HrmTypeDetailCodeDTO {
 			BooleanBuilder builder = new BooleanBuilder();
 			
 			builder
-				.and(eqTypeId(this.typeId))
+				//.and(eqTypeId(this.typeId))
 				.and(likeCodeName(this.codeName));
 						
 			return builder;
@@ -48,11 +49,11 @@ public class HrmTypeDetailCodeDTO {
 		
 		private BooleanExpression eqTypeId(String typeId) {			
 			
-			return qType.typeId.eq(typeId);
+			return null; //qType.typeId.eq(typeId);
 		}
 		
 		private BooleanExpression likeCodeName(String codeName) {
-			if (StringUtils.isEmpty(codeName)) {
+			if (!StringUtils.hasText(codeName)) {
 				return null;
 			}
 			
@@ -67,12 +68,10 @@ public class HrmTypeDetailCodeDTO {
 	public static class SaveCode implements Serializable {					
 				
 		private static final long serialVersionUID = -4493967354550706137L;
-
-		private String id;
+			
+		private String typeCode;
 		
-		private String typeId;
-		
-		private String code;
+		private String detailCode;
 		
 		private String codeName;					
 			
@@ -83,28 +82,26 @@ public class HrmTypeDetailCodeDTO {
 		private String comment;
 		
 		public HrmTypeDetailCode newTypeDetailCode() {
-			return new HrmTypeDetailCode(this.typeId
-									 ,this.code
-							  		 ,this.codeName
-							  		 ,this.useYn
-							   		 ,this.sequence
-							   		 ,this.comment);
+			return new HrmTypeDetailCode(new HrmTypeDetailCodeId(typeCode, detailCode)										
+								  		,this.codeName
+								  		,this.useYn
+								   		,this.sequence
+								   		,this.comment);
 		}
 			
 		public HrmTypeDetailCode changeInfo(HrmTypeDetailCode entity) {
-			entity.changeInfo(this.codeName
-							 ,this.useYn
-							 ,this.sequence
-							 ,this.comment);
+			entity.modify(this.codeName
+						 ,this.useYn
+						 ,this.sequence
+						 ,this.comment);
 			return entity;
 		}
 
 		public static SaveCode convert(HrmTypeDetailCode entity) {
 			if (entity == null) return null;
 			
-			return new SaveCode(entity.getId()
-							   ,entity.getTypeId() 
-					           ,entity.getCode()
+			return new SaveCode(entity.getId().getTypeCode()
+							   ,entity.getId().getDetailCode()
 					           ,entity.getCodeName()
 					           ,entity.isUseYn()
 					           ,entity.getSequence()

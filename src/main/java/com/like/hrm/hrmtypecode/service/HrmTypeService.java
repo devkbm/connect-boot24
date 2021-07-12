@@ -34,7 +34,7 @@ public class HrmTypeService {
 	}
 	
 	public void saveHrmType(HrmTypeDTO.SaveCode dto) {
-		HrmType hrmType = dto.getId() == null ? null : hrmTypeRepository.findById(dto.getId()).orElse(null);			
+		HrmType hrmType = null; //= dto.getId() == null ? null : hrmTypeRepository.findById(dto.getId()).orElse(null);			
 		
 		if (hrmType == null) {
 			hrmType = dto.newHrmType();
@@ -61,10 +61,11 @@ public class HrmTypeService {
 	
 	public void saveTypeDetailCode(HrmTypeDetailCodeDTO.SaveCode dto) {		
 		HrmTypeDetailCode typeDetailCode = null;
-		
+		/*
 		if (dto.getId() != null) {
 			typeDetailCode = this.getTypeDetailCode(dto.getId());
 		}
+		*/
 		
 		if (typeDetailCode == null) {
 			typeDetailCode = dto.newTypeDetailCode();

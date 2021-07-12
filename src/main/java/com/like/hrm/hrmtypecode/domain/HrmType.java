@@ -16,62 +16,53 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "HRMTYPECODE")
+@Table(name = "HRMTYPECODE2")
 public class HrmType extends AuditEntity {
-	
-	@Id	
-	@Column(name="TYPE_ID")
-	private String id;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name="TYPE_CODE")
-	private HrmTypeEnum hrmType;
 		
-	@Column(name="CODE")
+	@Id
+	@Column(name="TYPE_CODE")
 	private String code;
 	
-	@Column(name="CODE_NAME")
+	@Column(name="TYPE_CODE_NAME")
 	private String codeName;
-		
+	
 	@Column(name="USE_YN")
 	private boolean useYn = true;
-
+	
 	@Column(name="PRT_SEQ")
 	private Integer sequence;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(name="APPOINT_TYPE_CODE")
+	private HrmTypeEnum hrmType;
+				
 	@Column(name="CMT")
 	private String comment;		
-
-	/**
-	 * @param id
-	 * @param code
-	 * @param codeName
-	 * @param useYn
-	 * @param sequence
-	 * @param comment
-	 */
-	public HrmType(HrmTypeEnum hrmType
-				  ,String code
+	
+	public HrmType(String code
 				  ,String codeName
 				  ,boolean useYn
 				  ,Integer sequence
-				  ,String comment) {
-		this.id = hrmType + code;
+				  ,HrmTypeEnum hrmType				  
+				  ,String comment) {		
 		this.hrmType = hrmType;
 		this.code = code;
 		this.codeName = codeName;
 		this.useYn = useYn;
 		this.sequence = sequence;
+		this.hrmType = hrmType;
 		this.comment = comment;
 	}
 	
-	public void changeInfo(String codeName
-						  ,boolean useYn
-						  ,Integer sequence
-						  ,String comment ) {		
+	public void modify(String codeName
+					  ,boolean useYn
+					  ,Integer sequence
+					  ,HrmTypeEnum hrmType
+					  ,String comment ) {		
 		this.codeName = codeName;
 		this.useYn = useYn;
 		this.sequence = sequence;
+		this.hrmType = hrmType;
 		this.comment = comment;
 	}	
 	

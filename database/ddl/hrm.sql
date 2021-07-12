@@ -1,3 +1,32 @@
+create table if not exists COM.HRMTYPECODE2 (
+	SYS_DT					DATETIME		NULL		COMMENT '최초등록일시',
+	SYS_USER 				VARCHAR(20)		NULL		COMMENT '최초등록유저',
+	UPD_DT					DATETIME		NULL		COMMENT '최종수정일시',
+	UPD_USER				VARCHAR(20)		NULL		COMMENT '최종수정유저',    
+    TYPE_CODE				VARCHAR(10) 	NOT NULL 	COMMENT '구분코드',    
+	TYPE_CODE_NAME			VARCHAR(500) 	NOT NULL 	COMMENT '구분코드명칭',
+	USE_YN					BOOLEAN			NOT NULL 	COMMENT '사용여부',		
+	PRT_SEQ					INT				NULL		COMMENT '출력순서',
+	APPOINT_TYPE_CODE		VARCHAR(2)		NULL		COMMENT '발령구분코드',	
+	CMT						VARCHAR(2000) 	NULL 		COMMENT '비고',
+	constraint pk_hrmtypecode primary key(TYPE_CODE)	
+) COMMENT = '인사시스템구분코드정보';
+
+create table if not exists COM.HRMTYPEDETAILCODE (
+	SYS_DT					DATETIME		NULL		COMMENT '최초등록일시',
+	SYS_USER 				VARCHAR(20)		NULL		COMMENT '최초등록유저',
+	UPD_DT					DATETIME		NULL		COMMENT '최종수정일시',
+	UPD_USER				VARCHAR(20)		NULL		COMMENT '최종수정유저',
+	TYPE_CODE				VARCHAR(10)		NOT NULL	COMMENT '구분코드',
+    DETAIL_CODE				VARCHAR(20) 	NOT NULL 	COMMENT '상세코드',           
+	DETAIL_CODE_NAME		VARCHAR(500) 	NOT NULL 	COMMENT '상세코드명칭',
+	USE_YN					BOOLEAN			NOT NULL 	COMMENT '사용여부',		
+	PRT_SEQ					INT				NULL		COMMENT '출력순서',	
+	CMT						VARCHAR(2000) 	NULL 		COMMENT '비고',
+	constraint pk_hrmtypedetailcode primary key(TYPE_CODE, DETAIL_CODE),
+	constraint fk_hrmtypedetailcode foreign key(TYPE_CODE) references HRMTYPECODE2(TYPE_CODE)
+) COMMENT = '인사시스템상세코드정보';
+
 create table if not exists COM.HRMTYPECODE (
 	SYS_DT					DATETIME		NULL		COMMENT '최초등록일시',
 	SYS_USER 				VARCHAR(20)		NULL		COMMENT '최초등록유저',

@@ -3,8 +3,8 @@ package com.like.hrm.hrmtypecode.domain;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -20,22 +20,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "HRMTYPECODEDETAIL")
+@Table(name = "HRMTYPEDETAILCODE")
 public class HrmTypeDetailCode implements Serializable {		
 	
 	private static final long serialVersionUID = 5468996305272335478L;
 
-	@Id	
-	@Column(name="DETAIL_ID")
-	private String id;
+	@EmbeddedId		
+	private HrmTypeDetailCodeId id;		
 	
-	@Column(name="TYPE_ID")
-	private String typeId;
-	
-	@Column(name="CODE")
-	private String code;
-	
-	@Column(name="CODE_NAME")
+	@Column(name="DETAIL_CODE_NAME")
 	private String codeName;
 		
 	@Column(name="USE_YN")
@@ -49,35 +42,23 @@ public class HrmTypeDetailCode implements Serializable {
 	
 	@Transient
 	private String relCode;
-	
-	/**
-	 * 
-	 * @param typeId
-	 * @param code
-	 * @param codeName
-	 * @param useYn
-	 * @param sequence
-	 * @param comment
-	 */
-	public HrmTypeDetailCode(String typeId
-						 ,String code
-						 ,String codeName
-						 ,boolean useYn
-						 ,Integer sequence
-						 ,String comment) {		
-		this.id = typeId + code;
-		this.typeId = typeId;
-		this.code = code;
+		
+	public HrmTypeDetailCode(HrmTypeDetailCodeId id						 
+						 	,String codeName
+						 	,boolean useYn
+						 	,Integer sequence
+						 	,String comment) {		
+		this.id = id;				
 		this.codeName = codeName;		
 		this.useYn = useYn;
 		this.sequence = sequence;
 		this.comment = comment;
 	}
 		
-	public void changeInfo(String codeName
-						  ,boolean useYn
-						  ,Integer sequence
-						  ,String comment ) {	
+	public void modify(String codeName
+					  ,boolean useYn
+					  ,Integer sequence
+					  ,String comment ) {	
 		this.codeName = codeName;
 		this.useYn = useYn;
 		this.sequence = sequence;

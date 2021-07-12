@@ -43,7 +43,7 @@ public class HrmTypeDTO {
 		}
 		
 		private BooleanExpression eqHrmType(String hrmType) {
-			if (StringUtils.isEmpty(hrmType)) {
+			if (!StringUtils.hasText(hrmType)) {
 				return null;
 			}
 			
@@ -51,7 +51,7 @@ public class HrmTypeDTO {
 		}
 		
 		private BooleanExpression likeCodeName(String codeName) {
-			if (StringUtils.isEmpty(codeName)) {
+			if (!StringUtils.hasText(codeName)) {
 				return null;
 			}
 			
@@ -67,11 +67,7 @@ public class HrmTypeDTO {
 	public static class SaveCode implements Serializable {
 				
 		private static final long serialVersionUID = -4482323353197356218L;
-					
-		private String id;
-		
-		private String hrmType;
-		
+											
 		private String code;			
 			
 		private String codeName;					
@@ -80,33 +76,35 @@ public class HrmTypeDTO {
 		
 		private Integer sequence;
 		
+		private String hrmType;
+		
 		private String comment;
 				
 		public HrmType newHrmType() {
-			return new HrmType(HrmTypeEnum.valueOf(this.hrmType)
-					          ,this.code 
+			return new HrmType(this.code 
 					   		  ,this.codeName
 					   		  ,this.useYn
 					   		  ,this.sequence
+					   		  ,HrmTypeEnum.valueOf(this.hrmType)
 					   		  ,this.comment);
 		}
 		
 		public HrmType changeInfo(HrmType entity) {
-			entity.changeInfo(this.codeName
-							 ,this.useYn
-							 ,this.sequence
-							 ,this.comment);
+			entity.modify(this.codeName
+						 ,this.useYn
+						 ,this.sequence
+						 ,HrmTypeEnum.valueOf(this.hrmType)
+						 ,this.comment);
 			return entity;
 		}
 		
 		public static SaveCode convert(HrmType entity) {
 						
-			return new SaveCode(entity.getId()
-					           ,entity.getHrmType().toString()
-							   ,entity.getCode()
-							   ,entity.getCodeName()
+			return new SaveCode(entity.getCode()
+					           ,entity.getCodeName()					           
 							   ,entity.isUseYn()
 							   ,entity.getSequence()
+							   ,entity.getHrmType().toString()
 							   ,entity.getComment());
 			
 		}
