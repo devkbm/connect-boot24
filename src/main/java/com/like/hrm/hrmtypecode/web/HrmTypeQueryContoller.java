@@ -2,6 +2,7 @@ package com.like.hrm.hrmtypecode.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,18 +45,29 @@ public class HrmTypeQueryContoller {
 	@GetMapping("/hrm/hrmtype")
 	public ResponseEntity<?> getHrmTypeList(HrmTypeDTO.SearchHrmType dto) {
 		
-		List<HrmType> list = service.getHrmDeptTypeList(dto);												
-					
+		//List<HrmType> list = service.getHrmDeptTypeList(dto);												
+		
+		List<HrmTypeDTO.SaveCode> list = service.getHrmDeptTypeList(dto)
+												.stream()
+												.map(e -> HrmTypeDTO.SaveCode.convert(e))
+												.collect(Collectors.toList());
+		
+		//HrmTypeDTO.SaveCode.convert(entity)
 		return WebControllerUtil.getResponse(list											
 											,String.format("%d 건 조회되었습니다.", list.size())
 											,HttpStatus.OK);
 	}
 	
-	@GetMapping("/hrm/typedetailcode")
+	@GetMapping("/hrm/hrmtype/{type}/code")
 	public ResponseEntity<?> getHrmTypeDetailCodeList(HrmTypeDetailCodeDTO.SearchHrmTypeDetailCode dto) {
 		
-		List<HrmTypeDetailCode> list = service.getHrmDeptTypeList(dto);												
-					
+		//List<HrmTypeDetailCode> list = service.getHrmDeptTypeList(dto);												
+		
+		List<HrmTypeDetailCodeDTO.SaveCode> list = service.getHrmDeptTypeList(dto)
+														  .stream()
+														  .map(e -> HrmTypeDetailCodeDTO.SaveCode.convert(e))
+														  .collect(Collectors.toList());
+		
 		return WebControllerUtil.getResponse(list											
 											,String.format("%d 건 조회되었습니다.", list.size())
 											,HttpStatus.OK);

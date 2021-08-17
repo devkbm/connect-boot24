@@ -14,15 +14,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Embeddable
 public class HrmTypeDetailCodeId implements Serializable {
+	
+	private static final long serialVersionUID = 7109505610396778407L;
 
 	@Column(name="TYPE_CODE")
-	String typeCode;
+	String codeType;
 		
 	@Column(name="DETAIL_CODE")
-	String detailCode;	
+	String code;	
 	
-	public HrmTypeDetailCodeId(String typeCode, String detailCode) {
-		this.typeCode = typeCode;
-		this.detailCode = detailCode;
+	public HrmTypeDetailCodeId(String codeType, String code) {
+		this.codeType = codeType;
+		this.code = code;
 	}
 }

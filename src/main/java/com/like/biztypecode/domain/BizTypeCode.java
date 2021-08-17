@@ -1,6 +1,7 @@
-package com.like.hrm.hrmtypecode.domain;
+package com.like.biztypecode.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,9 +17,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "HRMTYPECODE")
-public class HrmType extends AuditEntity {
-		
+@Table(name = "BIZTYPECODE")
+public class BizTypeCode extends AuditEntity {
+
 	@Id
 	@Column(name="TYPE_CODE")
 	private String id;
@@ -33,37 +34,30 @@ public class HrmType extends AuditEntity {
 	private Integer sequence;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="APPOINT_TYPE_CODE")
-	private HrmTypeEnum hrmType;
-				
+	@Column(name="BIZ_TYPE")
+	private BizTypeEnum bizType;
+		
+	@Embedded
+	BizRuleComments ruleComments;
+		
 	@Column(name="CMT")
-	private String comment;		
+	private String comment;
 	
-	public HrmType(String id
-				  ,String name
-				  ,boolean useYn
-				  ,Integer sequence
-				  ,HrmTypeEnum hrmType				  
-				  ,String comment) {		
-		this.hrmType = hrmType;
+	public BizTypeCode(String id, String name, boolean useYn, Integer sequence, BizTypeEnum bizType, String comment) {
 		this.id = id;
 		this.name = name;
 		this.useYn = useYn;
 		this.sequence = sequence;
-		this.hrmType = hrmType;
-		this.comment = comment;
-	}
-	
-	public void modify(String name
-					  ,boolean useYn
-					  ,Integer sequence
-					  ,HrmTypeEnum hrmType
-					  ,String comment ) {		
-		this.name = name;
-		this.useYn = useYn;
-		this.sequence = sequence;
-		this.hrmType = hrmType;
+		this.bizType = bizType;
 		this.comment = comment;
 	}	
 	
+	public void modify(String name, boolean useYn, Integer sequence, BizRuleComments ruleComments, String comment) {
+		this.name = name;
+		this.useYn = useYn;
+		this.sequence = sequence;
+		this.ruleComments = ruleComments;
+		this.comment = comment;
+	}
+		
 }

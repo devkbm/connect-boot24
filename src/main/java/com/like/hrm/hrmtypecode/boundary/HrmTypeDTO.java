@@ -25,12 +25,12 @@ public class HrmTypeDTO {
 		private static final long serialVersionUID = 1L;
 
 		private final QHrmType qType = QHrmType.hrmType1;
-				
-		private String hrmType;
-		
+						
 		private String code;
 		
-		private String codeName;				
+		private String codeName;
+		
+		private String hrmType;
 					
 		public BooleanBuilder getBooleanBuilder() {
 			BooleanBuilder builder = new BooleanBuilder();
@@ -55,7 +55,7 @@ public class HrmTypeDTO {
 				return null;
 			}
 			
-			return qType.codeName.like("%" + codeName + "%");
+			return qType.name.like("%" + codeName + "%");
 		}
 				
 	}
@@ -85,7 +85,7 @@ public class HrmTypeDTO {
 					   		  ,this.codeName
 					   		  ,this.useYn
 					   		  ,this.sequence
-					   		  ,HrmTypeEnum.valueOf(this.hrmType)
+					   		  ,hrmType == null ? null : HrmTypeEnum.valueOf(this.hrmType)
 					   		  ,this.comment);
 		}
 		
@@ -93,18 +93,18 @@ public class HrmTypeDTO {
 			entity.modify(this.codeName
 						 ,this.useYn
 						 ,this.sequence
-						 ,HrmTypeEnum.valueOf(this.hrmType)
+						 ,hrmType == null ? null : HrmTypeEnum.valueOf(this.hrmType)
 						 ,this.comment);
 			return entity;
 		}
 		
 		public static SaveCode convert(HrmType entity) {
 						
-			return new SaveCode(entity.getCode()
-					           ,entity.getCodeName()					           
+			return new SaveCode(entity.getId()
+					           ,entity.getName()					           
 							   ,entity.isUseYn()
 							   ,entity.getSequence()
-							   ,entity.getHrmType().toString()
+							   ,entity.getHrmType() == null ? null : entity.getHrmType().toString()
 							   ,entity.getComment());
 			
 		}

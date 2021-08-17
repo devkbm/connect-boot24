@@ -7,6 +7,7 @@ import com.like.hrm.hrmtypecode.boundary.HrmTypeDTO;
 import com.like.hrm.hrmtypecode.boundary.HrmTypeDetailCodeDTO;
 import com.like.hrm.hrmtypecode.domain.HrmType;
 import com.like.hrm.hrmtypecode.domain.HrmTypeDetailCode;
+import com.like.hrm.hrmtypecode.domain.HrmTypeDetailCodeId;
 import com.like.hrm.hrmtypecode.domain.HrmTypeDetailCodeRepository;
 import com.like.hrm.hrmtypecode.domain.HrmTypeRepository;
 
@@ -49,11 +50,12 @@ public class HrmTypeService {
 		hrmTypeRepository.deleteById(id);				
 	}
 	
-	public HrmTypeDetailCode getTypeDetailCode(String id) {
+	public HrmTypeDetailCode getTypeDetailCode(HrmTypeDetailCodeId id) {
 		return hrmTypeDetailCodeRepository.findById(id).orElse(null);
 	}
 	
-	public HrmTypeDetailCodeDTO.SaveCode getTypeDetailCodeDTO(String id) {
+	public HrmTypeDetailCodeDTO.SaveCode getTypeDetailCodeDTO(HrmTypeDetailCodeId id) {
+		
 		HrmTypeDetailCode entity = hrmTypeDetailCodeRepository.findById(id).orElse(null);				
 		
 		return HrmTypeDetailCodeDTO.SaveCode.convert(entity);
@@ -76,7 +78,7 @@ public class HrmTypeService {
 		hrmTypeDetailCodeRepository.save(typeDetailCode);
 	}
 	
-	public void deleteTypeDetailCode(String id) {
+	public void deleteTypeDetailCode(HrmTypeDetailCodeId id) {
 		hrmTypeDetailCodeRepository.deleteById(id);
 	}		
 	

@@ -15,6 +15,7 @@ import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.hrm.hrmtypecode.boundary.HrmTypeDTO;
 import com.like.hrm.hrmtypecode.boundary.HrmTypeDetailCodeDTO;
+import com.like.hrm.hrmtypecode.domain.HrmTypeDetailCodeId;
 import com.like.hrm.hrmtypecode.service.HrmTypeService;
 
 @RestController
@@ -62,17 +63,17 @@ public class HrmTypeController {
 	}			
 	
 	
-	@GetMapping("/hrm/typedetailcode/{id}")
-	public ResponseEntity<?> getTypeDetailCode(@PathVariable(value="id") String id) {
+	@GetMapping("/hrm/hrmtype/{type}/code/{code}")
+	public ResponseEntity<?> getTypeDetailCode(@PathVariable(value="type") String type, @PathVariable(value="code") String code) {
 		
-		HrmTypeDetailCodeDTO.SaveCode dto = service.getTypeDetailCodeDTO(id);
+		HrmTypeDetailCodeDTO.SaveCode dto = service.getTypeDetailCodeDTO(new HrmTypeDetailCodeId(type, code));
 					
 		return WebControllerUtil.getResponse(dto
 											,String.format("%d 건 조회되었습니다.", dto == null ? 0 : 1)
 											,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/hrm/typedetailcode"}, method={RequestMethod.POST,RequestMethod.PUT}) 
+	@RequestMapping(value={"/hrm/hrmtype/{type}/code"}, method={RequestMethod.POST,RequestMethod.PUT}) 
 	public ResponseEntity<?> saveTypeDetailCode(@RequestBody HrmTypeDetailCodeDTO.SaveCode dto, BindingResult result) {				
 		
 		if ( result.hasErrors()) {			
@@ -86,10 +87,10 @@ public class HrmTypeController {
 											,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/hrm/typedetailcode/{id}")
-	public ResponseEntity<?> deleteTypeDetailCode(@PathVariable(value="id") String id) {				
+	@DeleteMapping("/hrm/hrmtype/{type}/code/{code}")
+	public ResponseEntity<?> deleteTypeDetailCode(@PathVariable(value="type") String type, @PathVariable(value="code") String code) {				
 																		
-		service.deleteTypeDetailCode(id);						
+		service.deleteTypeDetailCode(new HrmTypeDetailCodeId(type, code));						
 								 					
 		return WebControllerUtil.getResponse(null											
 											,String.format("%d 건 삭제되었습니다.", 1)

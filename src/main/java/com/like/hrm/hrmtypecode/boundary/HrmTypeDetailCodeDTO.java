@@ -69,9 +69,9 @@ public class HrmTypeDetailCodeDTO {
 				
 		private static final long serialVersionUID = -4493967354550706137L;
 			
-		private String typeCode;
+		private String codeType;
 		
-		private String detailCode;
+		private String code;
 		
 		private String codeName;					
 			
@@ -82,7 +82,7 @@ public class HrmTypeDetailCodeDTO {
 		private String comment;
 		
 		public HrmTypeDetailCode newTypeDetailCode() {
-			return new HrmTypeDetailCode(new HrmTypeDetailCodeId(typeCode, detailCode)										
+			return new HrmTypeDetailCode(new HrmTypeDetailCodeId(codeType, code)										
 								  		,this.codeName
 								  		,this.useYn
 								   		,this.sequence
@@ -100,8 +100,8 @@ public class HrmTypeDetailCodeDTO {
 		public static SaveCode convert(HrmTypeDetailCode entity) {
 			if (entity == null) return null;
 			
-			return new SaveCode(entity.getId().getTypeCode()
-							   ,entity.getId().getDetailCode()
+			return new SaveCode(entity.getId().getCodeType()
+							   ,entity.getId().getCode()
 					           ,entity.getCodeName()
 					           ,entity.isUseYn()
 					           ,entity.getSequence()
