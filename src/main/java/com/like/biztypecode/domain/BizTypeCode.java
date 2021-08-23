@@ -28,7 +28,7 @@ public class BizTypeCode extends AuditEntity {
 	private String name;
 	
 	@Column(name="USE_YN")
-	private boolean useYn = true;
+	private Boolean useYn = true;
 	
 	@Column(name="PRT_SEQ")
 	private Integer sequence;
@@ -43,7 +43,7 @@ public class BizTypeCode extends AuditEntity {
 	@Column(name="CMT")
 	private String comment;
 	
-	public BizTypeCode(String id, String name, boolean useYn, Integer sequence, BizTypeEnum bizType, String comment) {
+	public BizTypeCode(String id, String name, Boolean useYn, Integer sequence, BizTypeEnum bizType, String comment) {
 		this.id = id;
 		this.name = name;
 		this.useYn = useYn;
@@ -52,7 +52,7 @@ public class BizTypeCode extends AuditEntity {
 		this.comment = comment;
 	}	
 	
-	public void modify(String name, boolean useYn, Integer sequence, BizRuleComments ruleComments, String comment) {
+	public void modify(String name, Boolean useYn, Integer sequence, BizRuleComments ruleComments, String comment) {
 		this.name = name;
 		this.useYn = useYn;
 		this.sequence = sequence;
