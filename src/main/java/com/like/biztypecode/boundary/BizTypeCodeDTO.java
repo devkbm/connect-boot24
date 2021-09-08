@@ -107,6 +107,9 @@ public class BizTypeCodeDTO {
 		}
 		
 		public static SaveDTO convert(BizTypeCode entity) {
+			
+			if (entity == null) return null;
+			
 			return new SaveDTO(entity.getId()
 							  ,entity.getName()
 							  ,entity.getUseYn()

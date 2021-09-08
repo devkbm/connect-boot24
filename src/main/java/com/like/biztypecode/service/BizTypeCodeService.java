@@ -22,12 +22,12 @@ public class BizTypeCodeService {
 	}
 	
 	public void saveBizTypeCode(BizTypeCodeDTO.SaveDTO dto) {
-		BizTypeCode entity = null;
+		BizTypeCode entity = this.getBizTypeCode(dto.getId());
 		
-		if (dto.getId() != null) {
-			entity = this.getBizTypeCode(dto.getId());
+		if (entity == null) {
+			entity = dto.newEntity();			
 		} else {
-			entity = dto.newEntity();
+			dto.modify(entity);
 		}
 		
 		repository.save(entity);
