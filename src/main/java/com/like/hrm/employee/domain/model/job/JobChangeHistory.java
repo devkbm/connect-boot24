@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.core.domain.AuditEntity;
 import com.like.core.util.LocalDateUtil;
 import com.like.core.vo.DatePeriod;
-import com.like.hrm.employee.domain.model.Employee;
+import com.like.hrm.staff.domain.model.Staff;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -64,10 +64,10 @@ public class JobChangeHistory extends AuditEntity implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "EMP_ID", nullable=false, updatable=false)
-	private Employee employee;
+	private Staff employee;
 
 	@Builder
-	public JobChangeHistory(Employee employee, String jobType, String jobCode, DatePeriod period) {
+	public JobChangeHistory(Staff employee, String jobType, String jobCode, DatePeriod period) {
 		this.employee 	= employee;
 		this.jobType 	= jobType;
 		this.jobCode 	= jobCode;	

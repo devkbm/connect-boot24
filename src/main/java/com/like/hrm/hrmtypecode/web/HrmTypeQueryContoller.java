@@ -10,12 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
-import com.like.hrm.appointment.boundary.ChangeableTypeDTO;
-import com.like.hrm.appointment.boundary.ChangeableTypeDTO.EnumDTO;
 import com.like.hrm.hrmtypecode.boundary.HrmTypeDTO;
 import com.like.hrm.hrmtypecode.boundary.HrmTypeDetailCodeDTO;
-import com.like.hrm.hrmtypecode.domain.HrmType;
-import com.like.hrm.hrmtypecode.domain.HrmTypeDetailCode;
 import com.like.hrm.hrmtypecode.domain.HrmTypeEnum;
 import com.like.hrm.hrmtypecode.service.HrmTypeQueryService;
 
@@ -31,10 +27,15 @@ public class HrmTypeQueryContoller {
 	@GetMapping("/hrm/typelist")
 	public ResponseEntity<?> getTypeList() {
 		
-		List<ChangeableTypeDTO.EnumDTO> list = new ArrayList<ChangeableTypeDTO.EnumDTO>();
+		List<HrmTypeDTO.SaveCode> list = new ArrayList<HrmTypeDTO.SaveCode>();
 		
 		for (HrmTypeEnum menuType : HrmTypeEnum.values()) {			
-			list.add(new EnumDTO(menuType.getCode(), menuType.getName()));
+			list.add(new HrmTypeDTO.SaveCode(menuType.getCode()
+											,menuType.getName()
+											,true
+											,0
+											,"HRMTYPE"
+											,""));
 		}										
 					
 		return WebControllerUtil.getResponse(list											

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.core.domain.AuditEntity;
 import com.like.core.util.LocalDateUtil;
 import com.like.core.vo.DatePeriod;
-import com.like.hrm.employee.domain.model.Employee;
+import com.like.hrm.staff.domain.model.Staff;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -73,9 +73,9 @@ public class DeptChangeHistory extends AuditEntity implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "EMP_ID", nullable=false, updatable=false)
-	private Employee employee;
+	private Staff employee;
 	
-	public DeptChangeHistory(Employee employee, String deptType, String deptCode, DatePeriod period) {
+	public DeptChangeHistory(Staff employee, String deptType, String deptCode, DatePeriod period) {
 		this.employee = employee;
 		this.deptType = deptType;
 		this.deptCode = deptCode;		
@@ -106,7 +106,7 @@ public class DeptChangeHistory extends AuditEntity implements Serializable {
 		}
 	}
 	
-	boolean equalDeptHistory(Employee employee, String deptType, String deptCode) {
+	boolean equalDeptHistory(Staff employee, String deptType, String deptCode) {
 		boolean rtn = false;
 		
 		if ( this.employee.equals(employee) 

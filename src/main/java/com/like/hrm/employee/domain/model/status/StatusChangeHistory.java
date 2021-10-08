@@ -20,7 +20,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.core.domain.AuditEntity;
 import com.like.core.vo.DatePeriod;
-import com.like.hrm.employee.domain.model.Employee;
+import com.like.hrm.staff.domain.model.Staff;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -60,7 +60,7 @@ public class StatusChangeHistory extends AuditEntity implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "EMP_ID", nullable=false, updatable=false)
-	private Employee employee;
+	private Staff employee;
 
 	/**
 	 * @param employee
@@ -69,7 +69,7 @@ public class StatusChangeHistory extends AuditEntity implements Serializable {
 	 * @param fromDate
 	 * @param toDate
 	 */
-	public StatusChangeHistory(Employee employee
+	public StatusChangeHistory(Staff employee
 							  ,String appointmentCode
 							  ,String statusCode
 							  ,DatePeriod period) {		

@@ -41,164 +41,99 @@ create table if not exists COM.HRMRELATIONCODE (
 	constraint pk_HRMRELATIONCODE primary key(RELATION_ID)
 ) COMMENT = '인사연관코드정보';
 
-create table if not exists COM.HRMAPPOINTMENTCODE (
-	SYS_DT					DATETIME		NULL		COMMENT '최초등록일시',
-	SYS_USER 				VARCHAR(20)		NULL		COMMENT '최초등록유저',
-	UPD_DT					DATETIME		NULL		COMMENT '최종수정일시',
-	UPD_USER				VARCHAR(20)		NULL		COMMENT '최종수정유저',
-    APPOINTMENT_CODE		VARCHAR(10) 	NOT NULL 	COMMENT '발령코드',
-	APPOINTMENT_CODE_NAME	VARCHAR(255) 	NOT NULL 	COMMENT '발령코드명칭',
-	USE_YN					BOOLEAN			NOT NULL 	COMMENT '사용여부',
-	EMP_STATUS_CODE			VARCHAR(3)		NULL		COMMENT '근무상태코드',
-	END_DATE_YN				BOOLEAN			NOT NULL 	COMMENT '발령종료일여부',		
-	PRT_SEQ					INT				NULL		COMMENT '출력순서',	
-	CMT						VARCHAR(2000) 	NULL 		COMMENT '비고',
-	constraint pk_hrmappointmentcode primary key(APPOINTMENT_CODE)	
-) COMMENT = '발령코드정보';
-
-create table if not exists COM.HRMAPPOINTMENTCODEDETAIL (
-	SYS_DT				DATETIME		NULL		COMMENT '최초등록일시',
-	SYS_USER 			VARCHAR(20)		NULL		COMMENT '최초등록유저',
-	UPD_DT				DATETIME		NULL		COMMENT '최종수정일시',
-	UPD_USER			VARCHAR(20)		NULL		COMMENT '최종수정유저',
-    TYPE_ID				VARCHAR(20) 	NOT NULL 	COMMENT '타입ID_변경타입+변경타입상세',    
-	APPOINTMENT_CODE	VARCHAR(10) 	NOT NULL 	COMMENT '발령코드',
-	CHANGE_TYPE			VARCHAR(20)		NULL		COMMENT '변경타입',
-	CHANGE_TYPE_DETAIL	VARCHAR(20)		NULL		COMMENT '변경타입상세',	
-    PRT_SEQ				INT				NULL		COMMENT '출력순서',	    
-	constraint pk_hrmappointmentcodedetail primary key(TYPE_ID),
-	constraint fk_hrmappointmentcodedetail foreign key(APPOINTMENT_CODE) references HRMAPPOINTMENTCODE(APPOINTMENT_CODE) 
-) COMMENT = '발령코드상세정보';
-
-create table if not exists HRMEMPLOYEE (
-	SYS_DT			DATETIME		null		COMMENT '최초등록일시',
-	SYS_USER 		VARCHAR(50)		null		COMMENT '최초등록유저',
-	UPD_DT			DATETIME		null		COMMENT '최종수정일시',
-	UPD_USER		VARCHAR(50)		null		COMMENT '최종수정유저',
-	EMP_ID			VARCHAR(10) 	not null  	COMMENT '사원ID',
-	EMP_NAME		VARCHAR(500)	null		COMMENT '이름_한글',
-	EMP_NAME_ENG	VARCHAR(500)	null		COMMENT '이름_영문',
-	EMP_NAME_CHI	VARCHAR(500)	null		COMMENT '이름_한문',
-	EMP_NAME_LEGAL	VARCHAR(500)	null		COMMENT '법적이름',
-	RREGNO			VARCHAR(20)		null		COMMENT '주민등록번호',
-	GENDER			VARCHAR(1)		null		COMMENT '성별',
-	BIRTHDAY		DATE			null		COMMENT '생일',
-	WORK_CONDITION	VARCHAR(2)		null		COMMENT '근무상태',
-	IMG_PATH		VARCHAR(2000)  	null 		COMMENT '이미지경로',
-	constraint pk_hrmemployee primary key(EMP_ID)
+create table HRMSTAFF (
+	SYS_DT				DATETIME		null		COMMENT '최초등록일시',
+	SYS_USER 			VARCHAR(50)		null		COMMENT '최초등록유저',
+	UPD_DT				DATETIME		null		COMMENT '최종수정일시',
+	UPD_USER			VARCHAR(50)		null		COMMENT '최종수정유저',
+	STAFF_ID			VARCHAR(10) 	not null  	COMMENT '직원ID',
+	STAFF_NAME			VARCHAR(500)	null		COMMENT '이름_한글',
+	STAFF_NAME_LEGAL	VARCHAR(500)	null		COMMENT '이름_법적이름',
+	STAFF_NAME_ENG		VARCHAR(500)	null		COMMENT '이름_영문',
+	STAFF_NAME_CHI		VARCHAR(500)	null		COMMENT '이름_한문',	
+	RREGNO				VARCHAR(20)		null		COMMENT '주민등록번호',
+	GENDER				VARCHAR(1)		null		COMMENT '성별',
+	BIRTHDAY			DATE			null		COMMENT '생일(생년월일)',
+	WORK_STATE_CODE		VARCHAR(2)		null		COMMENT '근무상태코드',
+	IMG_PATH			VARCHAR(2000)  	null 		COMMENT '이미지경로',
+	BLNG_DEPT_CODE		VARCHAR(10)		null		COMMENT '소속부서',
+	WORK_DEPT_CODE		VARCHAR(10)		null		COMMENT '근무부서',
+	JOB_GROUP_CODE		VARCHAR(2)		null		COMMENT '직군코드',
+	JOB_POSITION_CODE	VARCHAR(4)		null		COMMENT '직위코드',
+	OCCUPATION_CODE		VARCHAR(4)		null		COMMENT '직종코드',
+	JOB_GRADE_CODE		VARCHAR(4)		null		COMMENT '직급코드',
+	PAY_STEP_CODE		VARCHAR(4)		null		COMMENT '호봉코드',
+	JOB_CODE			VARCHAR(4)		null		COMMENT '직무코드',	
+	constraint pk_hrmstaff primary key(STAFF_ID)
 ) COMMENT = '직원기본';
 
-create table if not exists HRMEMPDEPTHISTORY (
-	SYS_DT		DATETIME		null		COMMENT '최초등록일시',
-	SYS_USER 	VARCHAR(50)		null		COMMENT '최초등록유저',
-	UPD_DT		DATETIME		null		COMMENT '최종수정일시',
-	UPD_USER	VARCHAR(50)		null		COMMENT '최종수정유저',
-	ID			INT				not null	COMMENT '부서이력ID'	AUTO_INCREMENT,
-	EMP_ID		VARCHAR(10) 	not null  	COMMENT '사원ID',
-	DEPT_TYPE	VARCHAR(10)		not null	COMMENT '부서타입',
-	DEPT_CODE	VARCHAR(10)		not null	COMMENT '부서코드',
-	FROM_DT		DATE			not null	COMMENT '시작일자',
-	TO_DT		DATE			not null	COMMENT '종료일자',	
-	constraint pk_hrmempdepthistory primary key(ID),
-	constraint fk_hrmempdepthistory foreign key(EMP_ID) references HRMEMPLOYEE(EMP_ID)  
-) COMMENT = '직원부서이력';
+create table HRMSTAFFDUTY (
+	SYS_DT				DATETIME		null		COMMENT '최초등록일시',
+	SYS_USER 			VARCHAR(50)		null		COMMENT '최초등록유저',
+	UPD_DT				DATETIME		null		COMMENT '최종수정일시',
+	UPD_USER			VARCHAR(50)		null		COMMENT '최종수정유저',
+	STAFF_ID			VARCHAR(10) 	not null  	COMMENT '직원ID',
+	DUTY_RESPONSIBILITY_CODE VARCHAR(4)		null	COMMENT '직책코드',
+	FROM_DT				DATE			not null	COMMENT '시작일자',
+	TO_DT				DATE			not null	COMMENT '종료일자',
+	DEPUTY_YN			VARCHAR2(1)		not null	COMMENT '대리여부',
+	PAY_YN				VARCHAR2(1)		not null	COMMENT '급여여부',
+	constraint pk_hrmstaffduty primary key(STAFF_ID, DUTY_RESPONSIBILITY_CODE, FROM_DT),
+	constraint fk_hrmstaffduty1 foreign key(STAFF_ID) references HRMSTAFF(STAFF_ID)  
+) COMMENT = '직원직책';
 
-create table if not exists HRMEMPJOBHISTORY (
-	SYS_DT		DATETIME		null		COMMENT '최초등록일시',
-	SYS_USER 	VARCHAR(50)		null		COMMENT '최초등록유저',
-	UPD_DT		DATETIME		null		COMMENT '최종수정일시',
-	UPD_USER	VARCHAR(50)		null		COMMENT '최종수정유저',
-	ID			INT				not null	COMMENT '부서이력ID'	AUTO_INCREMENT,
-	EMP_ID		VARCHAR(10) 	not null  	COMMENT '사원ID',
-	JOB_TYPE	VARCHAR(10)		not null	COMMENT '직제타입',
-	JOB_CODE	VARCHAR(10)		not null	COMMENT '직제코드',
-	FROM_DT		DATE			not null	COMMENT '시작일자',
-	TO_DT		DATE			not null	COMMENT '종료일자',	
-	constraint pk_hrmempjobhistory primary key(ID),
-	constraint fk_hrmempjobhistory foreign key(EMP_ID) references HRMEMPLOYEE(EMP_ID)  
-) COMMENT = '직원인사이력';
-
-create table if not exists HRMEMPSTATUSHISTORY (
-	SYS_DT		DATETIME		null		COMMENT '최초등록일시',
-	SYS_USER 	VARCHAR(50)		null		COMMENT '최초등록유저',
-	UPD_DT		DATETIME		null		COMMENT '최종수정일시',
-	UPD_USER	VARCHAR(50)		null		COMMENT '최종수정유저',
-	ID			INT				not null	COMMENT '근무상태이력ID'	AUTO_INCREMENT,
-	EMP_ID		VARCHAR(10) 	not null  	COMMENT '사원ID',
-	APPOINTMENT_CODE	VARCHAR(10)		not null	COMMENT '발령코드',
-	STATUS_CODE	VARCHAR(10)		not null	COMMENT '상태코드',
-	FROM_DT		DATE			not null	COMMENT '시작일자',
-	TO_DT		DATE			not null	COMMENT '종료일자',	
-	constraint pk_hrmempstatushistory primary key(ID),
-	constraint fk_hrmempstatushistory foreign key(EMP_ID) references HRMEMPLOYEE(EMP_ID)  
-)  COMMENT = '직원상태이력';
-
-create table if not exists HRMEMPFAMILY (
+create table HRMSTAFFFAMILY (
 	SYS_DT			DATETIME		null		COMMENT '최초등록일시',
 	SYS_USER 		VARCHAR(50)		null		COMMENT '최초등록유저',
 	UPD_DT			DATETIME		null		COMMENT '최종수정일시',
 	UPD_USER		VARCHAR(50)		null		COMMENT '최종수정유저',
-	ID				INT				not null	COMMENT '직원학력ID'	AUTO_INCREMENT,
-	EMP_ID			VARCHAR(10) 	not null  	COMMENT '사원ID',
+	ID				INT				not null	COMMENT '직원가족ID'	AUTO_INCREMENT,
+	STAFF_ID		VARCHAR(10) 	not null  	COMMENT '직원ID',
 	FAMILY_NAME		VARCHAR(500)	not null	COMMENT '가족성명',
 	RREGNO			VARCHAR(20)		not null	COMMENT '주민등록번호',
 	FAMILY_REL_CODE	VARCHAR(3)		not null	COMMENT '가족관계코드',
 	OCCUPATION_NAME	VARCHAR(500)	not null	COMMENT '직업명',
-	SCHOOL_CAREER_TYPE	VARCHAR(3)	not null	COMMENT '학력구분',
+	SCHOOL_CAREER_CODE	VARCHAR(3)	not null	COMMENT '학력코드',
 	CMT				VARCHAR(2000) 	null 		COMMENT '비고',
-	constraint pk_hrmempfamily primary key(ID),
-	constraint fk_hrmempfamily1 foreign key(EMP_ID) references HRMEMPLOYEE(EMP_ID)  
+	constraint pk_hrmstafffamily primary key(ID),
+	constraint fk_hrmstafffamily1 foreign key(STAFF_ID) references HRMSTAFF(STAFF_ID)  
 ) COMMENT = '직원가족정보';
 
-create table if not exists HRMEMPSCHOOLCAREER (
+create table HRMSTAFFSCHOOLCAREER (
 	SYS_DT				DATETIME		null		COMMENT '최초등록일시',
 	SYS_USER 			VARCHAR(50)		null		COMMENT '최초등록유저',
 	UPD_DT				DATETIME		null		COMMENT '최종수정일시',
 	UPD_USER			VARCHAR(50)		null		COMMENT '최종수정유저',
 	ID					INT				not null	COMMENT '직원학력ID'	AUTO_INCREMENT,
-	EMP_ID				VARCHAR(10) 	not null  	COMMENT '사원ID',
-	SCHOOL_CAREER_TYPE	VARCHAR(2)		not null	COMMENT '학력유형',	
+	STAFF_ID			VARCHAR(10) 	not null  	COMMENT '직원ID',
+	SCHOOL_CAREER_CODE	VARCHAR(2)		not null	COMMENT '학력코드',	
 	SCHOOL_CODE			VARCHAR(5)		not null	COMMENT '학교코드',
 	FROM_DT				DATE			null 		COMMENT '시작일자',
 	TO_DT				DATE			null 		COMMENT '종료일자',
 	MAJOR_NAME			VARCHAR(500)	null 		COMMENT '전공학과명',
 	PLURAL_MAJOR_NAME	VARCHAR(500)	null 		COMMENT '복수전공학과명',
-	LOCATION			VARCHAR(500)	null 		COMMENT '소재지',
+	LOCATION_NAME		VARCHAR(500)	null 		COMMENT '소재지명',
 	LESSON_YEAR			INT				null 		COMMENT '복수전공학과명',
 	CMT					VARCHAR(2000) 	null 		COMMENT '비고',
-	constraint pk_hrmempschoolcareer primary key(ID),
-	constraint fk_hrmempschoolcareer foreign key(EMP_ID) references HRMEMPLOYEE(EMP_ID)  
+	constraint pk_hrmstaffschoolcareer primary key(ID),
+	constraint fk_hrmstaffschoolcareer foreign key(STAFF_ID) references HRMSTAFF(STAFF_ID)  
 ) COMMENT = '직원학력정보';
 
-create table if not exists HRMEMPEDUCATION (
-	SYS_DT			DATETIME		null		COMMENT '최초등록일시',
-	SYS_USER 		VARCHAR(50)		null		COMMENT '최초등록유저',
-	UPD_DT			DATETIME		null		COMMENT '최종수정일시',
-	UPD_USER		VARCHAR(50)		null		COMMENT '최종수정유저',
-	ID				INT				not null	COMMENT '직원학력ID'	AUTO_INCREMENT,
-	EMP_ID			VARCHAR(10) 	not null  	COMMENT '사원ID',
-	EDU_TYPE		VARCHAR(2)		not null	COMMENT '학력유형',
-	SCHOOL_CODE		VARCHAR(5)		not null	COMMENT '학교코드',	
-	CMT				VARCHAR(2000) 	null 		COMMENT '비고',
-	constraint pk_hrmempeducation primary key(ID),
-	constraint fk_hrmempeducation foreign key(EMP_ID) references HRMEMPLOYEE(EMP_ID)  
-) COMMENT = '직원학력정보';
-
-create table if not exists HRMEMPLICENSE (
+create table HRMSTAFFLICENSE (
 	SYS_DT					DATETIME		null		COMMENT '최초등록일시',
 	SYS_USER 				VARCHAR(50)		null		COMMENT '최초등록유저',
 	UPD_DT					DATETIME		null		COMMENT '최종수정일시',
 	UPD_USER				VARCHAR(50)		null		COMMENT '최종수정유저',
 	ID						INT				not null	COMMENT '직원자격면허ID'	AUTO_INCREMENT,
-	EMP_ID					VARCHAR(10) 	not null  	COMMENT '사원ID',
+	STAFF_ID				VARCHAR(10) 	not null  	COMMENT '직원ID',
 	LICENSE_TYPE			VARCHAR(2)		not null	COMMENT '자격면허유형',
 	LICENSE_CODE			VARCHAR(5)		not null	COMMENT '자격면허코드',
 	DATE_OF_ACQUISITION		DATE			null		COMMENT '취득일자',
 	CERTIFICATION_AUTHORITY	VARCHAR(500)	null		COMMENT '인증기관',
 	MANDATORY_YN			BOOLEAN			not null	COMMENT '필수여부',
 	CMT						VARCHAR(2000) 	null 		COMMENT '비고',
-	constraint pk_hrmemplicense primary key(ID),
-	constraint fk_hrmemplicense foreign key(EMP_ID) references HRMEMPLOYEE(EMP_ID)  
+	constraint pk_hrmstafflicense primary key(ID),
+	constraint fk_hrmstafflicense foreign key(STAFF_ID) references HRMSTAFF(STAFF_ID)  
 ) COMMENT = '직원자격면허';
 
 

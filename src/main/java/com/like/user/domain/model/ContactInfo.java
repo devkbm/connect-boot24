@@ -1,12 +1,12 @@
 package com.like.user.domain.model;
 
-import com.like.hrm.employee.domain.model.Employee;
+import com.like.hrm.staff.domain.model.Staff;
 
 public class ContactInfo {
 
 	private Long id;
 	
-	private Employee employee;
+	private Staff employee;
 	
 	private String type;
 	
@@ -14,7 +14,7 @@ public class ContactInfo {
 	
 	private boolean isLast;
 	
-	public ContactInfo(Employee employee
+	public ContactInfo(Staff employee
 					  ,String type
 					  ,String number
 					  ,Boolean isLast) {
