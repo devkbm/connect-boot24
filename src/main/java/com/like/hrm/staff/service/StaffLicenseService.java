@@ -27,7 +27,7 @@ public class StaffLicenseService {
 	}
 	
 	public void saveLicense(StaffDTO.SaveLicense dto) {
-		Staff emp = getEmployeeInfo(dto.getEmployeeId());
+		Staff emp = getEmployeeInfo(dto.getStaffId());
 		
 		License license = emp.getLicenseList().get(dto.getLicenseId());
 		

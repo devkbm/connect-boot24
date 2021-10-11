@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.hrm.hrmtypecode.boundary.HrmTypeDTO;
 import com.like.hrm.hrmtypecode.boundary.HrmTypeDetailCodeDTO;
-import com.like.hrm.hrmtypecode.domain.HrmTypeEnum;
+import com.like.hrm.hrmtypecode.domain.AppointmentTypeEnum;
 import com.like.hrm.hrmtypecode.service.HrmTypeQueryService;
 
 @RestController
@@ -29,7 +29,7 @@ public class HrmTypeQueryContoller {
 		
 		List<HrmTypeDTO.SaveCode> list = new ArrayList<HrmTypeDTO.SaveCode>();
 		
-		for (HrmTypeEnum menuType : HrmTypeEnum.values()) {			
+		for (AppointmentTypeEnum menuType : AppointmentTypeEnum.values()) {			
 			list.add(new HrmTypeDTO.SaveCode(menuType.getCode()
 											,menuType.getName()
 											,true

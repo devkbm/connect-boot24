@@ -39,7 +39,7 @@ public class StaffImageController {
 		this.employeeService 	= employeeService;
 	}
 
-	@PostMapping(value={"/hrm/employee/changeimage"})
+	@PostMapping(value={"/hrm/staff/changeimage"})
 	public ResponseEntity<?> changeEmployeeImage(@RequestParam("file") MultipartFile file,
 												 @RequestParam("employeeId") String employeeId) throws Exception {				
 		
@@ -50,11 +50,11 @@ public class StaffImageController {
 		String uuid = UUID.randomUUID().toString();
 		String path = fileService.fileTransefer(file, uuid, FileUploadLocation.STATIC_PATH);
 		
-		Staff emp = employeeService.getEmployee(employeeId);
+		Staff emp = employeeService.getStaff(employeeId);
 				
 		emp.changeImagePath(uuid);
 		
-		employeeService.saveEmployee(emp);
+		employeeService.saveStaff(emp);
 		
 		response.put("data", path);
 		response.put("status", "done");
@@ -62,11 +62,11 @@ public class StaffImageController {
 		return new ResponseEntity<Map<String,Object>>(response, responseHeaders, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/hrm/employee/downloadimage"}, method=RequestMethod.GET) 
+	@RequestMapping(value={"/hrm/staff/downloadimage"}, method=RequestMethod.GET) 
 	public HttpServletResponse downloadEmployeeImage(HttpServletResponse response,
 													 @RequestParam("employeeId") String employeeId) throws Exception {
 				
-		Staff emp = employeeService.getEmployee(employeeId);			
+		Staff emp = employeeService.getStaff(employeeId);			
 		
 		File file = fileService.getStaticPathFile(emp.getImagePath());
 				

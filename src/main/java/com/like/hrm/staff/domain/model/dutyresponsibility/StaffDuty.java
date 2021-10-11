@@ -1,4 +1,4 @@
-package com.like.hrm.staff.domain.model.staffduty;
+package com.like.hrm.staff.domain.model.dutyresponsibility;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "HRMSTAFFDUTY")
+@Table(name = "HRMSTAFFDUTYRESPONSIBILITY")
 @EntityListeners(AuditingEntityListener.class)
 public class StaffDuty extends AuditEntity implements Serializable {
 

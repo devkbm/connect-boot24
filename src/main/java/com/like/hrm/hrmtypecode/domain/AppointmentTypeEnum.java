@@ -3,7 +3,7 @@ package com.like.hrm.hrmtypecode.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum HrmTypeEnum {
+public enum AppointmentTypeEnum {
 
 	// 인사정보	
 	JOB("JOB", 			"인사", "HRMAP001"),
@@ -15,7 +15,7 @@ public enum HrmTypeEnum {
 	private String name;
 	private String parentCommonCodeId;
 	
-	private HrmTypeEnum(final String code, final String name, final String parentCommonCodeId) {
+	private AppointmentTypeEnum(final String code, final String name, final String parentCommonCodeId) {
 		this.code = code;
 		this.name = name;
 		this.parentCommonCodeId = parentCommonCodeId;

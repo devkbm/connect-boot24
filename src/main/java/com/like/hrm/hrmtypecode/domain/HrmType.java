@@ -34,7 +34,7 @@ public class HrmType extends AuditEntity {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="APPOINT_TYPE_CODE")
-	private HrmTypeEnum hrmType;
+	private AppointmentTypeEnum appointmentType;
 				
 	@Column(name="CMT")
 	private String comment;		
@@ -43,26 +43,26 @@ public class HrmType extends AuditEntity {
 				  ,String name
 				  ,boolean useYn
 				  ,Integer sequence
-				  ,HrmTypeEnum hrmType				  
+				  ,AppointmentTypeEnum hrmType				  
 				  ,String comment) {		
-		this.hrmType = hrmType;
+		this.appointmentType = hrmType;
 		this.id = id;
 		this.name = name;
 		this.useYn = useYn;
 		this.sequence = sequence;
-		this.hrmType = hrmType;
+		this.appointmentType = hrmType;
 		this.comment = comment;
 	}
 	
 	public void modify(String name
 					  ,boolean useYn
 					  ,Integer sequence
-					  ,HrmTypeEnum hrmType
+					  ,AppointmentTypeEnum hrmType
 					  ,String comment ) {		
 		this.name = name;
 		this.useYn = useYn;
 		this.sequence = sequence;
-		this.hrmType = hrmType;
+		this.appointmentType = hrmType;
 		this.comment = comment;
 	}	
 	

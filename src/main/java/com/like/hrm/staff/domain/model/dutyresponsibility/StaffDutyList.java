@@ -1,4 +1,4 @@
-package com.like.hrm.staff.domain.model.staffduty;
+package com.like.hrm.staff.domain.model.dutyresponsibility;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

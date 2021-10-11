@@ -18,7 +18,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 public class HrmTypeQueryJpaRepository implements HrmTypeQueryRepository {
 
 	private JPAQueryFactory	queryFactory;
-	private static final QHrmType qHrmType = QHrmType.hrmType1;
+	private static final QHrmType qHrmType = QHrmType.hrmType;
 	private static final QHrmTypeDetailCode qHrmTypeDetailCode = QHrmTypeDetailCode.hrmTypeDetailCode;
 	
 	public HrmTypeQueryJpaRepository(JPAQueryFactory queryFactory) {

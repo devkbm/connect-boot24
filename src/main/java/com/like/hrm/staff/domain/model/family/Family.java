@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "HRMEMPFAMILY")
+@Table(name = "HRMSTAFFFAMILY")
 @EntityListeners(AuditingEntityListener.class)
 public class Family extends AuditEntity implements Serializable {
 			
@@ -71,7 +71,7 @@ public class Family extends AuditEntity implements Serializable {
 	/**
 	 * 학력구분
 	 */
-	@Column(name="SCHOOL_CAREER_TYPE", nullable = true)
+	@Column(name="SCHOOL_CAREER_CODE", nullable = true)
 	private String schoolCareerType;
 	
 	/**

@@ -1,25 +1,22 @@
-package com.like.hrm.staff.domain.model;
+package com.like.hrm.staff.domain.model.appointment;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-/**
- * 
- * @author 김병민
- *
- */
-// 용어 참고 https://terms.naver.com/list.naver?cid=51072&categoryId=51072
+//용어 참고 https://terms.naver.com/list.naver?cid=51072&categoryId=51072
 @Getter
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Embeddable
-public class Appointment {
-	
+public class AppointmentInformation {
+
 	/**
 	 * 소속부서
 	 */
@@ -73,5 +70,4 @@ public class Appointment {
 	 */
 	@Column(name="DUTY_RESPONSIBILITY_CODE")
 	private String dutyResponsibilityCode;
-	
 }

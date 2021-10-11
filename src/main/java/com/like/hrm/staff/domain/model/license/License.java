@@ -40,7 +40,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "HRMEMPLICENSE")
+@Table(name = "HRMSTAFFLICENSE")
 @EntityListeners(AuditingEntityListener.class)
 public class License extends AuditEntity implements Serializable {
 	

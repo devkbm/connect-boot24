@@ -19,7 +19,7 @@ public class HrmRelationCodeQueryJpaRepository implements HrmRelationCodeQueryRe
 
 	private JPAQueryFactory	queryFactory;
 	private static final QCode qCode = QCode.code1;
-	private static final QHrmType qHrmType = QHrmType.hrmType1;
+	private static final QHrmType qHrmType = QHrmType.hrmType;
 	private static final QHrmTypeDetailCode qHrmTypeDetailCode = QHrmTypeDetailCode.hrmTypeDetailCode;
 	private static final QHrmRelationCode qHrmRelationCode = QHrmRelationCode.hrmRelationCode;
 	
@@ -30,7 +30,7 @@ public class HrmRelationCodeQueryJpaRepository implements HrmRelationCodeQueryRe
 
 	@Override
 	public List<SaveHrmRelationCode> getRelationCodeList(SearchHrmRelationCode condition) {
-		QHrmType qHrmType2 = QHrmType.hrmType1;
+		QHrmType qHrmType2 = QHrmType.hrmType;
 		QHrmTypeDetailCode qHrmTypeDetailCode2 = QHrmTypeDetailCode.hrmTypeDetailCode;
 		/*
 		return queryFactory

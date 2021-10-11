@@ -23,16 +23,16 @@ public class StaffService {
 		this.repository = repository;
 	}	
 	
-	public Staff getEmployee(String id) {
+	public Staff getStaff(String id) {
 		return repository.findById(id).orElse(null);
 	}
 	
-	public void saveEmployee(Staff employee) {				
+	public void saveStaff(Staff employee) {				
 		repository.save(employee);
 	}
 	
-	public void saveEmployee(StaffDTO.SaveEmployee dto) {
-		Staff employee = this.getEmployee(dto.getId());
+	public void saveStaff(StaffDTO.SaveEmployee dto) {
+		Staff employee = this.getStaff(dto.getStaffId());
 		
 		dto.modifyEntity(employee);
 		
@@ -41,11 +41,11 @@ public class StaffService {
 	
 	public void newEmployee(StaffDTO.NewEmployee dto) {										
 		
-		Staff emp = new Staff("test"
-				                   ,dto.getName()
-				                   ,dto.getNameEng()
-				                   ,dto.getNameChi()
-				                   ,dto.getResidentRegistrationNumber());
+		Staff emp = new Staff(dto.getStaffId()
+			                 ,dto.getName()
+			                 ,dto.getNameEng()
+			                 ,dto.getNameChi()
+			                 ,dto.getResidentRegistrationNumber());
 		
 		repository.save(emp);
 	}
@@ -55,7 +55,7 @@ public class StaffService {
 	}
 	
 	public void saveDeptChangeHistory(StaffDTO.NewDept dto) {
-		Staff emp = findEmployee(dto.getEmployeeId());
+		Staff emp = findStaff(dto.getEmployeeId());
 						
 		DeptChangeHistory deptChangeHistory = new DeptChangeHistory(emp
 																   ,dto.getDeptType()
@@ -68,7 +68,7 @@ public class StaffService {
 	}
 	
 	public void saveJobChangeHistory(StaffDTO.NewJob dto) {
-		Staff emp = findEmployee(dto.getEmployeeId());			
+		Staff emp = findStaff(dto.getEmployeeId());			
 		
 		JobChangeHistory jobChangeHistory = new JobChangeHistory(emp
 																,dto.getJobType()
@@ -80,7 +80,7 @@ public class StaffService {
 	}
 	
 	public void saveStatusChangeHistory(StaffDTO.NewStatus dto) {
-		Staff emp = findEmployee(dto.getEmployeeId());
+		Staff emp = findStaff(dto.getEmployeeId());
 		
 		StatusChangeHistory statusChangeHistory = new StatusChangeHistory(emp
 																		 ,dto.getAppointmentCode()
@@ -91,7 +91,7 @@ public class StaffService {
 		repository.save(emp);
 	}	
 	
-	private Staff findEmployee(String empId) {
+	private Staff findStaff(String empId) {
 		return repository.findById(empId).orElseThrow(() -> new EntityNotFoundException(empId + " 사번이 존재하지 않습니다."));
 	}
 }

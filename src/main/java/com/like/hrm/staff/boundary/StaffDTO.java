@@ -19,6 +19,8 @@ import com.like.hrm.employee.domain.model.job.JobChangeHistory;
 import com.like.hrm.employee.domain.model.status.StatusChangeHistory;
 import com.like.hrm.staff.domain.model.QStaff;
 import com.like.hrm.staff.domain.model.Staff;
+import com.like.hrm.staff.domain.model.appointment.AppointmentInformation;
+import com.like.hrm.staff.domain.model.appointment.AppointmentRecord;
 import com.like.hrm.staff.domain.model.family.Family;
 import com.like.hrm.staff.domain.model.license.License;
 import com.like.hrm.staff.domain.model.schoolcareer.SchoolCareer;
@@ -45,7 +47,7 @@ public class StaffDTO {
 
 		LocalDate referenceDate;
 		
-		String id;
+		String staffId;
 		
 		String name;
 		
@@ -67,12 +69,8 @@ public class StaffDTO {
 			log.info(this.deptType + " : "+ this.deptCodeList);
 			
 			builder				
-				.and(likeId(this.id))
-				.and(likeName(this.name))
-				.and(eqDeptCode(this.deptType, this.deptCode))
-				.and(inDeptCodeList(this.deptType, this.deptCodeList))
-				.and(likeDeptName(this.deptName))
-				.and(eqReferenceDate(this.referenceDate));				
+				.and(likeId(this.staffId))
+				.and(likeName(this.name));				
 			
 			return builder;
 		}
@@ -91,38 +89,7 @@ public class StaffDTO {
 			}
 			
 			return qStaff.name.like("%"+name+"%");
-		}
-		
-		private BooleanExpression eqDeptCode(String deptType, String deptCodeL) {
-			if (!StringUtils.hasText(deptCode)) {
-				return null;
-			}
-					
-			return qStaff.equalDeptCode(deptType, deptCode);
-		}
-		
-		private BooleanExpression inDeptCodeList(String deptType, List<String> deptCodeList) {
-			if (deptCodeList == null) {
-				return null;
-			}
-					
-			return qStaff.inDeptCode(deptType, deptCodeList);
-		}
-		
-		private BooleanExpression likeDeptName(String deptName) {
-			if (!StringUtils.hasText(deptName)) {
-				return null;
-			}
-			
-			return qStaff.likeDeptName("%"+deptName+"%", LocalDate.now());
-		}
-		
-		private BooleanExpression eqReferenceDate(LocalDate date) {
-			if (date == null)
-				return null;
-			
-			return qStaff.referenceDate(date);
-		}
+		}			
 					
 		
 	}
@@ -135,6 +102,8 @@ public class StaffDTO {
 		
 		private static final long serialVersionUID = 5189496256963058913L;	
 				
+		private String staffId;
+		
 		@NotEmpty
 		private String name;
 
@@ -151,8 +120,10 @@ public class StaffDTO {
 	@AllArgsConstructor
 	@NoArgsConstructor(access = AccessLevel.PROTECTED)
 	public static class ResponseEmployee implements Serializable {
-		
-		private String id;	
+				
+		private static final long serialVersionUID = 3650310845683492073L;
+
+		private String staffId;	
 		
 		private String name;
 		
@@ -171,9 +142,11 @@ public class StaffDTO {
 		private String imagePath;			
 		
 		public static ResponseEmployee convert(Staff entity) {
-															 												 			
+									
+			if (entity == null) return null;
+			
 			return ResponseEmployee.builder()
-								   .id(entity.getId())
+								   .staffId(entity.getId())
 								   .name(entity.getName())
 								   .nameEng(entity.getNameEng())
 								   .nameChi(entity.getNameChi())
@@ -195,7 +168,7 @@ public class StaffDTO {
 		private static final long serialVersionUID = -3475382902805357777L;
 
 		@NotEmpty
-		private String id;
+		private String staffId;
 				
 		private String name;
 
@@ -332,7 +305,7 @@ public class StaffDTO {
 		private static final long serialVersionUID = -8768170007000992707L;
 
 		@NotEmpty
-		private String employeeId;
+		private String staffId;
 		
 		@Nullable
 		private Long educationId;
@@ -361,7 +334,7 @@ public class StaffDTO {
 		
 		public static SaveEducation convert(SchoolCareer entity) {
 			return SaveEducation.builder()
-								.employeeId(entity.getStaff().getId())
+								.staffId(entity.getStaff().getId())
 								.educationId(entity.getId())
 								.schoolCareerType(entity.getSchoolCareerType())
 								.schoolCode(entity.getSchoolCode())
@@ -379,7 +352,7 @@ public class StaffDTO {
 		private static final long serialVersionUID = -4765555653271244793L;
 
 		@NotEmpty
-		private String employeeId;
+		private String staffId;
 		
 		@Nullable
 		private Long licenseId;
@@ -408,7 +381,7 @@ public class StaffDTO {
 		
 		public static SaveLicense convert(License entity)  {
 			return SaveLicense.builder()
-							  .employeeId(entity.getStaff().getId())
+							  .staffId(entity.getStaff().getId())
 							  .licenseId(entity.getLicenseId())
 							  .licenseType(entity.getLicenseType())
 							  .licenseCode(entity.getLicenseCode())
@@ -424,7 +397,7 @@ public class StaffDTO {
 	public static class SaveFamily implements Serializable {
 		
 		@NotEmpty
-		private String employeeId;
+		private String staffId;
 		
 		@Nullable
 		private Long id;
@@ -462,7 +435,7 @@ public class StaffDTO {
 		
 		public static SaveFamily convert(Family entity) {
 			return SaveFamily.builder()
-							 .employeeId(entity.getStaff().getId())
+							 .staffId(entity.getStaff().getId())
 							 .id(entity.getId())
 							 .name(entity.getResidentRegistrationNumber())
 							 .relation(entity.getRelation())
@@ -473,4 +446,96 @@ public class StaffDTO {
 		}
 	}
 	
+	
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@Builder
+	public static class SaveAppointmentRecord implements Serializable {
+		
+		@NotEmpty
+		private String staffId;
+		
+		@Nullable
+		private Long id;			
+				
+		private LocalDate appointmentDate;
+				
+		private LocalDate appointmentEndDate;
+				
+		private String recordName;
+				
+		private String comment;
+				
+		private String processWatingYn;
+		
+		private String blngDeptCode;
+		
+		private String workDeptCode;
+		
+		private String jobGroupCode;
+		
+		private String jobPositionCode;
+		
+		private String occupationCode;
+		
+		private String jobGradeCode;
+		
+		private String payStepCode;
+		
+		private String jobCode;
+		
+		private String dutyResponsibilityCode;
+		
+		public AppointmentRecord newEntity(Staff staff) {		
+			AppointmentInformation info = new AppointmentInformation(blngDeptCode
+																	,workDeptCode
+																	,jobGroupCode
+																	,jobPositionCode
+																	,occupationCode
+																	,jobGradeCode
+																	,payStepCode
+																	,jobCode
+																	,dutyResponsibilityCode);
+			
+			return new AppointmentRecord(staff,appointmentDate, appointmentEndDate, recordName, comment, info);				
+		}
+		
+		public void modifyEntity(AppointmentRecord entity) {
+			/*
+			entity.modifyEntity(name
+							   ,residentRegistrationNumber
+							   ,relation
+							   ,occupation
+							   ,schoolCareerType
+							   ,comment);
+							   
+							 */
+		}
+		
+		public static SaveAppointmentRecord convert(AppointmentRecord entity) {
+			if (entity == null) return null;																										
+			
+			AppointmentInformation info = entity.getInfo();
+			
+			return SaveAppointmentRecord.builder()
+							 			.staffId(entity.getStaff().getId())
+							 			.id(entity.getId())
+							 			.appointmentDate(entity.getAppointmentDate())
+							 			.appointmentEndDate(entity.getAppointmentEndDate())
+							 			.recordName(entity.getRecordName())
+							 			.comment(entity.getComment())
+							 			.processWatingYn(entity.getProcessWatingYn())
+							 			.blngDeptCode(info.getBlngDeptCode())
+							 			.workDeptCode(info.getWorkDeptCode())
+							 			.jobGroupCode(info.getJobGroupCode())
+							 			.jobPositionCode(info.getJobPositionCode())
+							 			.occupationCode(info.getOccupationCode())
+							 			.jobGradeCode(info.getJobGradeCode())
+							 			.payStepCode(info.getPayStepCode())
+							 			.jobCode(info.getJobCode())
+							 			.dutyResponsibilityCode(info.getDutyResponsibilityCode())
+							 			.build();
+		}
+	}
 }

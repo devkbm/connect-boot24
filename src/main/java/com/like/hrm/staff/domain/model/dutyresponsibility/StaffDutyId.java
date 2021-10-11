@@ -1,4 +1,4 @@
-package com.like.hrm.staff.domain.model.staffduty;
+package com.like.hrm.staff.domain.model.dutyresponsibility;
 
 import java.io.Serializable;
 import java.time.LocalDate;

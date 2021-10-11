@@ -8,16 +8,18 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.DateExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
+/*
 import com.like.dept.domain.model.QDept;
 import com.like.hrm.employee.domain.model.dept.QDeptChangeHistory;
 import com.like.hrm.employee.domain.model.job.QJobChangeHistory;
 import com.like.hrm.employee.domain.model.status.QStatusChangeHistory;
 import com.like.hrm.staff.domain.model.QStaff;
+*/
 import com.like.hrm.staff.domain.model.Staff;
 
 public class StaffExpression {
 
-		
+	/*	
 	@QueryDelegate(Staff.class)
 	public static BooleanExpression referenceDate(QStaff employee, LocalDate referenceDate) {
 		//DateExpression<LocalDate> now = DateExpression.currentDate(LocalDate.class);
@@ -78,7 +80,7 @@ public class StaffExpression {
 				               .and(dateExpression.between(qDeptChangeHistory.period.from, qDeptChangeHistory.period.to)))
 				             .exists();
 	}
-	
+	*/
 
 	/*
 	@QueryDelegate(Code.class)

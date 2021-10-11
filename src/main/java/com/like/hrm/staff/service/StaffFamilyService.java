@@ -27,7 +27,7 @@ public class StaffFamilyService {
 	}
 	
 	public void saveFamily(StaffDTO.SaveFamily dto) {
-		Staff emp = getEmployeeInfo(dto.getEmployeeId());
+		Staff emp = getEmployeeInfo(dto.getStaffId());
 		
 		Family entity = emp.getFamilyList().get(dto.getId());
 		

@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.like.core.domain.AuditEntity;
+import com.like.hrm.staff.domain.model.appointment.AppointmentRecordList;
 import com.like.hrm.staff.domain.model.family.FamilyList;
 import com.like.hrm.staff.domain.model.license.LicenseList;
 import com.like.hrm.staff.domain.model.schoolcareer.SchoolCareerList;
@@ -104,7 +105,13 @@ public class Staff extends AuditEntity implements Serializable {
 	 * 현재 발령 내용
 	 */
 	@Embedded
-	Appointment currentAppointment;
+	CurrentAppointmentInformation currentAppointment;
+	
+	/**
+	 * 발령기록 명단
+	 */
+	@Embedded
+	AppointmentRecordList appointmentRecordList;
 	
 	/**
 	 * 가족 명단

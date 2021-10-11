@@ -1,7 +1,6 @@
-package com.like.hrm.staff.domain.model.family;
+package com.like.hrm.staff.domain.model.appointment;
 
 import java.util.LinkedHashSet;
-
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,31 +12,30 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Embeddable
-public class FamilyList {
+public class AppointmentRecordList {
 
 	/**
-	 * 직원 가족이력
+	 * 직원 발령기록명단
 	 */
 	@OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	Set<Family> familyList = new LinkedHashSet<>();
+	Set<AppointmentRecord> appointmentRecordList = new LinkedHashSet<>();
 	
-	public Family get(Long id) {
+	public AppointmentRecord get(Long id) {
 		
-		return this.familyList.stream()
+		return this.appointmentRecordList.stream()
 							   .filter(e -> e.getId().equals(id))
 							   .findFirst()
 							   .orElse(null);
 	}
 	
-	public void add(Family family) {
-		if (this.familyList == null) {
-			this.familyList = new LinkedHashSet<>();
-		}
+	public void add(AppointmentRecord record) {
 		
-		this.familyList.add(family);
+		if (this.appointmentRecordList == null) this.appointmentRecordList = new LinkedHashSet<>(); 		
+		
+		this.appointmentRecordList.add(record);
 	}	
 	
 	public void remove(Long id) {		
-		this.familyList.removeIf(e -> e.getId().equals(id));			
+		this.appointmentRecordList.removeIf(e -> e.getId().equals(id));			
 	}
 }

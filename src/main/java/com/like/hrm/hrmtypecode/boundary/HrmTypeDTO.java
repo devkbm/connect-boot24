@@ -6,7 +6,7 @@ import org.springframework.util.StringUtils;
 
 
 import com.like.hrm.hrmtypecode.domain.HrmType;
-import com.like.hrm.hrmtypecode.domain.HrmTypeEnum;
+import com.like.hrm.hrmtypecode.domain.AppointmentTypeEnum;
 import com.like.hrm.hrmtypecode.domain.QHrmType;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -24,30 +24,30 @@ public class HrmTypeDTO {
 		
 		private static final long serialVersionUID = 1L;
 
-		private final QHrmType qType = QHrmType.hrmType1;
+		private final QHrmType qType = QHrmType.hrmType;
 						
 		private String code;
 		
 		private String codeName;
 		
-		private String hrmType;
+		private String appointmentType;
 					
 		public BooleanBuilder getBooleanBuilder() {
 			BooleanBuilder builder = new BooleanBuilder();
 			
 			builder
-				.and(eqHrmType(this.hrmType))
+				.and(eqHrmType(this.appointmentType))
 				.and(likeCodeName(this.codeName));
 						
 			return builder;
 		}
 		
-		private BooleanExpression eqHrmType(String hrmType) {
-			if (!StringUtils.hasText(hrmType)) {
+		private BooleanExpression eqHrmType(String appointmentType) {
+			if (!StringUtils.hasText(appointmentType)) {
 				return null;
 			}
 			
-			return qType.hrmType.eq(HrmTypeEnum.valueOf(hrmType));
+			return qType.appointmentType.eq(AppointmentTypeEnum.valueOf(appointmentType));
 		}
 		
 		private BooleanExpression likeCodeName(String codeName) {
@@ -76,7 +76,7 @@ public class HrmTypeDTO {
 		
 		private Integer sequence;
 		
-		private String hrmType;
+		private String appointmentType;
 		
 		private String comment;
 				
@@ -85,7 +85,7 @@ public class HrmTypeDTO {
 					   		  ,this.codeName
 					   		  ,this.useYn
 					   		  ,this.sequence
-					   		  ,hrmType == null ? null : HrmTypeEnum.valueOf(this.hrmType)
+					   		  ,appointmentType == null ? null : AppointmentTypeEnum.valueOf(this.appointmentType)
 					   		  ,this.comment);
 		}
 		
@@ -93,7 +93,7 @@ public class HrmTypeDTO {
 			entity.modify(this.codeName
 						 ,this.useYn
 						 ,this.sequence
-						 ,hrmType == null ? null : HrmTypeEnum.valueOf(this.hrmType)
+						 ,appointmentType == null ? null : AppointmentTypeEnum.valueOf(this.appointmentType)
 						 ,this.comment);
 			return entity;
 		}
@@ -104,7 +104,7 @@ public class HrmTypeDTO {
 					           ,entity.getName()					           
 							   ,entity.isUseYn()
 							   ,entity.getSequence()
-							   ,entity.getHrmType() == null ? null : entity.getHrmType().toString()
+							   ,entity.getAppointmentType() == null ? null : entity.getAppointmentType().toString()
 							   ,entity.getComment());
 			
 		}

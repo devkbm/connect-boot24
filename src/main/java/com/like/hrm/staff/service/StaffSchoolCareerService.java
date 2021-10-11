@@ -28,7 +28,7 @@ public class StaffSchoolCareerService {
 	}
 	
 	public void saveSchoolCareer(StaffDTO.SaveEducation dto) {
-		Staff emp = getEmployeeInfo(dto.getEmployeeId());
+		Staff emp = getEmployeeInfo(dto.getStaffId());
 		
 		SchoolCareer education = emp.getSchoolCareerList().get(dto.getEducationId());
 		

@@ -67,7 +67,7 @@ create table HRMSTAFF (
 	constraint pk_hrmstaff primary key(STAFF_ID)
 ) COMMENT = '직원기본';
 
-create table HRMSTAFFDUTY (
+create table HRMSTAFFDUTYRESPONSIBILITY (
 	SYS_DT				DATETIME		null		COMMENT '최초등록일시',
 	SYS_USER 			VARCHAR(50)		null		COMMENT '최초등록유저',
 	UPD_DT				DATETIME		null		COMMENT '최종수정일시',
@@ -76,11 +76,36 @@ create table HRMSTAFFDUTY (
 	DUTY_RESPONSIBILITY_CODE VARCHAR(4)		null	COMMENT '직책코드',
 	FROM_DT				DATE			not null	COMMENT '시작일자',
 	TO_DT				DATE			not null	COMMENT '종료일자',
-	DEPUTY_YN			VARCHAR2(1)		not null	COMMENT '대리여부',
-	PAY_YN				VARCHAR2(1)		not null	COMMENT '급여여부',
-	constraint pk_hrmstaffduty primary key(STAFF_ID, DUTY_RESPONSIBILITY_CODE, FROM_DT),
-	constraint fk_hrmstaffduty1 foreign key(STAFF_ID) references HRMSTAFF(STAFF_ID)  
+	DEPUTY_YN			VARCHAR(1)		not null	COMMENT '대리여부',
+	PAY_YN				VARCHAR(1)		not null	COMMENT '급여여부',
+	constraint pk_hrmstaffdutyresponsibility primary key(STAFF_ID, DUTY_RESPONSIBILITY_CODE, FROM_DT),
+	constraint fk_hrmstaffdutyresponsibility1 foreign key(STAFF_ID) references HRMSTAFF(STAFF_ID)  
 ) COMMENT = '직원직책';
+
+create table HRMSTAFFAPPOINTMENTRECORD (
+	SYS_DT						DATETIME		null		COMMENT '최초등록일시',
+	SYS_USER 					VARCHAR(50)		null		COMMENT '최초등록유저',
+	UPD_DT						DATETIME		null		COMMENT '최종수정일시',
+	UPD_USER					VARCHAR(50)		null		COMMENT '최종수정유저',
+	ID							INT				not null	COMMENT '발령기록ID'	AUTO_INCREMENT,
+	STAFF_ID					VARCHAR(10) 	not null  	COMMENT '직원ID',
+	APPOINTMENT_DT				DATE			null 		COMMENT '발령일자',
+	APPOINTMENT_END_DT			DATE			null 		COMMENT '발령종료일자',
+	RECORD_NAME					VARCHAR(2000)	null		COMMENT '기록명',
+	CMT							VARCHAR(2000) 	null 		COMMENT '비고',
+	PROC_WAIT_YN				VARCHAR(1)		null		COMMENT '처리대기여부',
+	BLNG_DEPT_CODE				VARCHAR(10)		null		COMMENT '소속부서',
+	WORK_DEPT_CODE				VARCHAR(10)		null		COMMENT '근무부서',
+	JOB_GROUP_CODE				VARCHAR(2)		null		COMMENT '직군코드',
+	JOB_POSITION_CODE			VARCHAR(4)		null		COMMENT '직위코드',
+	OCCUPATION_CODE				VARCHAR(4)		null		COMMENT '직종코드',
+	JOB_GRADE_CODE				VARCHAR(4)		null		COMMENT '직급코드',
+	PAY_STEP_CODE				VARCHAR(4)		null		COMMENT '호봉코드',
+	JOB_CODE					VARCHAR(4)		null		COMMENT '직무코드',	
+	DUTY_RESPONSIBILITY_CODE 	VARCHAR(4)		null		COMMENT '직책코드',	
+	constraint pk_hrmstaffappointmentrecord primary key(ID),
+	constraint fk_hrmstaffappointmentrecord1 foreign key(STAFF_ID) references HRMSTAFF(STAFF_ID)  
+) COMMENT = '직원발령기록';
 
 create table HRMSTAFFFAMILY (
 	SYS_DT			DATETIME		null		COMMENT '최초등록일시',
@@ -135,51 +160,6 @@ create table HRMSTAFFLICENSE (
 	constraint pk_hrmstafflicense primary key(ID),
 	constraint fk_hrmstafflicense foreign key(STAFF_ID) references HRMSTAFF(STAFF_ID)  
 ) COMMENT = '직원자격면허';
-
-
-create table if not exists COM.HRMAPPOINTMENTLEDGER (
-	SYS_DT					DATETIME		NULL		COMMENT '최초등록일시',
-	SYS_USER 				VARCHAR(20)		NULL		COMMENT '최초등록유저',
-	UPD_DT					DATETIME		NULL		COMMENT '최종수정일시',
-	UPD_USER				VARCHAR(20)		NULL		COMMENT '최종수정유저',
-    LEDGER_ID				VARCHAR(20) 	NOT NULL 	COMMENT '발령대장_ID',
-	APPOINTMENT_TYPE		VARCHAR(3) 		NOT NULL 	COMMENT '발령유형',
-	RGST_DT					DATETIME		NOT NULL 	COMMENT '발령등록일',			
-	CMT						VARCHAR(2000) 	NULL 		COMMENT '비고',
-	constraint pk_hrmappointmentledger primary key(LEDGER_ID)	
-) COMMENT = '발령대장';
-
-create table if not exists COM.HRMAPPOINTMENTLEDGERLIST (
-	SYS_DT					DATETIME		NULL		COMMENT '최초등록일시',
-	SYS_USER 				VARCHAR(20)		NULL		COMMENT '최초등록유저',
-	UPD_DT					DATETIME		NULL		COMMENT '최종수정일시',
-	UPD_USER				VARCHAR(20)		NULL		COMMENT '최종수정유저',
-    LIST_ID					INT 			NOT NULL 	COMMENT '발령대장명단_ID' AUTO_INCREMENT,
-	SEQ						INT				NOT NULL 	COMMENT '순번',    
-    EMP_ID					VARCHAR(10) 	NOT NULL  	COMMENT '직원ID',
-	APPOINTMENT_CODE		VARCHAR(10)		NOT NULL	COMMENT '발령코드',    
-	FROM_DT					DATETIME		NOT NULL 	COMMENT '발령일',			
-	TO_DT					DATETIME	 	NULL 		COMMENT '발령종료일',
-	LEDGER_ID				VARCHAR(20) 	NULL 		COMMENT '발령대장ID',
-	FINISH_YN				BOOLEAN			NULL 		COMMENT '완료여부',
-	constraint pk_hrmappointmentledgerlist 	primary key(LIST_ID)	
-) COMMENT = '발령대장명단';
-
-
-create table if not exists COM.HRMAPPOINTMENTINFO (
-	SYS_DT					DATETIME		NULL		COMMENT '최초등록일시',
-	SYS_USER 				VARCHAR(20)		NULL		COMMENT '최초등록유저',
-	UPD_DT					DATETIME		NULL		COMMENT '최종수정일시',
-	UPD_USER				VARCHAR(20)		NULL		COMMENT '최종수정유저',
-    ID						INT				NOT NULL	COMMENT '발령정보_ID'	AUTO_INCREMENT,
-	LIST_ID					INT 			NOT NULL 	COMMENT '발령대장명단_ID',
-	CHANGE_TYPE				VARCHAR(20)		NULL		COMMENT '변경타입',
-	CHANGE_TYPE_DETAIL		VARCHAR(20)		NULL		COMMENT '변경타입상세',	    	    	       
-	CODE					VARCHAR(10)		NULL		COMMENT '변경코드',
-	PRT_SEQ					INT				NULL		COMMENT '출력순서',
-	constraint pk_hrmappointmentinfo 	primary key(ID),	
-	constraint fk_hrmappointmentinfo1 	foreign key(LIST_ID) references HRMAPPOINTMENTLEDGERLIST(LIST_ID)  
-) COMMENT = '발령정보';
 
 create table HRMDUTYCODE (
 	SYS_DT					DATETIME		NULL		COMMENT '최초등록일시',

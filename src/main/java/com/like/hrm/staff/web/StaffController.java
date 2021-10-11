@@ -21,16 +21,16 @@ import com.like.hrm.staff.service.StaffService;
 @RestController
 public class StaffController {
 	
-	private StaffService employeeService;
+	private StaffService staffService;
 		
-	public StaffController(StaffService employeeService) {
-		this.employeeService = employeeService;
+	public StaffController(StaffService staffService) {
+		this.staffService = staffService;
 	}		
 	
-	@GetMapping("/hrm/employee/{id}")
-	public ResponseEntity<?> getEmployee(@PathVariable String id) {
+	@GetMapping("/hrm/staff/{id}")
+	public ResponseEntity<?> getStaff(@PathVariable String id) {
 				
-		Staff emp = employeeService.getEmployee(id);  									
+		Staff emp = staffService.getStaff(id);  									
 		
 		StaffDTO.ResponseEmployee dto = StaffDTO.ResponseEmployee.convert(emp); 
 		
@@ -40,14 +40,12 @@ public class StaffController {
 							,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/hrm/employee/create"}, method={RequestMethod.POST,RequestMethod.PUT})	
+	@RequestMapping(value={"/hrm/staff/create"}, method={RequestMethod.POST,RequestMethod.PUT})	
 	public ResponseEntity<?> newEmployee(@RequestBody @Valid StaffDTO.NewEmployee dto, BindingResult result) {			
 		
-		if ( result.hasErrors()) {
-			throw new ControllerException("오류");
-		} 											
+		if ( result.hasErrors()) throw new ControllerException("오류 : " + dto.toString());						
 						
-		employeeService.newEmployee(dto);
+		staffService.newEmployee(dto);
 											 				
 		return WebControllerUtil
 				.getResponse(null											
@@ -55,64 +53,18 @@ public class StaffController {
 							,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/hrm/employee"}, method={RequestMethod.POST,RequestMethod.PUT})	
-	public ResponseEntity<?> saveEmployee(@RequestBody StaffDTO.SaveEmployee dto, BindingResult result) {			
+	@RequestMapping(value={"/hrm/staff"}, method={RequestMethod.POST,RequestMethod.PUT})	
+	public ResponseEntity<?> saveStaff(@RequestBody StaffDTO.SaveEmployee dto, BindingResult result) {			
 		
-		if ( result.hasErrors()) {
-			throw new ControllerException("오류");
-		} 											
+		if ( result.hasErrors()) throw new ControllerException("오류 : " + dto.toString());						
 						
-		employeeService.saveEmployee(dto);
+		staffService.saveStaff(dto);
 											 				
 		return WebControllerUtil
 				.getResponse(null											
 							,String.format("%d 건 저장되었습니다.", 1)
 							,HttpStatus.OK);
 	}
-	
-	@RequestMapping(value={"/hrm/employee/changedept"}, method={RequestMethod.POST,RequestMethod.PUT})	
-	public ResponseEntity<?> saveDeptChange(@RequestBody StaffDTO.NewDept dto, BindingResult result) {			
 		
-		if ( result.hasErrors()) {
-			throw new ControllerException("오류");
-		} 											
-				
-		employeeService.saveDeptChangeHistory(dto);
-											 				
-		return WebControllerUtil
-				.getResponse(null											
-							,String.format("%d 건 저장되었습니다.", 1)
-							,HttpStatus.OK);
-	}
-	
-	@RequestMapping(value={"/hrm/employee/changejob"}, method={RequestMethod.POST,RequestMethod.PUT})	
-	public ResponseEntity<?> saveJobChange(@RequestBody StaffDTO.NewJob dto, BindingResult result) {			
-		
-		if ( result.hasErrors()) {
-			throw new ControllerException("오류");
-		} 											
-				
-		employeeService.saveJobChangeHistory(dto);
-											 				
-		return WebControllerUtil
-				.getResponse(null											
-							,String.format("%d 건 저장되었습니다.", 1)
-							,HttpStatus.OK);
-	}
-	
-	@RequestMapping(value={"/hrm/employee/changestatus"}, method={RequestMethod.POST,RequestMethod.PUT})	
-	public ResponseEntity<?> saveStatusChange(@RequestBody StaffDTO.NewStatus dto, BindingResult result) {			
-		
-		if ( result.hasErrors()) {
-			throw new ControllerException("오류");
-		} 											
-				
-		employeeService.saveStatusChangeHistory(dto);
-											 				
-		return WebControllerUtil
-				.getResponse(null							
-							,String.format("%d 건 저장되었습니다.", 1)
-							,HttpStatus.OK);
-	}	
 	
 }
