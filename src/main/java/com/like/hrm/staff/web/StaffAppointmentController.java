@@ -39,7 +39,7 @@ public class StaffAppointmentController {
 							,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/hrm/staff/appointmentrecord"}, method={RequestMethod.POST,RequestMethod.PUT})	
+	@RequestMapping(value={"/hrm/staff/{staffId}/appointmentrecord"}, method={RequestMethod.POST,RequestMethod.PUT})	
 	public ResponseEntity<?> saveAppointmentRecord(@RequestBody StaffDTO.SaveAppointmentRecord dto, BindingResult result) {			
 		
 		if ( result.hasErrors()) {

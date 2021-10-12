@@ -2,11 +2,16 @@ package com.like.hrm.staff.service;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.like.hrm.staff.boundary.StaffDTO;
 import com.like.hrm.staff.domain.model.Staff;
 import com.like.hrm.staff.domain.model.appointment.AppointmentRecord;
 import com.like.hrm.staff.domain.repository.StaffRepository;
 
+@Transactional
+@Service
 public class StaffAppointmentService {
 
 	private StaffRepository repository;

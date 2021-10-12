@@ -3,6 +3,7 @@ package com.like.hrm.staff.boundary;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import org.springframework.util.StringUtils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.like.board.domain.model.vo.Period;
 import com.like.hrm.employee.domain.model.dept.DeptChangeHistory;
 import com.like.hrm.employee.domain.model.job.JobChangeHistory;
 import com.like.hrm.employee.domain.model.status.StatusChangeHistory;
@@ -514,9 +516,9 @@ public class StaffDTO {
 		}
 		
 		public static SaveAppointmentRecord convert(AppointmentRecord entity) {
-			if (entity == null) return null;																										
-			
-			AppointmentInformation info = entity.getInfo();
+			if (entity == null) return null;																													
+
+			Optional<AppointmentInformation> info = Optional.ofNullable(entity.getInfo());
 			
 			return SaveAppointmentRecord.builder()
 							 			.staffId(entity.getStaff().getId())
@@ -526,15 +528,15 @@ public class StaffDTO {
 							 			.recordName(entity.getRecordName())
 							 			.comment(entity.getComment())
 							 			.processWatingYn(entity.getProcessWatingYn())
-							 			.blngDeptCode(info.getBlngDeptCode())
-							 			.workDeptCode(info.getWorkDeptCode())
-							 			.jobGroupCode(info.getJobGroupCode())
-							 			.jobPositionCode(info.getJobPositionCode())
-							 			.occupationCode(info.getOccupationCode())
-							 			.jobGradeCode(info.getJobGradeCode())
-							 			.payStepCode(info.getPayStepCode())
-							 			.jobCode(info.getJobCode())
-							 			.dutyResponsibilityCode(info.getDutyResponsibilityCode())
+							 			.blngDeptCode(info.map(AppointmentInformation::getBlngDeptCode).orElse(null))
+							 			.workDeptCode(info.map(AppointmentInformation::getWorkDeptCode).orElse(null))
+							 			.jobGroupCode(info.map(AppointmentInformation::getJobGroupCode).orElse(null))
+							 			.jobPositionCode(info.map(AppointmentInformation::getJobPositionCode).orElse(null))
+							 			.occupationCode(info.map(AppointmentInformation::getOccupationCode).orElse(null))
+							 			.jobGradeCode(info.map(AppointmentInformation::getJobGradeCode).orElse(null))
+							 			.payStepCode(info.map(AppointmentInformation::getPayStepCode).orElse(null))
+							 			.jobCode(info.map(AppointmentInformation::getJobCode).orElse(null))
+							 			.dutyResponsibilityCode(info.map(AppointmentInformation::getDutyResponsibilityCode).orElse(null))
 							 			.build();
 		}
 	}
