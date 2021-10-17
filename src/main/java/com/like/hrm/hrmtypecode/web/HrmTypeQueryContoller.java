@@ -27,10 +27,10 @@ public class HrmTypeQueryContoller {
 	@GetMapping("/hrm/typelist")
 	public ResponseEntity<?> getTypeList() {
 		
-		List<HrmTypeDTO.SaveCode> list = new ArrayList<HrmTypeDTO.SaveCode>();
+		List<HrmTypeDTO.FormHrmType> list = new ArrayList<HrmTypeDTO.FormHrmType>();
 		
 		for (AppointmentTypeEnum menuType : AppointmentTypeEnum.values()) {			
-			list.add(new HrmTypeDTO.SaveCode(menuType.getCode()
+			list.add(new HrmTypeDTO.FormHrmType(menuType.getCode()
 											,menuType.getName()
 											,true
 											,0
@@ -48,9 +48,9 @@ public class HrmTypeQueryContoller {
 		
 		//List<HrmType> list = service.getHrmDeptTypeList(dto);												
 		
-		List<HrmTypeDTO.SaveCode> list = service.getHrmDeptTypeList(dto)
+		List<HrmTypeDTO.FormHrmType> list = service.getHrmTypeList(dto)
 												.stream()
-												.map(e -> HrmTypeDTO.SaveCode.convert(e))
+												.map(e -> HrmTypeDTO.FormHrmType.convert(e))
 												.collect(Collectors.toList());
 		
 		//HrmTypeDTO.SaveCode.convert(entity)
@@ -59,14 +59,14 @@ public class HrmTypeQueryContoller {
 											,HttpStatus.OK);
 	}
 	
-	@GetMapping("/hrm/hrmtype/{type}/code")
+	@GetMapping("/hrm/hrmtype/code")
 	public ResponseEntity<?> getHrmTypeDetailCodeList(HrmTypeDetailCodeDTO.SearchHrmTypeDetailCode dto) {
 		
 		//List<HrmTypeDetailCode> list = service.getHrmDeptTypeList(dto);												
 		
-		List<HrmTypeDetailCodeDTO.SaveCode> list = service.getHrmDeptTypeList(dto)
+		List<HrmTypeDetailCodeDTO.FormHrmTypeDetailCode> list = service.getTypeDetailCodeList(dto)
 														  .stream()
-														  .map(e -> HrmTypeDetailCodeDTO.SaveCode.convert(e))
+														  .map(e -> HrmTypeDetailCodeDTO.FormHrmTypeDetailCode.convert(e))
 														  .collect(Collectors.toList());
 		
 		return WebControllerUtil.getResponse(list											

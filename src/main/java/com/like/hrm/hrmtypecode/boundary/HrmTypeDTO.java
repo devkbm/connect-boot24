@@ -64,7 +64,7 @@ public class HrmTypeDTO {
 	@Builder
 	@AllArgsConstructor
 	@NoArgsConstructor(access = AccessLevel.PROTECTED)
-	public static class SaveCode implements Serializable {
+	public static class FormHrmType implements Serializable {
 				
 		private static final long serialVersionUID = -4482323353197356218L;
 											
@@ -98,9 +98,9 @@ public class HrmTypeDTO {
 			return entity;
 		}
 		
-		public static SaveCode convert(HrmType entity) {
+		public static FormHrmType convert(HrmType entity) {
 						
-			return new SaveCode(entity.getId()
+			return new FormHrmType(entity.getId()
 					           ,entity.getName()					           
 							   ,entity.isUseYn()
 							   ,entity.getSequence()

@@ -28,13 +28,13 @@ public class HrmTypeService {
 		return hrmTypeRepository.findById(id).orElse(null);
 	}
 	
-	public HrmTypeDTO.SaveCode getHrmTypeDTO(String code) {
+	public HrmTypeDTO.FormHrmType getHrmTypeDTO(String code) {
 		HrmType entity = this.getHrmType(code);
 		
-		return HrmTypeDTO.SaveCode.convert(entity);
+		return HrmTypeDTO.FormHrmType.convert(entity);
 	}
 	
-	public void saveHrmType(HrmTypeDTO.SaveCode dto) {
+	public void saveHrmType(HrmTypeDTO.FormHrmType dto) {
 		HrmType hrmType = null; //= dto.getId() == null ? null : hrmTypeRepository.findById(dto.getId()).orElse(null);			
 		
 		if (hrmType == null) {
@@ -54,14 +54,14 @@ public class HrmTypeService {
 		return hrmTypeDetailCodeRepository.findById(id).orElse(null);
 	}
 	
-	public HrmTypeDetailCodeDTO.SaveCode getTypeDetailCodeDTO(HrmTypeDetailCodeId id) {
+	public HrmTypeDetailCodeDTO.FormHrmTypeDetailCode getTypeDetailCodeDTO(HrmTypeDetailCodeId id) {
 		
 		HrmTypeDetailCode entity = hrmTypeDetailCodeRepository.findById(id).orElse(null);				
 		
-		return HrmTypeDetailCodeDTO.SaveCode.convert(entity);
+		return HrmTypeDetailCodeDTO.FormHrmTypeDetailCode.convert(entity);
 	}
 	
-	public void saveTypeDetailCode(HrmTypeDetailCodeDTO.SaveCode dto) {		
+	public void saveTypeDetailCode(HrmTypeDetailCodeDTO.FormHrmTypeDetailCode dto) {		
 		HrmTypeDetailCode typeDetailCode = null;
 		/*
 		if (dto.getId() != null) {

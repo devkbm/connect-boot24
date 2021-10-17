@@ -30,7 +30,7 @@ public class HrmTypeController {
 	@GetMapping("/hrm/hrmtype/{id}")
 	public ResponseEntity<?> getHrmType(@PathVariable(value="id") String id) {
 		
-		HrmTypeDTO.SaveCode hrmType = service.getHrmTypeDTO(id);
+		HrmTypeDTO.FormHrmType hrmType = service.getHrmTypeDTO(id);
 					
 		return WebControllerUtil.getResponse(hrmType											
 											,String.format("%d 건 조회되었습니다.", hrmType == null ? 0 : 1)
@@ -38,7 +38,7 @@ public class HrmTypeController {
 	}
 	
 	@RequestMapping(value={"/hrm/hrmtype"}, method={RequestMethod.POST,RequestMethod.PUT}) 
-	public ResponseEntity<?> saveHrmType(@RequestBody HrmTypeDTO.SaveCode dto, BindingResult result) {				
+	public ResponseEntity<?> saveHrmType(@RequestBody HrmTypeDTO.FormHrmType dto, BindingResult result) {				
 		
 		if ( result.hasErrors()) {			
 			throw new ControllerException(result.toString());
@@ -66,7 +66,7 @@ public class HrmTypeController {
 	@GetMapping("/hrm/hrmtype/{type}/code/{code}")
 	public ResponseEntity<?> getTypeDetailCode(@PathVariable(value="type") String type, @PathVariable(value="code") String code) {
 		
-		HrmTypeDetailCodeDTO.SaveCode dto = service.getTypeDetailCodeDTO(new HrmTypeDetailCodeId(type, code));
+		HrmTypeDetailCodeDTO.FormHrmTypeDetailCode dto = service.getTypeDetailCodeDTO(new HrmTypeDetailCodeId(type, code));
 					
 		return WebControllerUtil.getResponse(dto
 											,String.format("%d 건 조회되었습니다.", dto == null ? 0 : 1)
@@ -74,7 +74,7 @@ public class HrmTypeController {
 	}
 	
 	@RequestMapping(value={"/hrm/hrmtype/{type}/code"}, method={RequestMethod.POST,RequestMethod.PUT}) 
-	public ResponseEntity<?> saveTypeDetailCode(@RequestBody HrmTypeDetailCodeDTO.SaveCode dto, BindingResult result) {				
+	public ResponseEntity<?> saveTypeDetailCode(@RequestBody HrmTypeDetailCodeDTO.FormHrmTypeDetailCode dto, BindingResult result) {				
 		
 		if ( result.hasErrors()) {			
 			throw new ControllerException(result.toString());

@@ -21,11 +21,11 @@ public class HrmTypeQueryService {
 		this.repository = repository;
 	}
 				
-	public List<HrmType> getHrmDeptTypeList(HrmTypeDTO.SearchHrmType condition) {
+	public List<HrmType> getHrmTypeList(HrmTypeDTO.SearchHrmType condition) {
 		return repository.getHrmTypeList(condition);
 	}
 	
-	public List<HrmTypeDetailCode> getHrmDeptTypeList(HrmTypeDetailCodeDTO.SearchHrmTypeDetailCode condition) {
+	public List<HrmTypeDetailCode> getTypeDetailCodeList(HrmTypeDetailCodeDTO.SearchHrmTypeDetailCode condition) {
 		return repository.getTypeDetailCodeList(condition);
 	}	
 	

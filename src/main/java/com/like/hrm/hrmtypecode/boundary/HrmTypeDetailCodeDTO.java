@@ -41,7 +41,7 @@ public class HrmTypeDetailCodeDTO {
 			BooleanBuilder builder = new BooleanBuilder();
 			
 			builder
-				//.and(eqTypeId(this.typeId))
+				.and(eqTypeId(this.typeId))
 				.and(likeCodeName(this.codeName));
 						
 			return builder;
@@ -49,7 +49,7 @@ public class HrmTypeDetailCodeDTO {
 		
 		private BooleanExpression eqTypeId(String typeId) {			
 			
-			return null; //qType.typeId.eq(typeId);
+			return qType.id.codeType.eq(typeId);
 		}
 		
 		private BooleanExpression likeCodeName(String codeName) {
@@ -65,7 +65,7 @@ public class HrmTypeDetailCodeDTO {
 	@Data
 	@AllArgsConstructor
 	@NoArgsConstructor(access = AccessLevel.PROTECTED)
-	public static class SaveCode implements Serializable {					
+	public static class FormHrmTypeDetailCode implements Serializable {					
 				
 		private static final long serialVersionUID = -4493967354550706137L;
 			
@@ -97,10 +97,10 @@ public class HrmTypeDetailCodeDTO {
 			return entity;
 		}
 
-		public static SaveCode convert(HrmTypeDetailCode entity) {
+		public static FormHrmTypeDetailCode convert(HrmTypeDetailCode entity) {
 			if (entity == null) return null;
 			
-			return new SaveCode(entity.getId().getCodeType()
+			return new FormHrmTypeDetailCode(entity.getId().getCodeType()
 							   ,entity.getId().getCode()
 					           ,entity.getCodeName()
 					           ,entity.isUseYn()
