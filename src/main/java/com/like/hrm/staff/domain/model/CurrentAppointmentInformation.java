@@ -70,7 +70,7 @@ public class CurrentAppointmentInformation {
 	@Column(name="JOB_CODE")
 	private String jobCode;
 			
-	public void apply(AppointmentInformation info) {
+	void apply(AppointmentInformation info) {
 		this.blngDeptCode = info.getBlngDeptCode();
 		this.workDeptCode = info.getWorkDeptCode();
 		this.jobGroupCode = info.getJobGroupCode();

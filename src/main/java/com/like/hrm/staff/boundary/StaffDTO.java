@@ -490,31 +490,22 @@ public class StaffDTO {
 		private String dutyResponsibilityCode;
 		
 		public AppointmentRecord newEntity(Staff staff) {		
-			AppointmentInformation info = new AppointmentInformation(blngDeptCode
-																	,workDeptCode
-																	,jobGroupCode
-																	,jobPositionCode
-																	,occupationCode
-																	,jobGradeCode
-																	,payStepCode
-																	,jobCode
-																	,dutyResponsibilityCode);
+			AppointmentInformation info = newAppointmentInformation();
 			
 			return new AppointmentRecord(staff,appointmentDate, appointmentEndDate, recordName, comment, info);				
 		}
 		
 		public void modifyEntity(AppointmentRecord entity) {
-			/*
-			entity.modifyEntity(name
-							   ,residentRegistrationNumber
-							   ,relation
-							   ,occupation
-							   ,schoolCareerType
-							   ,comment);
-							   
-							 */
+			
+			AppointmentInformation info = newAppointmentInformation();
+			
+			entity.modify(appointmentDate
+						 ,appointmentEndDate
+						 ,recordName
+						 ,comment
+						 ,info);									
 		}
-		
+				
 		public static SaveAppointmentRecord convert(AppointmentRecord entity) {
 			if (entity == null) return null;																													
 
@@ -538,6 +529,18 @@ public class StaffDTO {
 							 			.jobCode(info.map(AppointmentInformation::getJobCode).orElse(null))
 							 			.dutyResponsibilityCode(info.map(AppointmentInformation::getDutyResponsibilityCode).orElse(null))
 							 			.build();
+		}
+		
+		private AppointmentInformation newAppointmentInformation() {
+			return new AppointmentInformation(blngDeptCode
+											 ,workDeptCode
+											 ,jobGroupCode
+											 ,jobPositionCode
+											 ,occupationCode
+											 ,jobGradeCode
+											 ,payStepCode
+											 ,jobCode
+											 ,dutyResponsibilityCode);
 		}
 	}
 }

@@ -80,7 +80,14 @@ public class AppointmentRecord extends AuditEntity implements Serializable {
 		this.processWatingYn = "Y";
 	}
 			
-	public void modify() {
-		
+	public void modify(LocalDate appointmentDate
+					  ,LocalDate appointmentEndDate
+					  ,String recordName
+					  ,String comment
+					  ,AppointmentInformation info) {
+		this.appointmentDate = appointmentDate;
+		this.appointmentEndDate = appointmentEndDate;
+		this.recordName = recordName;
+		this.info = info;
 	}
 }

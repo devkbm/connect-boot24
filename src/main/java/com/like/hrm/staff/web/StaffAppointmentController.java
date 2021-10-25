@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +28,7 @@ public class StaffAppointmentController {
 	
 	@GetMapping("/hrm/staff/{staffId}/appointmentrecord/{id}")
 	public ResponseEntity<?> getAppointmentRecord(@PathVariable String staffId
-									  ,@PathVariable Long id) {
+									  			 ,@PathVariable Long id) {
 				
 		AppointmentRecord entity = service.getAppointmentRecord(staffId, id);  									
 				
@@ -47,6 +48,18 @@ public class StaffAppointmentController {
 		} 											
 				
 		service.saveAppointmentRecord(dto);
+											 				
+		return WebControllerUtil
+				.getResponse(null							
+							,String.format("%d 건 저장되었습니다.", 1)
+							,HttpStatus.OK);
+	}
+	
+	@PutMapping("/hrm/staff/{staffId}/appointmentrecord/{id}/apply")
+	public ResponseEntity<?> applyAppointmentRecord(@PathVariable String staffId
+ 			 									   ,@PathVariable Long id) {									
+				
+		service.applyAppointmentRecord(staffId, id);
 											 				
 		return WebControllerUtil
 				.getResponse(null							

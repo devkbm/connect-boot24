@@ -42,6 +42,12 @@ public class StaffAppointmentService {
 		repository.save(emp);
 	}	
 	
+	public void applyAppointmentRecord(String staffId, Long appointmentRecordId) {
+		Staff staff = getStaffInfo(staffId);
+		
+		staff.applyAppointmentRecord(appointmentRecordId);			
+	}
+	
 	private Staff getStaffInfo(String staffId) {
 		return repository.findById(staffId)
 						 .orElseThrow(() -> new EntityNotFoundException(staffId + " 사번이 존재하지 않습니다."));

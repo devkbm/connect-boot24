@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.like.core.domain.AuditEntity;
+import com.like.hrm.staff.domain.model.appointment.AppointmentRecord;
 import com.like.hrm.staff.domain.model.appointment.AppointmentRecordList;
 import com.like.hrm.staff.domain.model.family.FamilyList;
 import com.like.hrm.staff.domain.model.license.LicenseList;
@@ -162,5 +163,11 @@ public class Staff extends AuditEntity implements Serializable {
 	public void changeImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}		
+	
+	public void applyAppointmentRecord(Long appointmentRecordId) {
+		AppointmentRecord record = this.appointmentRecordList.get(appointmentRecordId);
+		
+		this.currentAppointment.apply(record.getInfo());
+	}
 
 }
