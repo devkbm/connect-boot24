@@ -25,8 +25,10 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"staff"})
+@ToString(exclude = {"staff"})
 @EqualsAndHashCode(callSuper = false, of = {"id"})
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

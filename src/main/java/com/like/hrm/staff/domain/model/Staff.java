@@ -164,8 +164,10 @@ public class Staff extends AuditEntity implements Serializable {
 		this.imagePath = imagePath;
 	}		
 	
-	public void applyAppointmentRecord(Long appointmentRecordId) {
+	public void applyAppointmentRecord(Long appointmentRecordId) {		
 		AppointmentRecord record = this.appointmentRecordList.get(appointmentRecordId);
+		
+		if (this.currentAppointment == null) this.currentAppointment = new CurrentAppointmentInformation(record.getInfo()); 		
 		
 		this.currentAppointment.apply(record.getInfo());
 	}

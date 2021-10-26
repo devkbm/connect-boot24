@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 import com.like.hrm.staff.domain.model.appointment.AppointmentInformation;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,7 +70,11 @@ public class CurrentAppointmentInformation {
 	 */
 	@Column(name="JOB_CODE")
 	private String jobCode;
-			
+		
+	public CurrentAppointmentInformation(AppointmentInformation info) {
+		this.apply(info);
+	}
+	
 	void apply(AppointmentInformation info) {
 		this.blngDeptCode = info.getBlngDeptCode();
 		this.workDeptCode = info.getWorkDeptCode();

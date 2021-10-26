@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,10 +56,13 @@ public class StaffAppointmentController {
 							,HttpStatus.OK);
 	}
 	
-	@PutMapping("/hrm/staff/{staffId}/appointmentrecord/{id}/apply")
+	@GetMapping("/hrm/staff/{staffId}/appointmentrecord/{id}/apply")
+	//@RequestMapping(value={"/hrm/staff/{staffId}/appointmentrecord/{id}/apply"}, method={RequestMethod.POST})	
 	public ResponseEntity<?> applyAppointmentRecord(@PathVariable String staffId
  			 									   ,@PathVariable Long id) {									
-				
+		
+		System.out.println(staffId + " : " + id.toString());
+		
 		service.applyAppointmentRecord(staffId, id);
 											 				
 		return WebControllerUtil
