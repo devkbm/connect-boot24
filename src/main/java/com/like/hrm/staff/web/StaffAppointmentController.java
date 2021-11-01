@@ -1,12 +1,13 @@
 package com.like.hrm.staff.web;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.hrm.staff.boundary.StaffDTO;
 import com.like.hrm.staff.domain.model.appointment.AppointmentRecord;
+import com.like.hrm.staff.domain.model.appointment.AppointmentRecordList;
 import com.like.hrm.staff.service.StaffAppointmentService;
 
 @RestController
@@ -25,6 +27,21 @@ public class StaffAppointmentController {
 	
 	public StaffAppointmentController(StaffAppointmentService service) {
 		this.service = service;
+	}
+	
+	@GetMapping("/hrm/staff/{staffId}/appointmentrecord")
+	public ResponseEntity<?> getAppointmentRecordList(@PathVariable String staffId) {
+				
+		AppointmentRecordList entity = service.getAppointmentRecord(staffId);  									
+				
+		List<StaffDTO.SaveAppointmentRecord> list = entity.getStream()
+														  .map(e -> StaffDTO.SaveAppointmentRecord.convert(e))
+														  .collect(Collectors.toList()); 		
+		
+		return WebControllerUtil
+				.getResponse(list											
+							,String.format("%d 건 조회되었습니다.", list.size())
+							,HttpStatus.OK);
 	}
 	
 	@GetMapping("/hrm/staff/{staffId}/appointmentrecord/{id}")

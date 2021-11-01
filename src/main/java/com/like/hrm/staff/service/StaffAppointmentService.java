@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.like.hrm.staff.boundary.StaffDTO;
 import com.like.hrm.staff.domain.model.Staff;
 import com.like.hrm.staff.domain.model.appointment.AppointmentRecord;
+import com.like.hrm.staff.domain.model.appointment.AppointmentRecordList;
 import com.like.hrm.staff.domain.repository.StaffRepository;
 
 @Transactional
@@ -18,6 +19,10 @@ public class StaffAppointmentService {
 	
 	public StaffAppointmentService(StaffRepository repository) {
 		this.repository = repository;		
+	}
+	
+	public AppointmentRecordList getAppointmentRecord(String staffId) {
+		return getStaffInfo(staffId).getAppointmentRecordList();
 	}
 	
 	public AppointmentRecord getAppointmentRecord(String staffId, Long id) {

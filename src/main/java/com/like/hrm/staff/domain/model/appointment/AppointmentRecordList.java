@@ -2,6 +2,7 @@ package com.like.hrm.staff.domain.model.appointment;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
@@ -37,5 +38,9 @@ public class AppointmentRecordList {
 	
 	public void remove(Long id) {		
 		this.appointmentRecordList.removeIf(e -> e.getId().equals(id));			
+	}
+	
+	public Stream<AppointmentRecord> getStream() {
+		return this.appointmentRecordList.stream();
 	}
 }
