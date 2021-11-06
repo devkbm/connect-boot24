@@ -31,7 +31,7 @@ public class StaffAppointmentService {
 		return staff.getAppointmentRecordList().get(id);	
 	}
 	
-	public void saveAppointmentRecord(StaffDTO.SaveAppointmentRecord dto) {
+	public void saveAppointmentRecord(StaffDTO.FormStaffAppointmentRecord dto) {
 		Staff emp = getStaffInfo(dto.getStaffId());
 		
 		AppointmentRecord entity = emp.getAppointmentRecordList().get(dto.getId());

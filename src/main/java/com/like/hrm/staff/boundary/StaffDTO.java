@@ -453,7 +453,7 @@ public class StaffDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class SaveAppointmentRecord implements Serializable {
+	public static class FormStaffAppointmentRecord implements Serializable {
 		
 		@NotEmpty
 		private String staffId;
@@ -506,12 +506,12 @@ public class StaffDTO {
 						 ,info);									
 		}
 				
-		public static SaveAppointmentRecord convert(AppointmentRecord entity) {
+		public static FormStaffAppointmentRecord convert(AppointmentRecord entity) {
 			if (entity == null) return null;																													
 
 			Optional<AppointmentInformation> info = Optional.ofNullable(entity.getInfo());
 			
-			return SaveAppointmentRecord.builder()
+			return FormStaffAppointmentRecord.builder()
 							 			.staffId(entity.getStaff().getId())
 							 			.id(entity.getId())
 							 			.appointmentDate(entity.getAppointmentDate())

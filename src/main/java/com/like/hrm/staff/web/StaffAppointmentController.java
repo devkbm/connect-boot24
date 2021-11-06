@@ -34,8 +34,8 @@ public class StaffAppointmentController {
 				
 		AppointmentRecordList entity = service.getAppointmentRecord(staffId);  									
 				
-		List<StaffDTO.SaveAppointmentRecord> list = entity.getStream()
-														  .map(e -> StaffDTO.SaveAppointmentRecord.convert(e))
+		List<StaffDTO.FormStaffAppointmentRecord> list = entity.getStream()
+														  .map(e -> StaffDTO.FormStaffAppointmentRecord.convert(e))
 														  .collect(Collectors.toList()); 		
 		
 		return WebControllerUtil
@@ -50,7 +50,7 @@ public class StaffAppointmentController {
 				
 		AppointmentRecord entity = service.getAppointmentRecord(staffId, id);  									
 				
-		StaffDTO.SaveAppointmentRecord dto = StaffDTO.SaveAppointmentRecord.convert(entity) ;
+		StaffDTO.FormStaffAppointmentRecord dto = StaffDTO.FormStaffAppointmentRecord.convert(entity) ;
 		
 		return WebControllerUtil
 				.getResponse(dto											
@@ -59,7 +59,7 @@ public class StaffAppointmentController {
 	}
 	
 	@RequestMapping(value={"/hrm/staff/{staffId}/appointmentrecord"}, method={RequestMethod.POST,RequestMethod.PUT})	
-	public ResponseEntity<?> saveAppointmentRecord(@RequestBody StaffDTO.SaveAppointmentRecord dto, BindingResult result) {			
+	public ResponseEntity<?> saveAppointmentRecord(@RequestBody StaffDTO.FormStaffAppointmentRecord dto, BindingResult result) {			
 		
 		if ( result.hasErrors()) {
 			throw new ControllerException("오류 : " +dto.toString());

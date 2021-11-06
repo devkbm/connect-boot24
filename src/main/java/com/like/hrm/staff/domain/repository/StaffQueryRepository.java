@@ -3,6 +3,7 @@ package com.like.hrm.staff.domain.repository;
 import java.util.List;
 
 import com.like.hrm.staff.boundary.StaffDTO.SearchEmployee;
+import com.like.hrm.staff.boundary.StafflAppointmentRecordList;
 import com.like.hrm.staff.domain.model.Staff;
 
 public interface StaffQueryRepository {
@@ -15,4 +16,6 @@ public interface StaffQueryRepository {
 	 * @return Employee 엔티티
 	 */
 	Staff getLastEmployee(String yyyy);
+	
+	List<StafflAppointmentRecordList> getStafflAppointmentRecordList(String staffId);
 }

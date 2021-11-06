@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
@@ -33,6 +34,16 @@ public class StaffQueryController {
 		
 		return WebControllerUtil.getResponse(dtoList											
 											,String.format("%d 건 조회되었습니다.", dtoList.size())
+											,HttpStatus.OK);
+	}
+	
+	@GetMapping("/hrm/staff/{id}/record")
+	public ResponseEntity<?> getEmployeeList(@PathVariable String id) {
+		
+		List<?> list = service.getStafflAppointmentRecordList(id);								
+		
+		return WebControllerUtil.getResponse(list											
+											,String.format("%d 건 조회되었습니다.", list.size())
 											,HttpStatus.OK);
 	}
 }
