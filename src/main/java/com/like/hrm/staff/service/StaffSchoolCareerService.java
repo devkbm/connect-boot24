@@ -27,7 +27,7 @@ public class StaffSchoolCareerService {
 		return emp.getSchoolCareerList().get(id);
 	}
 	
-	public void saveSchoolCareer(StaffDTO.SaveEducation dto) {
+	public void saveSchoolCareer(StaffDTO.FormEducation dto) {
 		Staff emp = getEmployeeInfo(dto.getStaffId());
 		
 		SchoolCareer education = emp.getSchoolCareerList().get(dto.getEducationId());

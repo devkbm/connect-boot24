@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotEmpty;
@@ -15,10 +14,6 @@ import org.springframework.util.StringUtils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.like.board.domain.model.vo.Period;
-import com.like.hrm.employee.domain.model.dept.DeptChangeHistory;
-import com.like.hrm.employee.domain.model.job.JobChangeHistory;
-import com.like.hrm.employee.domain.model.status.StatusChangeHistory;
 import com.like.hrm.staff.domain.model.QStaff;
 import com.like.hrm.staff.domain.model.Staff;
 import com.like.hrm.staff.domain.model.appointment.AppointmentInformation;
@@ -165,7 +160,7 @@ public class StaffDTO {
 	@AllArgsConstructor
 	@Builder
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public static class SaveEmployee implements Serializable {
+	public static class FormEmployee implements Serializable {
 								
 		private static final long serialVersionUID = -3475382902805357777L;
 
@@ -190,119 +185,13 @@ public class StaffDTO {
 					 		   ,this.birthday);
 		}
 	}
-		
-	
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	@Builder
-	public static class NewDept implements Serializable {
-				
-		private static final long serialVersionUID = 8984690778056785945L;
-		
-		private String employeeId;
-		
-		private Long id;
-		
-		private String deptType;
-						
-		private String deptCode;
-				
-		private String deptName;
-		
-		private LocalDate fromDate;
-					
-		private LocalDate toDate;
-		
-		public static NewDept convert(DeptChangeHistory entity) {
-			return NewDept.builder()
-						  .employeeId(entity.getEmployee().getId())
-						  .id(entity.getId())
-						  .deptType(entity.getDeptType())
-						  .deptCode(entity.getDeptCode())
-						  .deptName(entity.getDeptName())
-						  .fromDate(entity.getPeriod().getFrom())
-						  .toDate(entity.getPeriod().getTo())
-						  .build();
-		}
-	}
-	
-	
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	@Builder
-	public static class NewJob implements Serializable {					
-		
-		private static final long serialVersionUID = -5137257776558074803L;
-
-		@NotEmpty
-		private String employeeId;
-		
-		@NotEmpty
-		private String jobType;
-				
-		@NotEmpty
-		private String jobCode;
-				
-		@NotEmpty
-		private LocalDate fromDate;
 			
-		@NotEmpty
-		private LocalDate toDate;
-		
-		public static NewJob convert(JobChangeHistory entity) {
-			return NewJob.builder()
-						 .employeeId(entity.getEmployee().getId())
-						 .jobType(entity.getJobType())
-						 .jobCode(entity.getJobCode())
-						 .fromDate(entity.getPeriod().getFrom())
-						 .toDate(entity.getPeriod().getTo())
-						 .build();			
-		}
-		
-	}
-	
 	
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class NewStatus implements Serializable {					
-
-		private static final long serialVersionUID = -129845094404797994L;
-
-		@NotEmpty
-		private String employeeId;
-		
-		@NotEmpty
-		private String appointmentCode;
-				
-		@NotEmpty
-		private String statusCode;
-				
-		@NotEmpty
-		private LocalDate fromDate;
-			
-		@NotEmpty
-		private LocalDate toDate;
-		
-		public static NewStatus convert(StatusChangeHistory entity) {
-			return NewStatus.builder()
-							.employeeId(entity.getEmployee().getId())
-							.appointmentCode(entity.getAppointmentCode())
-							.statusCode(entity.getStatusCode())
-							.fromDate(entity.getPeriod().getFrom())
-							.toDate(entity.getPeriod().getTo())
-							.build();
-		}
-	}
-	
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	@Builder
-	public static class SaveEducation implements Serializable {					
+	public static class FormEducation implements Serializable {					
 
 		private static final long serialVersionUID = -8768170007000992707L;
 
@@ -334,8 +223,8 @@ public class StaffDTO {
 							   ,comment);	
 		}	
 		
-		public static SaveEducation convert(SchoolCareer entity) {
-			return SaveEducation.builder()
+		public static FormEducation convert(SchoolCareer entity) {
+			return FormEducation.builder()
 								.staffId(entity.getStaff().getId())
 								.educationId(entity.getId())
 								.schoolCareerType(entity.getSchoolCareerType())
@@ -349,7 +238,7 @@ public class StaffDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class SaveLicense implements Serializable {						
+	public static class FormLicense implements Serializable {						
 
 		private static final long serialVersionUID = -4765555653271244793L;
 
@@ -381,8 +270,8 @@ public class StaffDTO {
 							   ,comment);	
 		}	
 		
-		public static SaveLicense convert(License entity)  {
-			return SaveLicense.builder()
+		public static FormLicense convert(License entity)  {
+			return FormLicense.builder()
 							  .staffId(entity.getStaff().getId())
 							  .licenseId(entity.getLicenseId())
 							  .licenseType(entity.getLicenseType())
@@ -396,7 +285,7 @@ public class StaffDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class SaveFamily implements Serializable {
+	public static class FormFamily implements Serializable {
 		
 		@NotEmpty
 		private String staffId;
@@ -435,8 +324,8 @@ public class StaffDTO {
 							   ,comment);
 		}
 		
-		public static SaveFamily convert(Family entity) {
-			return SaveFamily.builder()
+		public static FormFamily convert(Family entity) {
+			return FormFamily.builder()
 							 .staffId(entity.getStaff().getId())
 							 .id(entity.getId())
 							 .name(entity.getResidentRegistrationNumber())

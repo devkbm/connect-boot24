@@ -31,7 +31,7 @@ public class StaffFamilyController {
 				
 		Family entity = service.getFamily(empId, id);  									
 				
-		StaffDTO.SaveFamily dto = StaffDTO.SaveFamily.convert(entity) ;
+		StaffDTO.FormFamily dto = StaffDTO.FormFamily.convert(entity) ;
 		
 		return WebControllerUtil
 				.getResponse(dto											
@@ -40,7 +40,7 @@ public class StaffFamilyController {
 	}
 	
 	@RequestMapping(value={"/hrm/employee/family"}, method={RequestMethod.POST,RequestMethod.PUT})	
-	public ResponseEntity<?> saveFamily(@RequestBody StaffDTO.SaveFamily dto, BindingResult result) {			
+	public ResponseEntity<?> saveFamily(@RequestBody StaffDTO.FormFamily dto, BindingResult result) {			
 		
 		if ( result.hasErrors()) {
 			throw new ControllerException("오류");

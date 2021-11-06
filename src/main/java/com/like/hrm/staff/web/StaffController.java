@@ -54,7 +54,7 @@ public class StaffController {
 	}
 	
 	@RequestMapping(value={"/hrm/staff"}, method={RequestMethod.POST,RequestMethod.PUT})	
-	public ResponseEntity<?> saveStaff(@RequestBody StaffDTO.SaveEmployee dto, BindingResult result) {			
+	public ResponseEntity<?> saveStaff(@RequestBody StaffDTO.FormEmployee dto, BindingResult result) {			
 		
 		if ( result.hasErrors()) throw new ControllerException("오류 : " + dto.toString());						
 						

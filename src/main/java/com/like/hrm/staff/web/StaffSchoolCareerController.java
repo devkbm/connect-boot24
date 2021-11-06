@@ -40,7 +40,7 @@ public class StaffSchoolCareerController {
 	}
 	
 	@RequestMapping(value={"/hrm/employee/education"}, method={RequestMethod.POST,RequestMethod.PUT})	
-	public ResponseEntity<?> saveEducation(@RequestBody @Valid StaffDTO.SaveEducation dto, BindingResult result) {			
+	public ResponseEntity<?> saveEducation(@RequestBody @Valid StaffDTO.FormEducation dto, BindingResult result) {			
 		
 		if ( result.hasErrors()) {
 			throw new ControllerException("오류");

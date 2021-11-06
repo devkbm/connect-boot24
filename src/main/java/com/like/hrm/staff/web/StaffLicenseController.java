@@ -38,7 +38,7 @@ public class StaffLicenseController {
 	}
 	
 	@RequestMapping(value={"/hrm/employee/license"}, method={RequestMethod.POST,RequestMethod.PUT})	
-	public ResponseEntity<?> saveLicense(@RequestBody StaffDTO.SaveLicense dto, BindingResult result) {			
+	public ResponseEntity<?> saveLicense(@RequestBody StaffDTO.FormLicense dto, BindingResult result) {			
 		
 		if ( result.hasErrors()) {
 			throw new ControllerException("오류");

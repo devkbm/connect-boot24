@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.hrm.staff.boundary.StaffDTO;
-import com.like.hrm.staff.boundary.StafflAppointmentRecordList;
+import com.like.hrm.staff.boundary.ResponseStaffAppointmentRecord;
 import com.like.hrm.staff.domain.model.Staff;
 import com.like.hrm.staff.domain.repository.StaffQueryRepository;
 
@@ -24,7 +24,7 @@ public class StaffQueryService {
 		return repository.getEmployeeList(dto);
 	}
 	
-	public List<StafflAppointmentRecordList> getStafflAppointmentRecordList(String staffId) {
+	public List<ResponseStaffAppointmentRecord> getStafflAppointmentRecordList(String staffId) {
 		return repository.getStafflAppointmentRecordList(staffId);
 	}
 	

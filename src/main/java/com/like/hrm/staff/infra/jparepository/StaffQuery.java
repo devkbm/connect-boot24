@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.like.hrm.hrmtypecode.domain.QHrmTypeDetailCode;
-import com.like.hrm.staff.boundary.QStafflAppointmentRecordList;
+import com.like.hrm.staff.boundary.QResponseStaffAppointmentRecord;
 import com.like.hrm.staff.boundary.StaffDTO.SearchEmployee;
-import com.like.hrm.staff.boundary.StafflAppointmentRecordList;
+import com.like.hrm.staff.boundary.ResponseStaffAppointmentRecord;
 import com.like.hrm.staff.domain.model.QStaff;
 import com.like.hrm.staff.domain.model.Staff;
 import com.like.hrm.staff.domain.model.appointment.QAppointmentRecord;
@@ -38,7 +38,7 @@ public class StaffQuery implements StaffQueryRepository {
 	}
 
 	@Override
-	public List<StafflAppointmentRecordList> getStafflAppointmentRecordList(String staffId) {		
+	public List<ResponseStaffAppointmentRecord> getStafflAppointmentRecordList(String staffId) {		
 		
 		QHrmTypeDetailCode jobGroupCode = QHrmTypeDetailCode.hrmTypeDetailCode;
 		QHrmTypeDetailCode jobPositionCode = new QHrmTypeDetailCode("jobPositionCode");
@@ -48,7 +48,7 @@ public class StaffQuery implements StaffQueryRepository {
 		QHrmTypeDetailCode jobCode = new QHrmTypeDetailCode("jobCode");				
 		QHrmTypeDetailCode dutyResponsibilityCode = new QHrmTypeDetailCode("dutyResponsibilityCode");
 		
-		return queryFactory.select(newC(qStaff, qAppointmentRecord, jobGroupCode, jobPositionCode, occupationCode, jobGradeCode, payStepCode, jobCode, dutyResponsibilityCode))
+		return queryFactory.select(projections(qStaff, qAppointmentRecord, jobGroupCode, jobPositionCode, occupationCode, jobGradeCode, payStepCode, jobCode, dutyResponsibilityCode))
 						   .from(qStaff)
 						   .join(qAppointmentRecord)
 						   		.on(qStaff.id.eq(qAppointmentRecord.staff.id))
@@ -77,7 +77,7 @@ public class StaffQuery implements StaffQueryRepository {
 						   .fetch();
 	}
 	
-	private QStafflAppointmentRecordList newC(QStaff qStaff
+	private QResponseStaffAppointmentRecord projections(QStaff qStaff
 											, QAppointmentRecord qRecord
 											, QHrmTypeDetailCode jobGroupCode
 											, QHrmTypeDetailCode jobPositionCode
@@ -87,7 +87,7 @@ public class StaffQuery implements StaffQueryRepository {
 											, QHrmTypeDetailCode jobCode
 											, QHrmTypeDetailCode dutyResponsibilityCode) {
 		
-		return new QStafflAppointmentRecordList(qStaff.staff.id
+		return new QResponseStaffAppointmentRecord(QStaff.staff.id
 											   ,qRecord.id
 											   ,qRecord.appointmentDate
 											   ,qRecord.appointmentEndDate

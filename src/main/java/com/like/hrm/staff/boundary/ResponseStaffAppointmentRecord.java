@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class StafflAppointmentRecordList {
+public class ResponseStaffAppointmentRecord {
 
 	private String staffId;
 		
@@ -63,7 +63,7 @@ public class StafflAppointmentRecordList {
 	private String dutyResponsibilityName;	
 	
 	@QueryProjection
-	public StafflAppointmentRecordList(String staffId, Long id, LocalDate appointmentDate, LocalDate appointmentEndDate,
+	public ResponseStaffAppointmentRecord(String staffId, Long id, LocalDate appointmentDate, LocalDate appointmentEndDate,
 			String recordName, String comment, String processWatingYn, String blngDeptCode, String blngDeptName,
 			String workDeptCode, String workDeptName, String jobGroupCode, String jobGroupName, String jobPositionCode,
 			String jobPositionName, String occupationCode, String occupationName, String jobGradeCode,

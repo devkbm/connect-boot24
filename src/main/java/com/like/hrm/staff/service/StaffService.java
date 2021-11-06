@@ -5,10 +5,6 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.like.core.vo.DatePeriod;
-import com.like.hrm.employee.domain.model.dept.DeptChangeHistory;
-import com.like.hrm.employee.domain.model.job.JobChangeHistory;
-import com.like.hrm.employee.domain.model.status.StatusChangeHistory;
 import com.like.hrm.staff.boundary.StaffDTO;
 import com.like.hrm.staff.domain.model.Staff;
 import com.like.hrm.staff.domain.repository.StaffRepository;
@@ -31,7 +27,7 @@ public class StaffService {
 		repository.save(employee);
 	}
 	
-	public void saveStaff(StaffDTO.SaveEmployee dto) {
+	public void saveStaff(StaffDTO.FormEmployee dto) {
 		Staff employee = this.getStaff(dto.getStaffId());
 		
 		dto.modifyEntity(employee);
@@ -50,46 +46,10 @@ public class StaffService {
 		repository.save(emp);
 	}
 	
-	public void deleteEmployee(String id) {		
+	public void deleteStaff(String id) {		
 		repository.deleteById(id);
 	}
-	
-	public void saveDeptChangeHistory(StaffDTO.NewDept dto) {
-		Staff emp = findStaff(dto.getEmployeeId());
-						
-		DeptChangeHistory deptChangeHistory = new DeptChangeHistory(emp
-																   ,dto.getDeptType()
-																   ,dto.getDeptCode()
-																   ,new DatePeriod(dto.getFromDate(),dto.getToDate()));
-				
-		//emp.getDeptHistory().add(deptChangeHistory);
 		
-		repository.save(emp);
-	}
-	
-	public void saveJobChangeHistory(StaffDTO.NewJob dto) {
-		Staff emp = findStaff(dto.getEmployeeId());			
-		
-		JobChangeHistory jobChangeHistory = new JobChangeHistory(emp
-																,dto.getJobType()
-																,dto.getJobCode()
-																,new DatePeriod(dto.getFromDate(),dto.getToDate()));
-		//emp.getJobHistory().add(jobChangeHistory);
-		
-		repository.save(emp);
-	}
-	
-	public void saveStatusChangeHistory(StaffDTO.NewStatus dto) {
-		Staff emp = findStaff(dto.getEmployeeId());
-		
-		StatusChangeHistory statusChangeHistory = new StatusChangeHistory(emp
-																		 ,dto.getAppointmentCode()
-																		 ,dto.getStatusCode()
-																		 ,new DatePeriod(dto.getFromDate(),dto.getToDate())); 			
-		//emp.getStatusHistory().add(statusChangeHistory);
-		
-		repository.save(emp);
-	}	
 	
 	private Staff findStaff(String empId) {
 		return repository.findById(empId).orElseThrow(() -> new EntityNotFoundException(empId + " 사번이 존재하지 않습니다."));
