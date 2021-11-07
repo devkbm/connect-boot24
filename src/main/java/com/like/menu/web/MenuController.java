@@ -16,9 +16,9 @@ import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.menu.boundary.MenuDTO;
 import com.like.menu.boundary.MenuGroupDTO;
-import com.like.menu.boundary.MenuGroupDTO.SaveMenuGroup;
-import com.like.menu.domain.model.Menu;
-import com.like.menu.domain.model.MenuGroup;
+import com.like.menu.boundary.MenuGroupDTO.FormMenuGroup;
+import com.like.menu.domain.Menu;
+import com.like.menu.domain.MenuGroup;
 import com.like.menu.service.MenuCommandService;
 
 @RestController
@@ -30,20 +30,20 @@ public class MenuController {
 		this.menuCommandService = menuCommandService;		
 	}
 			
-	@GetMapping("/common/menugroup/{id}")
+	@GetMapping("/api/common/menugroup/{id}")
 	public ResponseEntity<?> getMenuGroup(@PathVariable(value="id") String menuGroupCode) {				
 		
 		MenuGroup menuGroup = menuCommandService.getMenuGroup(menuGroupCode);
 		
-		MenuGroupDTO.SaveMenuGroup dto = SaveMenuGroup.convert(menuGroup);
+		MenuGroupDTO.FormMenuGroup dto = FormMenuGroup.convert(menuGroup);
 								
 		return WebControllerUtil.getResponse(dto											
 											,String.format("%d 건 조회되었습니다.", dto != null ? 1 : 0)
 											,HttpStatus.OK);
 	}		
 		
-	@PostMapping("/common/menugroup/{id}")
-	public ResponseEntity<?> saveMenuGroup(@Valid @RequestBody MenuGroupDTO.SaveMenuGroup dto, BindingResult result) {				
+	@PostMapping("/api/common/menugroup/{id}")
+	public ResponseEntity<?> saveMenuGroup(@Valid @RequestBody MenuGroupDTO.FormMenuGroup dto, BindingResult result) {				
 		
 		if ( result.hasErrors()) {			
 			throw new ControllerException(result.getAllErrors().toString());
@@ -56,7 +56,7 @@ public class MenuController {
 											,HttpStatus.OK);
 	}
 		
-	@DeleteMapping("/common/menugroup/{id}")
+	@DeleteMapping("/api/common/menugroup/{id}")
 	public ResponseEntity<?> delCodeGroup(@PathVariable(value="id") String menuGroupCode) {				
 												
 		menuCommandService.deleteMenuGroup(menuGroupCode);							
@@ -67,12 +67,12 @@ public class MenuController {
 	}
 	
 	
-	@GetMapping("/common/menu/{menucode}")
+	@GetMapping("/api/common/menu/{menucode}")
 	public ResponseEntity<?> getMenu(@PathVariable(value="menucode") String menuCode) {				
 		
 		Menu menu = menuCommandService.getMenu(menuCode); 		
 		
-		MenuDTO.SaveMenu dto = MenuDTO.SaveMenu.convert(menu);			
+		MenuDTO.FormMenu dto = MenuDTO.FormMenu.convert(menu);			
 		
 		return WebControllerUtil.getResponse(dto											
 											,String.format("%d 건 조회되었습니다.", dto != null ? 1 : 0)
@@ -81,8 +81,8 @@ public class MenuController {
 	
 	
 		
-	@PostMapping("/common/menu/{menucode}")
-	public ResponseEntity<?> saveMenu(@RequestBody @Valid MenuDTO.SaveMenu dto, BindingResult result) throws Exception {
+	@PostMapping("/api/common/menu/{menucode}")
+	public ResponseEntity<?> saveMenu(@RequestBody @Valid MenuDTO.FormMenu dto, BindingResult result) throws Exception {
 											
 		if ( result.hasErrors()) {
 			//throw new ControllerException("오류");
@@ -96,7 +96,7 @@ public class MenuController {
 											,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/common/menu/{id}")
+	@DeleteMapping("/api/common/menu/{id}")
 	public ResponseEntity<?> delMenu(@PathVariable(value="id") String menuCode) {				
 												
 		menuCommandService.deleteMenu(menuCode);							

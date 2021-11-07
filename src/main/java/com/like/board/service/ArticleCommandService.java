@@ -18,7 +18,7 @@ import com.like.board.domain.repository.ArticleRepository;
 import com.like.board.domain.repository.BoardRepository;
 import com.like.board.domain.service.AttachedFileConverter;
 import com.like.core.util.SessionUtil;
-import com.like.file.domain.model.FileInfo;
+import com.like.file.domain.FileInfo;
 import com.like.file.service.FileService;
 
 @Service
@@ -45,7 +45,7 @@ public class ArticleCommandService {
 		return repository.findById(id).orElse(null);		
 	}
 		
-	public String saveArticle(ArticleDTO.SaveArticleByMuiltiPart dto) throws Exception {
+	public String saveArticle(ArticleDTO.FormArticleByMuiltiPart dto) throws Exception {
 		
 		List<FileInfo> fileInfoList = null;
 		List<AttachedFile> attachedFileList = null;					
@@ -70,7 +70,7 @@ public class ArticleCommandService {
 		return pkArticle;
 	}
 	
-	public String saveArticle(ArticleDTO.SaveArticleByJson dto) {		 							
+	public String saveArticle(ArticleDTO.FormArticleByJson dto) {		 							
 		Board board = boardRepository.findById(dto.getFkBoard()).orElseThrow(() -> new IllegalAddException("존재 하지 않은 게시판입니다."));
 		Article article = null;
 		List<FileInfo> fileInfoList = null;
@@ -139,7 +139,7 @@ public class ArticleCommandService {
 		return article;					
 	}	
 	
-	private Article convertEntity(ArticleDTO.SaveArticleByMuiltiPart dto) {		
+	private Article convertEntity(ArticleDTO.FormArticleByMuiltiPart dto) {		
 		Board board = boardRepository.findById(dto.getFkBoard()).orElseThrow(() -> new IllegalAddException("존재 하지 않은 게시판입니다."));		
 		Article article = dto.isNew() ? null : repository.findById(Long.parseLong(dto.getPkArticle())).orElse(null);
 						

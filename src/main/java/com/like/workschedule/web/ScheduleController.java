@@ -8,15 +8,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.workschedule.boundary.ScheduleDTO;
-import com.like.workschedule.domain.model.Schedule;
+import com.like.workschedule.domain.Schedule;
 import com.like.workschedule.service.ScheduleService;
 
 @RestController
@@ -28,23 +27,22 @@ public class ScheduleController {
 		this.service = service;
 	}
 	
-	@GetMapping(value={"/grw/schedule/{id}"})
+	@GetMapping("/api/grw/schedule/{id}")	
 	public ResponseEntity<?> getSchedule(@PathVariable(value="id") Long id) {
 						
 		Schedule entity = service.getSchedule(id);							
 		
-		ScheduleDTO.ScheduleResponse dto = ScheduleDTO.convertResDTO(entity);
+		ScheduleDTO.ResponseSchedule dto = ScheduleDTO.ResponseSchedule.convertResDTO(entity);
 		
 		return WebControllerUtil
 				.getResponse(dto
-							,dto == null ? 0 : 1
-							,dto == null ? false : true
+							,dto == null ? 0 : 1							
 							,"조회 되었습니다."
 							,HttpStatus.OK);													
 	}
-	
-	@RequestMapping(value={"/grw/schedule"}, method={RequestMethod.POST,RequestMethod.PUT}) 
-	public ResponseEntity<?> saveWorkGroup(@Valid @RequestBody ScheduleDTO.SaveSchedule dto, BindingResult result) {				
+		
+	@PostMapping("/api/grw/schedule")
+	public ResponseEntity<?> saveWorkGroup(@Valid @RequestBody ScheduleDTO.FormSchedule dto, BindingResult result) {				
 		
 		if ( result.hasErrors()) {			
 			throw new ControllerException(result.getAllErrors().toString());
@@ -54,21 +52,19 @@ public class ScheduleController {
 										 					
 		return WebControllerUtil
 				.getResponse(dto
-							,dto != null ? 1 : 0
-							,true
+							,dto != null ? 1 : 0							
 							,String.format("%d 건 저장되었습니다.", dto != null ? 1 : 0)
 							,HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value={"/grw/schedule/{id}"})
+	@DeleteMapping("/api/grw/schedule/{id}")
 	public ResponseEntity<?> deleteSchedule(@PathVariable(value="id") Long id) {
 						
 		service.deleteSchedule(id);							
 				
 		return WebControllerUtil
 				.getResponse(null
-							,1
-							,true
+							,1							
 							,"삭제 되었습니다."
 							,HttpStatus.OK);													
 	}

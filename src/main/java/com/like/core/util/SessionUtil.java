@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.like.user.domain.model.AuthenticationToken;
+import com.like.user.domain.AuthenticationToken;
 
 public class SessionUtil {
 	

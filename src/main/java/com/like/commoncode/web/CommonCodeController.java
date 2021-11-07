@@ -31,7 +31,7 @@ public class CommonCodeController {
 								  						 					
 		Code entity = service.getCode(id);
 		
-		CodeDTO.SaveCode dto = CodeDTO.SaveCode.convertDTO(entity);
+		CodeDTO.FormCode dto = CodeDTO.FormCode.convertDTO(entity);
 		
 		return WebControllerUtil
 				.getResponse(dto							
@@ -41,7 +41,7 @@ public class CommonCodeController {
 	
 	
 	@RequestMapping(value={"/common/code"}, method={RequestMethod.POST,RequestMethod.PUT}) 
-	public ResponseEntity<?> saveCode(@RequestBody CodeDTO.SaveCode dto, BindingResult result) {			
+	public ResponseEntity<?> saveCode(@RequestBody CodeDTO.FormCode dto, BindingResult result) {			
 		
 		if ( result.hasErrors()) {
 			throw new ControllerException("오류");

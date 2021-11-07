@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
-import com.like.holiday.domain.model.Holiday;
+import com.like.holiday.domain.Holiday;
 import com.like.holiday.service.HolidayService;
 
 @RestController
@@ -28,7 +28,7 @@ public class HolidayController {
 		this.holidayService = holidayService;			
 	}		
 	
-	@GetMapping("/common/holiday/{id}")
+	@GetMapping("/api/common/holiday/{id}")
 	public ResponseEntity<?> getHoliday(@PathVariable(value="id") @DateTimeFormat(pattern="yyyyMMdd") LocalDate id) {
 		
 		Holiday entity = holidayService.getHoliyday(id);
@@ -38,7 +38,7 @@ public class HolidayController {
 											,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/common/holiday"}, method={RequestMethod.POST,RequestMethod.PUT}) 
+	@RequestMapping(value={"/api/common/holiday"}, method={RequestMethod.POST,RequestMethod.PUT}) 
 	public ResponseEntity<?> saveHoliday(@RequestBody Holiday dto, BindingResult result) {				
 		
 		if ( result.hasErrors()) {			
@@ -52,7 +52,7 @@ public class HolidayController {
 											,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/common/holiday/{id}")
+	@DeleteMapping("/api/common/holiday/{id}")
 	public ResponseEntity<?> delHoliday(@PathVariable(value="id") @DateTimeFormat(pattern="yyyyMMdd") LocalDate id) {						
 												
 		holidayService.deleteHoliday(id);

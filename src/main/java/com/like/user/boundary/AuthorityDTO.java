@@ -7,8 +7,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.util.StringUtils;
 
-import com.like.user.domain.model.Authority;
-import com.like.user.domain.model.QAuthority;
+import com.like.user.domain.Authority;
+import com.like.user.domain.QAuthority;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
@@ -37,17 +37,13 @@ public class AuthorityDTO {
 		}
 		
 		private BooleanExpression likeAuthority(String authority) {
-			if (StringUtils.isEmpty(authority)) {
-				return null;
-			}
+			if (!StringUtils.hasText(authority)) return null;
 			
 			return qAuthority.authorityName.like("%"+authority+"%");
 		}
 		
 		private BooleanExpression likeDescription(String description) {
-			if (StringUtils.isEmpty(description)) {
-				return null;
-			}
+			if (!StringUtils.hasText(description)) return null;
 			
 			return qAuthority.description.like("%"+description+"%");
 		}
@@ -55,7 +51,7 @@ public class AuthorityDTO {
 	}
 	
 	@Data
-	public static class SaveAuthority {
+	public static class FormAuthority {
 
 		LocalDateTime createdDt;	
 			

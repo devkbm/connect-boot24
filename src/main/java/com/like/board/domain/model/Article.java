@@ -20,7 +20,7 @@ import com.like.board.domain.model.enums.PasswordType;
 import com.like.board.domain.model.vo.Period;
 import com.like.core.domain.AuditEntity;
 import com.like.core.util.SessionUtil;
-import com.like.file.domain.model.FileInfo;
+import com.like.file.domain.FileInfo;
 
 /**
  * <p>게시글 클래스</p>

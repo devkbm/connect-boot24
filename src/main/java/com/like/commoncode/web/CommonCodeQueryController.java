@@ -40,8 +40,8 @@ public class CommonCodeQueryController {
 							
 		List<Code> list = service.getCodeList(searchCondition);  						 						
 		
-		List<CodeDTO.SaveCode> dtoList = list.stream()
-											 .map(e -> CodeDTO.SaveCode.convertDTO(e))
+		List<CodeDTO.FormCode> dtoList = list.stream()
+											 .map(e -> CodeDTO.FormCode.convertDTO(e))
 											 .collect(Collectors.toList());
 		
 		return WebControllerUtil

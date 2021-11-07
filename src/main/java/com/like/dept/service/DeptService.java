@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.dept.boundary.DeptDTO;
-import com.like.dept.domain.model.Dept;
-import com.like.dept.domain.repository.DeptRepository;
+import com.like.dept.domain.Dept;
+import com.like.dept.domain.DeptRepository;
 
 @Service("deptService")
 @Transactional
@@ -33,7 +33,7 @@ public class DeptService {
 		deptRepository.save(dept);
 	}
 	
-	public void saveDept(DeptDTO.SaveDept dto) {
+	public void saveDept(DeptDTO.FormDept dto) {
 		Dept dept = deptRepository.findById(dto.getDeptCode()).orElse(null);
 		Dept parentDept = dto.getParentDeptCode() == null ? null : deptRepository.findById(dto.getParentDeptCode()).orElse(null); 			
 		

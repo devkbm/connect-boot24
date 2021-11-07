@@ -21,7 +21,7 @@ public class BizTypeCodeService {
 		return repository.findById(id).orElse(null);
 	}
 	
-	public void saveBizTypeCode(BizTypeCodeDTO.SaveDTO dto) {
+	public void saveBizTypeCode(BizTypeCodeDTO.FormBizTypeCode dto) {
 		BizTypeCode entity = this.getBizTypeCode(dto.getId());
 		
 		if (entity == null) {

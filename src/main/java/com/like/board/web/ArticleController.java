@@ -37,7 +37,7 @@ public class ArticleController {
 		
 		Article article = service.getArticle(id);		
 	
-		ArticleDTO.ArticleResponse response = ArticleDTO.ArticleResponse.converDTO(article);				
+		ArticleDTO.ResponseArticle response = ArticleDTO.ResponseArticle.converDTO(article);				
 		
 		return WebControllerUtil.getResponse(response											
 											,String.format("%d 건 조회되었습니다.", 1)
@@ -66,7 +66,7 @@ public class ArticleController {
 	
 	@RequestMapping(value={"/grw/board/articletemp"}, method={RequestMethod.POST,RequestMethod.PUT})
 	@ResponseBody
-	public ResponseEntity<?> saveArticleWithMultiPartFile(ArticleDTO.SaveArticleByMuiltiPart dto, BindingResult result) throws Exception {
+	public ResponseEntity<?> saveArticleWithMultiPartFile(ArticleDTO.FormArticleByMuiltiPart dto, BindingResult result) throws Exception {
 											
 		if ( result.hasErrors() ) {
 			throw new ControllerException(result.getAllErrors().toString());
@@ -81,7 +81,7 @@ public class ArticleController {
 	
 	@RequestMapping(value={"/grw/board/article"}, method={RequestMethod.POST,RequestMethod.PUT})
 	@ResponseBody
-	public ResponseEntity<?> saveArticleJson(@RequestBody ArticleDTO.SaveArticleByJson dto, BindingResult result) throws Exception {
+	public ResponseEntity<?> saveArticleJson(@RequestBody ArticleDTO.FormArticleByJson dto, BindingResult result) throws Exception {
 											
 		if ( result.hasErrors() ) {
 			throw new ControllerException(result.getAllErrors().toString());

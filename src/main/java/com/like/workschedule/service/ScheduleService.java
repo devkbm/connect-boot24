@@ -5,10 +5,10 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.like.workschedule.boundary.ScheduleDTO;
-import com.like.workschedule.domain.model.Schedule;
-import com.like.workschedule.domain.model.WorkGroup;
-import com.like.workschedule.domain.repository.ScheduleRepository;
-import com.like.workschedule.domain.repository.WorkGroupRepository;
+import com.like.workschedule.domain.Schedule;
+import com.like.workschedule.domain.ScheduleRepository;
+import com.like.workschedule.domain.WorkGroup;
+import com.like.workschedule.domain.WorkGroupRepository;
 
 @Service
 @Transactional
@@ -30,7 +30,7 @@ public class ScheduleService {
 		repository.save(schedule);
 	}
 	
-	public void saveSchedule(ScheduleDTO.SaveSchedule dto) {
+	public void saveSchedule(ScheduleDTO.FormSchedule dto) {
 		WorkGroup workGroup = workGroupRepository.findById(dto.getWorkGroupId()).orElse(null);
 		Schedule entity = null; 
 		

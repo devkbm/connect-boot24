@@ -2,7 +2,7 @@ package com.like.core.oauth;
 
 import java.util.Map;
 
-import com.like.user.domain.model.User;
+import com.like.user.domain.SystemUser;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -47,8 +47,8 @@ public class OAuthAttributes {
 	}
 
 
-	public User toEntity() {
-		return User.builder()
+	public SystemUser toEntity() {
+		return SystemUser.builder()
 				   .name(name)
 				   .email(email)
 				   //.picture(picture)

@@ -36,7 +36,7 @@ public class BoardController {
 				
 		Board board = boardCommandService.getBoard(id);		
 		
-		BoardDTO.SaveBoard dto = BoardDTO.SaveBoard.convertDTO(board);				
+		BoardDTO.FormBoard dto = BoardDTO.FormBoard.convertDTO(board);				
 							
 		return WebControllerUtil.getResponse(dto											
 											,String.format("%d 건 조회되었습니다.", board != null ? 1 : 0)
@@ -44,7 +44,7 @@ public class BoardController {
 	}	
 		
 	@RequestMapping(value={"/grw/board"}, method={RequestMethod.POST,RequestMethod.PUT}) 
-	public ResponseEntity<?> saveBoard(@RequestBody @Valid final BoardDTO.SaveBoard boardDTO, BindingResult result) {								
+	public ResponseEntity<?> saveBoard(@RequestBody @Valid final BoardDTO.FormBoard boardDTO, BindingResult result) {								
 		
 		if ( result.hasErrors()) {
 			throw new ControllerException("오류");

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.like.team.domain.model.TeamMember;
-import com.like.user.domain.model.User;
+import com.like.user.domain.SystemUser;
 import com.like.team.boundary.TeamDTO;
 import com.like.team.domain.model.Team;
 
@@ -20,7 +20,7 @@ public interface TeamRepository {
 	
 	void deleteTeam(Team team);
 			
-	TeamMember getTeamMember(Team team, User member);	
+	TeamMember getTeamMember(Team team, SystemUser member);	
 	
 	void saveJoinTeam(TeamMember joinTeam);
 	

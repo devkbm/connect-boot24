@@ -1,13 +1,12 @@
 package com.like.file.infra.jparepository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.like.file.domain.model.FileInfo;
-import com.like.file.domain.repository.FileRepository;
+import com.like.file.domain.FileInfo;
+import com.like.file.domain.FileRepository;
 import com.like.file.infra.jparepository.springdata.JpaFileInfo;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -21,10 +20,8 @@ public class FileInfoJpaRepository implements FileRepository {
 	private JpaFileInfo jpaFileInfo;
 	
 	@Override
-	public FileInfo getFileInfo(String id) {
-		Optional<FileInfo> entity = jpaFileInfo.findById(id);
-		
-		return entity.orElse(null);
+	public FileInfo getFileInfo(String id) {				
+		return jpaFileInfo.findById(id).orElse(null);
 	}
 	
 	@Override

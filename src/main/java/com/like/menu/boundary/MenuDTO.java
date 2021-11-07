@@ -2,20 +2,18 @@ package com.like.menu.boundary;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.util.StringUtils;
 
-import com.like.menu.domain.model.Menu;
-import com.like.menu.domain.model.MenuGroup;
-import com.like.menu.domain.model.QMenu;
-import com.like.menu.domain.model.QMenuGroup;
-import com.like.menu.domain.model.WebResource;
-import com.like.menu.domain.model.enums.MenuType;
+import com.like.menu.domain.Menu;
+import com.like.menu.domain.MenuGroup;
+import com.like.menu.domain.MenuType;
+import com.like.menu.domain.QMenu;
+import com.like.menu.domain.QMenuGroup;
+import com.like.menu.domain.WebResource;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.annotations.QueryProjection;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
 import lombok.AllArgsConstructor;
@@ -32,7 +30,7 @@ public class MenuDTO {
 
 		private final QMenu qMenu = QMenu.menu;
 		
-		@NotEmpty
+		@NotEmpty(message = "필수 입력 값입니다.")
 		String menuGroupCode;
 		
 		String menuCode;
@@ -51,17 +49,13 @@ public class MenuDTO {
 		}
 		
 		private BooleanExpression likeMenuCode(String menuCode) {
-			if (StringUtils.isEmpty(menuCode)) {
-				return null;
-			}
+			if (!StringUtils.hasText(menuCode)) return null;
 			
 			return qMenu.menuCode.like("%"+menuCode+"%");
 		}
 		
 		private BooleanExpression likeMenuName(String menuName) {
-			if (StringUtils.isEmpty(menuName)) {
-				return null;
-			}
+			if (!StringUtils.hasText(menuName)) return null;
 			
 			return qMenu.menuName.like("%"+menuName+"%");
 		}
@@ -71,7 +65,7 @@ public class MenuDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class SaveMenu implements Serializable {
+	public static class FormMenu implements Serializable {
 		
 		private static final long serialVersionUID = 2421325619239144951L;
 
@@ -125,9 +119,9 @@ public class MenuDTO {
 			
 		}
 		
-		public static SaveMenu convert(Menu menu) {
+		public static FormMenu convert(Menu menu) {
 			
-			return SaveMenu.builder()
+			return FormMenu.builder()
 					   	   .createdDt(menu.getCreatedDt())
 					   	   .createdBy(menu.getCreatedBy())
 					   	   .modifiedDt(menu.getModifiedDt())
@@ -144,53 +138,4 @@ public class MenuDTO {
 		}
 	}
 	
-	@Data
-	public static class MenuHierarchy implements Serializable {
-					
-		private static final long serialVersionUID = 6846227958954258462L;
-
-		private String menuGroupCode;
-			
-		private String key;
-		
-		private String title;
-		
-		private String parentMenuCode;
-			
-		private String menuType;
-		
-		private Long sequence;
-			
-		private Long level;
-					
-		private String url;
-						
-		private boolean expanded;
-		
-		private boolean selected;
-		
-		private boolean isLeaf;
-		
-		private List<MenuHierarchy> children;
-
-		@QueryProjection
-		public MenuHierarchy(String menuGroupCode, String key, String title, String parentMenuCode,
-				MenuType menuType, Long sequence, Long level, String url, boolean isLeaf) {		
-			this.menuGroupCode = menuGroupCode;
-			this.key = key;
-			this.title = title;
-			this.parentMenuCode = parentMenuCode;
-			this.menuType = menuType.toString();
-			this.sequence = sequence;
-			this.level = level;
-			this.url = url;
-			this.isLeaf = isLeaf;		
-			this.expanded = false;
-			this.selected = false;
-		}
-		
-		
-		
-		
-	}
 }

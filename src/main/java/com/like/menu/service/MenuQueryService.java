@@ -7,8 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.like.menu.boundary.MenuDTO;
 import com.like.menu.boundary.MenuGroupDTO;
-import com.like.menu.domain.model.Menu;
-import com.like.menu.domain.model.MenuGroup;
+import com.like.menu.boundary.ResponseMenuHierarchy;
+import com.like.menu.domain.Menu;
+import com.like.menu.domain.MenuGroup;
 import com.like.menu.infra.jparepository.MenuQueryJpaRepository;
 
 @Service
@@ -33,10 +34,10 @@ public class MenuQueryService {
 		return menuJpaRepository.getMenuList(condition);
 	}
 	
-	public List<MenuDTO.MenuHierarchy> getMenuHierachy(String menuGroupCode) {
-		List<MenuDTO.MenuHierarchy> rootList = menuJpaRepository.getMenuRootList(menuGroupCode);
+	public List<ResponseMenuHierarchy> getMenuHierachy(String menuGroupCode) {
+		List<ResponseMenuHierarchy> rootList = menuJpaRepository.getMenuRootList(menuGroupCode);
 		
 		return menuJpaRepository.getMenuHierarchyDTO(rootList);
-	}
+	}	
 		
 }

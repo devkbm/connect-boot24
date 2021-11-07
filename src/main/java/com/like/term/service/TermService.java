@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.term.boundary.TermDTO;
-import com.like.term.domain.model.TermDictionary;
-import com.like.term.domain.repository.TermRepository;
+import com.like.term.domain.TermDictionary;
+import com.like.term.domain.TermRepository;
 
-@Service("termService")
+@Service
 @Transactional
 public class TermService {
 	    

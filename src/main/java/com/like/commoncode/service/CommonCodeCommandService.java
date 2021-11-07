@@ -25,7 +25,7 @@ public class CommonCodeCommandService {
 		codeRepository.save(code);		
 	}
 	
-	public void saveCode(CodeDTO.SaveCode dto) {
+	public void saveCode(CodeDTO.FormCode dto) {
 		Code parentCode = null; 
 		Code code = null;
 		

@@ -7,8 +7,9 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.util.StringUtils;
 
-import com.like.menu.domain.model.QWebResource;
-import com.like.menu.domain.model.WebResource;
+
+import com.like.menu.domain.WebResource;
+import com.like.menu.domain.QWebResource;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
@@ -50,41 +51,31 @@ public class WebResourceDTO {
 		}
 		
 		private BooleanExpression likeResourceCode(String resourceCode) {
-			if (StringUtils.isEmpty(resourceCode)) {
-				return null;
-			}
+			if (!StringUtils.hasText(resourceCode)) return null;
 			
 			return qWebResource.resourceCode.like("%"+resourceCode+"%");
 		}
 		
 		private BooleanExpression likeResourceName(String resourceName) {
-			if (StringUtils.isEmpty(resourceName)) {
-				return null;
-			}
+			if (!StringUtils.hasText(resourceName)) return null;
 			
 			return qWebResource.resourceName.like("%"+resourceName+"%");
 		}
 		
 		private BooleanExpression likeResourceType(String resourceType) {
-			if (StringUtils.isEmpty(resourceType)) {
-				return null;
-			}
+			if (!StringUtils.hasText(resourceType)) return null;
 			
 			return qWebResource.resourceType.like("%"+resourceType+"%");
 		}
 		
 		private BooleanExpression likeUrl(String url) {
-			if (StringUtils.isEmpty(url)) {
-				return null;
-			}
+			if (!StringUtils.hasText(url)) return null;
 			
 			return qWebResource.url.like("%"+url+"%");
 		}
 		
 		private BooleanExpression likeDescription(String description) {
-			if (StringUtils.isEmpty(description)) {
-				return null;
-			}
+			if (!StringUtils.hasText(description)) return null;
 			
 			return qWebResource.description.like("%"+description+"%");
 		}
@@ -94,7 +85,7 @@ public class WebResourceDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder	
-	public static class SaveWebResource implements Serializable {
+	public static class FormWebResource implements Serializable {
 				
 		private static final long serialVersionUID = -1400051159309726788L;
 
@@ -136,8 +127,8 @@ public class WebResourceDTO {
 							   ,description);
 		}
 		
-		public static SaveWebResource convertDTO(WebResource entity) {
-			return SaveWebResource.builder()
+		public static FormWebResource convertDTO(WebResource entity) {
+			return FormWebResource.builder()
 								  .createdDt(entity.getCreatedDt())	
 								  .createdBy(entity.getCreatedBy())
 								  .modifiedDt(entity.getCreatedDt())

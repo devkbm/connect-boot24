@@ -15,11 +15,11 @@ import javax.validation.constraints.Size;
 import org.springframework.util.StringUtils;
 
 import com.like.core.validation.annotation.Id;
-import com.like.dept.domain.model.Dept;
-import com.like.menu.domain.model.MenuGroup;
-import com.like.user.domain.model.Authority;
-import com.like.user.domain.model.QUser;
-import com.like.user.domain.model.User;
+import com.like.dept.domain.Dept;
+import com.like.menu.domain.MenuGroup;
+import com.like.user.domain.Authority;
+import com.like.user.domain.QSystemUser;
+import com.like.user.domain.SystemUser;
 import com.like.user.domain.model.vo.AccountSpec;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -32,11 +32,11 @@ import lombok.Singular;
 
 public class UserDTO {
 	
-	public static UserDTO.SaveUser convertDTO(User entity) throws FileNotFoundException, IOException {					
+	public static UserDTO.FormSystemUser convertDTO(SystemUser entity) throws FileNotFoundException, IOException {					
 		
 		Optional<Dept> dept = Optional.ofNullable(entity.getDept());
 		
-		SaveUser dto = SaveUser.builder()
+		FormSystemUser dto = FormSystemUser.builder()
 								.createdDt(entity.getCreatedDt())
 								.createdBy(entity.getCreatedBy())
 								.modifiedDt(entity.getModifiedDt())
@@ -69,7 +69,7 @@ public class UserDTO {
 
 		private static final long serialVersionUID = -7886731992928427538L;
 
-		private final QUser qUser = QUser.user;
+		private final QSystemUser qUser = QSystemUser.systemUser;
 		
 		String userId;
 		
@@ -88,25 +88,19 @@ public class UserDTO {
 		}
 		
 		private BooleanExpression likeUserId(String userId) {
-			if (StringUtils.isEmpty(userId)) {
-				return null;				
-			}
+			if (!StringUtils.hasText(userId)) return null;
 						
 			return qUser.userId.like("%"+userId+"%");
 		}
 		
 		private BooleanExpression likeUserName(String name) {
-			if (StringUtils.isEmpty(name)) {
-				return null;
-			}
+			if (!StringUtils.hasText(name)) return null;
 						
 			return qUser.name.like("%"+name+"%");
 		}
 		
 		private BooleanExpression equalDeptCode(String deptCode) {
-			if (StringUtils.isEmpty(deptCode)) {
-				return null;
-			}
+			if (!StringUtils.hasText(deptCode)) return null;
 			
 			return qUser.dept.deptCode.eq(deptCode);
 		}
@@ -116,7 +110,7 @@ public class UserDTO {
 	@Builder
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class SaveUser {
+	public static class FormSystemUser {
 		
 		LocalDateTime createdDt;	
 		
@@ -157,8 +151,8 @@ public class UserDTO {
 		@Singular(value = "menuGroupList")
 		List<String> menuGroupList; 
 		
-		public User newUser(Dept dept, List<Authority> authorityList, List<MenuGroup> menuGroupList) {
-			return User.builder()
+		public SystemUser newUser(Dept dept, List<Authority> authorityList, List<MenuGroup> menuGroupList) {
+			return SystemUser.builder()
 					   .userId(this.userId)
 					   .name(this.name)					   
 					   .dept(dept)				
@@ -172,7 +166,7 @@ public class UserDTO {
 			
 		}
 		
-		public void modifyUser(User user, Dept dept, List<Authority> authorityList, List<MenuGroup> menuGroupList) {
+		public void modifyUser(SystemUser user, Dept dept, List<Authority> authorityList, List<MenuGroup> menuGroupList) {
 			user.modifyEntity(name							 
 							 //,enabled
 							 ,mobileNum

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.like.file.domain.model.FileInfo;
+import com.like.file.domain.FileInfo;
 
 @Repository
 public interface JpaFileInfo extends JpaRepository<FileInfo, String> {

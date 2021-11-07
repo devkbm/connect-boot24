@@ -17,8 +17,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.like.user.domain.model.AuthenticationToken;
-import com.like.user.domain.model.User;
+import com.like.user.domain.AuthenticationToken;
+import com.like.user.domain.SystemUser;
 import com.like.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -83,7 +83,7 @@ public class OauthLoginController {
         log.info(client.getAccessToken().getTokenValue());        
     	log.info(client.getRefreshToken() != null ? client.getRefreshToken().getTokenValue() : "null");
     	
-    	User user = userService.getUser("1");
+    	SystemUser user = userService.getUser("1");
 		
 		List<GrantedAuthority> authorities = (List<GrantedAuthority>)user.getAuthorities();           						
         //authentication("1", "1234", authorities, session);         		 							       

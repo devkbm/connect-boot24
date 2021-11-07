@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
 import com.like.workschedule.boundary.ScheduleDTO;
-import com.like.workschedule.domain.model.Schedule;
+import com.like.workschedule.domain.Schedule;
 import com.like.workschedule.service.ScheduleQueryService;
 
 @RestController
@@ -23,19 +23,18 @@ public class ScheduleQueryController {
 		this.service = service;
 	}
 	
-	@GetMapping(value={"/grw/schedule"})
+	@GetMapping("/api/grw/schedule")
 	public ResponseEntity<?> getScheduleList(@ModelAttribute ScheduleDTO.SearchSchedule searchCondition) {
 						
 		List<Schedule> workGroupList = service.getScheduleList(searchCondition);				
 		
-		List<ScheduleDTO.ScheduleResponse> dtoList = workGroupList.stream()
-																  .map( r -> ScheduleDTO.convertResDTO(r))
+		List<ScheduleDTO.ResponseSchedule> dtoList = workGroupList.stream()
+																  .map( r -> ScheduleDTO.ResponseSchedule.convertResDTO(r))
 																  .collect(Collectors.toList());
 		
 		return WebControllerUtil
 				.getResponse(dtoList
-							,dtoList.size()
-							,dtoList.isEmpty()? false : true
+							,dtoList.size()							
 							,dtoList.size() + "건 조회 되었습니다."
 							,HttpStatus.OK);												
 	}

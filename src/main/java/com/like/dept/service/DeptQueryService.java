@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.dept.boundary.DeptDTO;
-import com.like.dept.boundary.DeptDTO.DeptHierarchy;
-import com.like.dept.domain.model.Dept;
-import com.like.dept.domain.repository.DeptQueryRepository;
+import com.like.dept.boundary.ResponseDeptHierarchy;
+import com.like.dept.domain.Dept;
+import com.like.dept.domain.DeptQueryRepository;
 
 @Service
 @Transactional(readOnly = true)
@@ -24,7 +24,7 @@ public class DeptQueryService {
 		return repository.getDeptList(searchCondition);
 	}
 	
-	public List<DeptHierarchy> getDeptHierarchyList() {
+	public List<ResponseDeptHierarchy> getDeptHierarchyList() {
 		return repository.getDeptHierarchy();
 	}
 	

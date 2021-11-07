@@ -14,9 +14,9 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.like.core.vo.Period;
-import com.like.holiday.domain.model.DateInfo;
-import com.like.holiday.domain.model.DateInfoList;
-import com.like.holiday.domain.service.HolidayUtilService;
+import com.like.holiday.domain.service.DateInfo;
+import com.like.holiday.domain.service.DateInfoList;
+import com.like.holiday.service.DateInfoService;
 import com.like.hrm.duty.domain.model.DutyApplication;
 import com.like.hrm.duty.domain.model.QDutyApplication;
 import com.querydsl.core.BooleanBuilder;
@@ -105,7 +105,7 @@ public class DutyApplicationDTO {
 							   ,this.getSelectedDate());		
 		}
 		
-		public static SaveDutyApplication convert(DutyApplication entity, HolidayUtilService service) {					
+		public static SaveDutyApplication convert(DutyApplication entity, DateInfoService service) {					
 			
 			DateInfoList dateInfoList = service.getDateInfoList(entity.getPeriod().getFrom().toLocalDate()
 															   ,entity.getPeriod().getTo().toLocalDate());

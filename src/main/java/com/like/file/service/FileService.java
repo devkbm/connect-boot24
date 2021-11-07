@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.like.file.domain.model.FileInfo;
+import com.like.file.domain.FileInfo;
 import com.like.file.infra.file.LocalFileRepository;
 import com.like.file.infra.file.LocalFileRepository.FileUploadLocation;
 import com.like.file.infra.jparepository.FileInfoJpaRepository;
 
-@Service("fileService")
+@Service
 public class FileService {
 		
 	@Resource(name="fileInfoJpaRepository")

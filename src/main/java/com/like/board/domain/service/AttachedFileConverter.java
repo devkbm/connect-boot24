@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import com.like.board.domain.model.Article;
 import com.like.board.domain.model.AttachedFile;
-import com.like.file.domain.model.FileInfo;
+import com.like.file.domain.FileInfo;
 
 public class AttachedFileConverter {
 

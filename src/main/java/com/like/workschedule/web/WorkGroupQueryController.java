@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.like.core.util.SessionUtil;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.workschedule.boundary.WorkDTO;
-import com.like.workschedule.domain.model.WorkGroup;
+import com.like.workschedule.domain.WorkGroup;
 import com.like.workschedule.service.WorkGroupQueryService;
 
 @RestController
@@ -23,20 +23,19 @@ public class WorkGroupQueryController {
 		this.service = service;		
 	}
 	
-	@GetMapping(value={"/grw/workgroup"})
+	@GetMapping("/api/grw/workgroup")
 	public ResponseEntity<?> getWorkGroupList(@ModelAttribute WorkDTO.SearchWorkGroup searchCondition) {
 						
 		List<WorkGroup> workGroupList = service.getWorkGroupList(searchCondition);				
 		
 		return WebControllerUtil
 				.getResponse(workGroupList
-							,workGroupList.size()
-							,workGroupList.isEmpty()? false : true
+							,workGroupList.size()							
 							,workGroupList.size() + "건 조회 되었습니다."
 							,HttpStatus.OK);												
 	}
 	
-	@GetMapping(value={"/grw/myworkgroup"})
+	@GetMapping("/api/grw/myworkgroup")
 	public ResponseEntity<?> getWorkGroupList() {
 						
 		String sessionId = SessionUtil.getUserId(); // SecurityContextHolder.getContext().getAuthentication().getName();
@@ -45,8 +44,7 @@ public class WorkGroupQueryController {
 		
 		return WebControllerUtil
 				.getResponse(workGroupList
-							,workGroupList.size()
-							,workGroupList.isEmpty()? false : true
+							,workGroupList.size()							
 							,workGroupList.size() + "건 조회 되었습니다."
 							,HttpStatus.OK);												
 	}

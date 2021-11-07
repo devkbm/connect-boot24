@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.user.boundary.LoginRequestDTO;
-import com.like.user.domain.model.AuthenticationToken;
-import com.like.user.domain.model.User;
+import com.like.user.domain.AuthenticationToken;
+import com.like.user.domain.SystemUser;
 import com.like.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -61,7 +61,7 @@ public class UserLoginController {
 		String username = dto.getUsername();
 		String password = dto.getPassword();
 		log.info(username);
-		User user = userService.getUser(username);
+		SystemUser user = userService.getUser(username);
 		
 		List<GrantedAuthority> authorities = (List<GrantedAuthority>)user.getAuthorities();           						
         authentication(username, password, authorities, session);         		 							       

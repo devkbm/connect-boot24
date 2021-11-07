@@ -2,11 +2,8 @@ package com.like.biztypecode.boundary;
 
 import java.io.Serializable;
 
-import com.like.biztypecode.boundary.BizTypeCodeDTO.SaveDTO;
 import com.like.biztypecode.domain.BizDetailCode;
 import com.like.biztypecode.domain.BizDetailCodeId;
-import com.like.biztypecode.domain.BizTypeCode;
-import com.like.biztypecode.domain.BizTypeEnum;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,8 +18,10 @@ public class BizDetailCodeDTO {
 	@Builder
 	@AllArgsConstructor
 	@NoArgsConstructor(access = AccessLevel.PROTECTED)
-	public static class SaveDTO implements Serializable {
-				
+	public static class FormBizDetailCode implements Serializable {
+						
+		private static final long serialVersionUID = 7876453214715116350L;
+
 		private String typeCode;
 		
 		private String detailCode;
@@ -49,11 +48,11 @@ public class BizDetailCodeDTO {
 			return entity;
 		}
 		
-		public static SaveDTO convert(BizDetailCode entity) {
+		public static FormBizDetailCode convert(BizDetailCode entity) {
 			
 			if (entity == null) return null;
 			
-			return new SaveDTO(entity.getId().getTypeCode()
+			return new FormBizDetailCode(entity.getId().getTypeCode()
 							  ,entity.getId().getDetailCode()
 							  ,entity.getCodeName()
 							  ,entity.getUseYn()

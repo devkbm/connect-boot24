@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
 import com.like.user.boundary.AuthorityDTO;
-import com.like.user.domain.model.Authority;
+import com.like.user.domain.Authority;
 import com.like.user.service.AuthorityQueryService;
 
 @RestController
@@ -22,7 +21,7 @@ public class AuthorityQueryController {
 		this.service = service;		
 	}
 	
-	@RequestMapping(value={"/common/authority"}, method=RequestMethod.GET) 
+	@GetMapping("/api/common/authority")
 	public ResponseEntity<?> getAuthorityList(AuthorityDTO.SearchAuthority dto) {				
 		
 		List<Authority> authorityList = service.getAuthorityList(dto);								 				

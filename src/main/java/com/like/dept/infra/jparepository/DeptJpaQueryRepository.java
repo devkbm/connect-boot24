@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.like.dept.boundary.DeptDTO.DeptHierarchy;
 import com.like.dept.boundary.DeptDTO.SearchDept;
-import com.like.dept.domain.model.Dept;
-import com.like.dept.domain.model.QDept;
-import com.like.dept.domain.repository.DeptQueryRepository;
+import com.like.dept.boundary.ResponseDeptHierarchy;
+import com.like.dept.domain.Dept;
+import com.like.dept.domain.DeptQueryRepository;
+import com.like.dept.domain.QDept;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -32,18 +32,18 @@ public class DeptJpaQueryRepository implements DeptQueryRepository {
 	}
 
 	@Override
-	public List<DeptHierarchy> getDeptHierarchy() {
-		List<DeptHierarchy> rootNodeList = this.getDeptRootNodeList();
+	public List<ResponseDeptHierarchy> getDeptHierarchy() {
+		List<ResponseDeptHierarchy> rootNodeList = this.getDeptRootNodeList();
 		
-		List<DeptHierarchy> result = this.addDeptChildNodeList(rootNodeList);
+		List<ResponseDeptHierarchy> result = this.addDeptChildNodeList(rootNodeList);
 		
 		return result;
 	}
 	
-	private List<DeptHierarchy> addDeptChildNodeList(List<DeptHierarchy> list) {
-		List<DeptHierarchy> children = null;
+	private List<ResponseDeptHierarchy> addDeptChildNodeList(List<ResponseDeptHierarchy> list) {
+		List<ResponseDeptHierarchy> children = null;
 		
-		for ( DeptHierarchy node : list) {
+		for ( ResponseDeptHierarchy node : list) {
 			
 			children = getDeptChildNodeList(node.getDeptCode());
 			
@@ -62,7 +62,7 @@ public class DeptJpaQueryRepository implements DeptQueryRepository {
 		return list;
 	}
 
-	private List<DeptHierarchy> getDeptRootNodeList() {
+	private List<ResponseDeptHierarchy> getDeptRootNodeList() {
 		return queryFactory
 				.select(this.getDeptHierarchyConstructor())
 				.from(qDept)
@@ -71,7 +71,7 @@ public class DeptJpaQueryRepository implements DeptQueryRepository {
 				.fetch();
 	}
 	
-	private List<DeptHierarchy> getDeptChildNodeList(String parentDeptCode) {
+	private List<ResponseDeptHierarchy> getDeptChildNodeList(String parentDeptCode) {
 		return queryFactory
 				.select(this.getDeptHierarchyConstructor())
 				.from(qDept)
@@ -80,9 +80,9 @@ public class DeptJpaQueryRepository implements DeptQueryRepository {
 				.fetch();
 	}
 	
-	private ConstructorExpression<DeptHierarchy> getDeptHierarchyConstructor() {
+	private ConstructorExpression<ResponseDeptHierarchy> getDeptHierarchyConstructor() {
 		return Projections.constructor(
-				DeptHierarchy.class,
+				ResponseDeptHierarchy.class,
 				qDept._super.createdDt, 
 				qDept._super.createdBy,
 				qDept._super.modifiedDt,

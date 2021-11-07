@@ -8,15 +8,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.like.dept.domain.model.Dept;
-import com.like.dept.domain.repository.DeptRepository;
-import com.like.menu.domain.model.MenuGroup;
-import com.like.menu.domain.repository.MenuGroupRepository;
+import com.like.dept.domain.Dept;
+import com.like.dept.domain.DeptRepository;
+import com.like.menu.domain.MenuGroup;
+import com.like.menu.domain.MenuGroupRepository;
 import com.like.user.boundary.UserDTO;
-import com.like.user.domain.model.Authority;
-import com.like.user.domain.model.User;
-import com.like.user.domain.repository.AuthorityRepository;
-import com.like.user.domain.repository.UserRepository;
+import com.like.user.domain.Authority;
+import com.like.user.domain.AuthorityRepository;
+import com.like.user.domain.SystemUser;
+import com.like.user.domain.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,12 +47,12 @@ public class UserService {
 	 * @param userId	사용자아이디
 	 * @return 사용자 도메인
 	 */
-	public User getUser(String userId) {								
+	public SystemUser getUser(String userId) {								
 		return repository.findById(userId).orElse(null);
 	}
 		
-	public User getFullUser(String userId) {
-		User user = repository.findById(userId).orElse(null);
+	public SystemUser getFullUser(String userId) {
+		SystemUser user = repository.findById(userId).orElse(null);
 		List<MenuGroup> menuGroupList = user.getMenuGroupList();
 		
 		log.info(menuGroupList.toString());
@@ -64,8 +64,8 @@ public class UserService {
 	 * 사용자를 생성한다.
 	 * @param user	사용자 도메인
 	 */
-	public void saveUser(UserDTO.SaveUser dto) {
-		User user = repository.findById(dto.getUserId()).orElse(null);
+	public void saveUser(UserDTO.FormSystemUser dto) {
+		SystemUser user = repository.findById(dto.getUserId()).orElse(null);
 		Dept dept = dto.getDeptCode() == null ? null : deptRepository.findById(dto.getDeptCode()).orElse(null); 
 		
 		List<Authority> authorityList = authorityRepository.findAllById(dto.getAuthorityList());		
@@ -89,7 +89,7 @@ public class UserService {
 								
 	}
 		
-	public void saveUser(User user) {
+	public void saveUser(SystemUser user) {
 		repository.save(user);
 	}
 	
@@ -108,7 +108,7 @@ public class UserService {
 	 * @param afterPassword		변경후 비밀번호
 	 */
 	public void changePassword(String userId, String beforePassword, String afterPassword) {
-		User user = repository.findById(userId).orElse(null);			
+		SystemUser user = repository.findById(userId).orElse(null);			
 		
 		if ( user.isVaild(beforePassword) ) {
 			user.changePassword(afterPassword);
@@ -120,7 +120,7 @@ public class UserService {
 	 * @param userId	사용자 아이디
 	 */
 	public void initPassword(String userId) {
-		User user = repository.findById(userId).orElse(null);
+		SystemUser user = repository.findById(userId).orElse(null);
 				
 		user.initPassword();		
 	}			
@@ -153,7 +153,7 @@ public class UserService {
 	 * 사용자 신규등록시 권한이 없을 경우 기본 권한을 추가한다.
 	 * @param user	사용자 도메인
 	 */
-	private void initAuthority(User user) {							
+	private void initAuthority(SystemUser user) {							
 		List<Authority> authorities = new ArrayList<Authority>();
 		
 		authorities.add(authorityRepository.findById("ROLE_USER").orElse(null));			

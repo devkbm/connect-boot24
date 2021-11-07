@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.user.boundary.AuthorityDTO;
-import com.like.user.domain.model.Authority;
-import com.like.user.domain.repository.AuthorityQueryRepository;
+import com.like.user.domain.Authority;
+import com.like.user.domain.AuthorityQueryRepository;
 
 @Transactional(readOnly = true)
 @Service

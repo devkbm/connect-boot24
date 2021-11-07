@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
 import com.like.user.boundary.UserDTO;
-import com.like.user.domain.model.User;
+import com.like.user.domain.SystemUser;
 import com.like.user.service.UserQueryService;
 
 @RestController
@@ -24,14 +24,14 @@ public class UserQueryController {
 		this.service = service;
 	}
 	
-	@GetMapping(value={"/common/user"})
+	@GetMapping(value={"/api/common/user"})
 	public ResponseEntity<?> getUserList(UserDTO.SearchUser condition) throws FileNotFoundException, IOException {
 				
-		List<User> userList = service.getUserList(condition);						
+		List<SystemUser> userList = service.getUserList(condition);						
 		
-		List<UserDTO.SaveUser> dtoList = new ArrayList<>();
+		List<UserDTO.FormSystemUser> dtoList = new ArrayList<>();
 		
-		for (User user : userList) {
+		for (SystemUser user : userList) {
 			dtoList.add(UserDTO.convertDTO(user));
 		}
 		

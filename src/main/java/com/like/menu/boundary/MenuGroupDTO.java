@@ -7,8 +7,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.util.StringUtils;
 
-import com.like.menu.domain.model.MenuGroup;
-import com.like.menu.domain.model.QMenuGroup;
+import com.like.menu.domain.MenuGroup;
+import com.like.menu.domain.QMenuGroup;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
@@ -41,17 +41,13 @@ public class MenuGroupDTO {
 		}
 		
 		private BooleanExpression likeMenGroupCode(String menuGroupCode) {
-			if (StringUtils.isEmpty(menuGroupCode)) {
-				return null;
-			}
+			if (!StringUtils.hasText(menuGroupCode)) return null;
 			
 			return qMenuGroup.menuGroupCode.like("%"+menuGroupCode+"%");
 		}
 		
 		private BooleanExpression likeMenGroupName(String menuGroupName) {
-			if (StringUtils.isEmpty(menuGroupName)) {
-				return null;
-			}
+			if (!StringUtils.hasText(menuGroupName)) return null;
 			
 			return qMenuGroup.menuGroupName.like("%"+menuGroupName+"%");
 		}
@@ -63,7 +59,7 @@ public class MenuGroupDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class SaveMenuGroup implements Serializable {
+	public static class FormMenuGroup implements Serializable {
 		
 		private static final long serialVersionUID = 3108072896516171536L;
 
@@ -95,8 +91,8 @@ public class MenuGroupDTO {
 			menuGroup.modifyEntity(this.menuGroupName, this.description);
 		}
 		
-		public static SaveMenuGroup convert(MenuGroup entity) {
-			return SaveMenuGroup.builder()
+		public static FormMenuGroup convert(MenuGroup entity) {
+			return FormMenuGroup.builder()
 								.createdDt(entity.getCreatedDt())
 								.createdBy(entity.getCreatedBy())
 								.modifiedDt(entity.getModifiedDt())

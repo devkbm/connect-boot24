@@ -9,9 +9,7 @@ public class ResponseObject<T> {
 	
 	T data;
 	
-	int total;
-	
-	boolean success;
+	int total;	
 	
 	String message;
 	
@@ -23,10 +21,9 @@ public class ResponseObject<T> {
 	
 	String path;
 	
-	public ResponseObject(T data, int total, boolean success, String message) {
+	public ResponseObject(T data, int total, String message) {
 		this.data = data;
-		this.total = total;
-		this.success = success;
+		this.total = total;		
 		this.message = message;
 	}
 }

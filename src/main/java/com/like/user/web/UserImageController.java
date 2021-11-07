@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.like.file.infra.file.LocalFileRepository.FileUploadLocation;
 import com.like.file.service.FileService;
-import com.like.user.domain.model.User;
+import com.like.user.domain.SystemUser;
 import com.like.user.service.UserService;
 
 @Controller
@@ -35,11 +35,11 @@ public class UserImageController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value={"/common/user/image"}, method=RequestMethod.GET) 
+	@RequestMapping(value={"/api/common/user/image"}, method=RequestMethod.GET) 
 	public HttpServletResponse downloadUserImage(HttpServletResponse response,
 											     @RequestParam("userId") String userId) throws Exception {
 				
-		User user = userService.getUser(userId);			
+		SystemUser user = userService.getUser(userId);			
 		
 		File file = fileService.getStaticPathFile(user.getImage());
 				
@@ -50,7 +50,7 @@ public class UserImageController {
 		return response;
 	}
 	
-	@PostMapping(value={"/common/user/image"})
+	@PostMapping(value={"/api/common/user/image"})
 	public ResponseEntity<?> changeUserImage(@RequestParam("file") MultipartFile file,
 											 @RequestParam("userId") String userId) throws Exception {				
 		
@@ -61,7 +61,7 @@ public class UserImageController {
 		String uuid = UUID.randomUUID().toString();
 		String path = fileService.fileTransefer(file, uuid, FileUploadLocation.STATIC_PATH);
 		
-		User user = userService.getUser(userId);
+		SystemUser user = userService.getUser(userId);
 				
 		user.ChangeImage(uuid);
 		

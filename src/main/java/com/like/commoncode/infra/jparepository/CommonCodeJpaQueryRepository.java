@@ -68,7 +68,7 @@ public class CommonCodeJpaQueryRepository implements CommonCodeQueryRepository {
 		builder.and(qCode.isRootNode())
 		       .and(qCode.enabled());
 		
-		if (!StringUtils.isEmpty(systemTypeCode)) {
+		if (!StringUtils.hasText(systemTypeCode)) {
 			builder.and(qCode.systemTypeCode.eq(systemTypeCode));
 		}		
 				

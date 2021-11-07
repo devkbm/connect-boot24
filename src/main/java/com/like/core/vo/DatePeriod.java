@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @Embeddable
 public class DatePeriod implements Serializable {
+	
+	private static final long serialVersionUID = -5440169980662476619L;
 
 	@Column(name="FROM_DT")
 	private LocalDate from;

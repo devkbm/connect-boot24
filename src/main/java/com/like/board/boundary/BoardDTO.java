@@ -54,17 +54,13 @@ public class BoardDTO {
 		}
 		
 		private BooleanExpression likeBoardName(String boardName) {
-			if (StringUtils.isEmpty(boardName)) {
-				return null;
-			}
+			if (!StringUtils.hasText(boardName)) return null;
 			
 			return qBoard.boardName.like("%"+boardName+"%");
 		}
 		
 		private BooleanExpression equalBoardType(String boardType) {
-			if (StringUtils.isEmpty(boardType)) {
-				return null;
-			}
+			if (!StringUtils.hasText(boardType)) return null;
 			
 			return qBoard.boardType.eq(BoardType.valueOf(boardType));
 		}
@@ -78,7 +74,7 @@ public class BoardDTO {
 	@Builder
 	@NoArgsConstructor(access = AccessLevel.PROTECTED)
 	@AllArgsConstructor	
-	public static class SaveBoard implements Serializable {
+	public static class FormBoard implements Serializable {
 						
 		private static final long serialVersionUID = 1L;
 
@@ -143,7 +139,7 @@ public class BoardDTO {
 					          ,this.sequence);
 		}
 		
-		public static BoardDTO.SaveBoard convertDTO(Board entity) {					
+		public static BoardDTO.FormBoard convertDTO(Board entity) {					
 			
 			if (entity == null)
 				return null;
@@ -151,7 +147,7 @@ public class BoardDTO {
 			Optional<Board> parent = Optional.ofNullable(entity.getParent());
 			Optional<Period> period = Optional.ofNullable(entity.getPeriod());
 			
-			return SaveBoard.builder()
+			return FormBoard.builder()
 						    .createdDt(entity.getCreatedDt())
 						    .createdBy(entity.getCreatedBy())
 						    .modifiedDt(entity.getModifiedDt())

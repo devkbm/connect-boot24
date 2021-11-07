@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.user.boundary.UserDTO;
-import com.like.user.domain.model.User;
-import com.like.user.domain.repository.UserQueryRepository;
+import com.like.user.domain.SystemUser;
+import com.like.user.domain.UserQueryRepository;
 
 
 @Service
@@ -24,7 +24,7 @@ public class UserQueryService  {
 	 * 유저 도메인 리스트를 조회한다.
 	 * @return	유저 도메인 리스트
 	 */
-	public List<User> getUserList(UserDTO.SearchUser condition) {
+	public List<SystemUser> getUserList(UserDTO.SearchUser condition) {
 		return repository.getUserList(condition);
 	}		
 	

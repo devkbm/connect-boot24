@@ -5,8 +5,8 @@ import java.io.Serializable;
 import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.like.term.domain.model.QTermDictionary;
-import com.like.term.domain.model.TermDictionary;
+import com.like.term.domain.QTermDictionary;
+import com.like.term.domain.TermDictionary;
 import com.querydsl.core.BooleanBuilder;
 
 import lombok.AccessLevel;

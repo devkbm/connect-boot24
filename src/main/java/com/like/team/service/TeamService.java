@@ -13,7 +13,7 @@ import com.like.team.boundary.TeamDTO;
 import com.like.team.domain.model.Team;
 import com.like.team.domain.repository.TeamRepository;
 import com.like.user.boundary.UserDTO;
-import com.like.user.domain.model.User;
+import com.like.user.domain.SystemUser;
 import com.like.user.service.UserQueryService;
 import com.like.user.service.UserService;
 
@@ -51,7 +51,7 @@ public class TeamService {
 	 * @param team 팀 엔티티
 	 * @param teamMemberList 팀원 엔티티
 	 */
-	public void saveTeam(Team team, List<User> userList) {
+	public void saveTeam(Team team, List<SystemUser> userList) {
 		teamRepository.saveTeam(team);
 					
 		// 기존 등록된 멤버 삭제
@@ -60,7 +60,7 @@ public class TeamService {
 		if (userList != null) {
 		
 			List<TeamMember> teamMemberList = new ArrayList<TeamMember>();		
-			for (User user: userList) {
+			for (SystemUser user: userList) {
 				teamMemberList.add(new TeamMember(team, user));
 			}	
 			
@@ -82,7 +82,7 @@ public class TeamService {
 	 * @param searchCondition 조회 조건
 	 * @return User 
 	 */
-	public List<User> getAllMember(UserDTO.SearchUser searchCondition) {
+	public List<SystemUser> getAllMember(UserDTO.SearchUser searchCondition) {
 		return userQueryService.getUserList(searchCondition);
 	}
 	
@@ -91,7 +91,7 @@ public class TeamService {
 	 * @param teamId
 	 * @return
 	 */
-	public List<User> getTeamMemberList(Long teamId) {
+	public List<SystemUser> getTeamMemberList(Long teamId) {
 		Team team = teamRepository.getTeam(teamId);
 		
 		return team.getMemberList();
@@ -105,7 +105,7 @@ public class TeamService {
 	 */
 	public TeamMember getTeamMember(Long teamId, String userId) {
 		Team team = teamRepository.getTeam(teamId);
-		User user = userService.getUser(userId);
+		SystemUser user = userService.getUser(userId);
 				
 		return teamRepository.getTeamMember(team, user);
 	}

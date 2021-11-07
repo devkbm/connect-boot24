@@ -6,10 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import com.like.board.domain.model.Article;
 import com.like.board.domain.model.QArticle;
-import com.like.board.domain.model.QArticleCheck;
 import com.like.board.domain.model.QAttachedFile;
+import com.like.file.domain.QFileInfo;
 import com.like.board.domain.repository.ArticleQueryRepository;
-import com.like.file.domain.model.QFileInfo;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -19,7 +18,7 @@ public class ArticleQueryJpaRepository implements ArticleQueryRepository {
 	private JPAQueryFactory queryFactory;
 	
 	private final QArticle qArticle = QArticle.article;
-	private final QArticleCheck qArticleCheck = QArticleCheck.articleCheck;
+	// private final QArticleCheck qArticleCheck = QArticleCheck.articleCheck;
 	private final QFileInfo qFileInfo = QFileInfo.fileInfo;
 	private final QAttachedFile qAttachedFile = QAttachedFile.attachedFile;
 	

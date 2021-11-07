@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.like.holiday.domain.model.Holiday;
-import com.like.holiday.domain.model.QHoliday;
-import com.like.holiday.domain.repository.HolidayQueryRepository;
+import com.like.holiday.domain.Holiday;
+import com.like.holiday.domain.QHoliday;
+import com.like.holiday.domain.HolidayQueryRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository

@@ -22,7 +22,7 @@ public class BizDetailCodeService {
 		return repository.findById(id).orElse(null);
 	}
 	
-	public void saveBizDetailCode(BizDetailCodeDTO.SaveDTO dto) {
+	public void saveBizDetailCode(BizDetailCodeDTO.FormBizDetailCode dto) {
 		BizDetailCode entity = this.getBizDetailCode(new BizDetailCodeId(dto.getTypeCode(), dto.getDetailCode()));
 		
 		if (entity == null) {

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.workschedule.boundary.WorkDTO;
-import com.like.workschedule.domain.model.WorkGroup;
-import com.like.workschedule.domain.repository.WorkGroupQueryRepository;
+import com.like.workschedule.domain.WorkGroup;
+import com.like.workschedule.domain.WorkGroupQueryRepository;
 
 
 @Service

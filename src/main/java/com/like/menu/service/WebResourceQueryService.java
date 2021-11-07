@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.menu.boundary.WebResourceDTO;
-import com.like.menu.domain.model.WebResource;
-import com.like.menu.domain.repository.WebResourceQueryRepository;
+import com.like.menu.domain.WebResource;
+import com.like.menu.domain.WebResourceQueryRepository;
 
 @Service
 @Transactional(readOnly=true)

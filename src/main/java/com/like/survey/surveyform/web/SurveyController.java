@@ -44,8 +44,7 @@ public class SurveyController {
 		List<SurveyForm> list = surveyQueryService.getSurveyFormList(dto); 		
 								
 		return WebControllerUtil.getResponse(list
-											,list.size()
-											,true
+											,list.size()											
 											,String.format("%d 건 조회되었습니다.", list.size())
 											,HttpStatus.OK);
 	}
@@ -56,8 +55,7 @@ public class SurveyController {
 		SurveyForm surveryForm = surveyService.getSurveyForm(formId); 		
 								
 		return WebControllerUtil.getResponse(surveryForm
-											,surveryForm != null ? 1 : 0
-											,true
+											,surveryForm != null ? 1 : 0											
 											,String.format("%d 건 조회되었습니다.", surveryForm != null ? 1 : 0)
 											,HttpStatus.OK);
 	}
@@ -73,8 +71,7 @@ public class SurveyController {
 		surveyService.saveSurveyForm(dto);			
 										 					
 		return WebControllerUtil.getResponse(null
-											,1
-											,true
+											,1											
 											,String.format("%d 건 저장되었습니다.", 1)
 											,HttpStatus.OK);
 	}
@@ -85,8 +82,7 @@ public class SurveyController {
 		surveyService.deleteSurveyForm(formId); 		
 								
 		return WebControllerUtil.getResponse(null
-											,1
-											,true
+											,1											
 											,String.format("%d 건 삭제되었습니다.", 1)
 											,HttpStatus.OK);
 	}
@@ -98,8 +94,7 @@ public class SurveyController {
 		SurveyItem surveryForm = surveyService.getSurveyItem(formId, itemId); 		
 								
 		return WebControllerUtil.getResponse(surveryForm
-											,surveryForm != null ? 1 : 0
-											,true
+											,surveryForm != null ? 1 : 0											
 											,String.format("%d 건 조회되었습니다.", surveryForm != null ? 1 : 0)
 											,HttpStatus.OK);
 	}
@@ -114,8 +109,7 @@ public class SurveyController {
 		surveyService.saveSurveyItem(dto);			
 										 					
 		return WebControllerUtil.getResponse(null
-											,1
-											,true
+											,1											
 											,String.format("%d 건 저장되었습니다.", 1)
 											,HttpStatus.OK);
 	}
@@ -127,8 +121,7 @@ public class SurveyController {
 		surveyService.deleteSurveyItem(formId, itemId); 		
 								
 		return WebControllerUtil.getResponse(null
-											,1
-											,true
+											,1											
 											,String.format("%d 건 삭제되었습니다.", 1)
 											,HttpStatus.OK);
 	}

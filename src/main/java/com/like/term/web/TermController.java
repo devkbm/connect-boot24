@@ -2,6 +2,8 @@ package com.like.term.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.term.boundary.TermDTO;
-import com.like.term.domain.model.TermDictionary;
+import com.like.term.domain.TermDictionary;
 import com.like.term.service.TermService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +33,7 @@ public class TermController {
 		this.termService = termService;
 	}
 		
-	@GetMapping("/common/terms/{id}")
+	@GetMapping("/api/common/terms/{id}")
 	public ResponseEntity<?> getTerm(@PathVariable(value="id") Long id) {
 		
 		TermDictionary term = termService.getTerm(id);								
@@ -42,7 +44,7 @@ public class TermController {
 							,HttpStatus.OK);
 	}	
 		
-	@GetMapping("/common/terms")
+	@GetMapping("/api/common/terms")
 	public ResponseEntity<?> getTermList(TermDTO.SearchTerm contidion) {
 				
 		List<TermDictionary> list = termService.getTermList(contidion); 							
@@ -53,8 +55,8 @@ public class TermController {
 							,HttpStatus.OK);
 	}	
 		
-	@PostMapping("/common/terms")
-	public ResponseEntity<?> saveTerm(@RequestBody TermDTO.SaveTerm dto, BindingResult result) {
+	@PostMapping("/api/common/terms")
+	public ResponseEntity<?> saveTerm(@RequestBody @Valid TermDTO.SaveTerm dto, BindingResult result) {
 					
 		if ( result.hasErrors()) {
 			throw new ControllerException("오류");
@@ -71,7 +73,7 @@ public class TermController {
 	
 	}
 					
-	@DeleteMapping("/common/terms/{id}")
+	@DeleteMapping("/api/common/terms/{id}")
 	public ResponseEntity<?> delTerm(@PathVariable(value="id") Long id) {
 								
 		termService.deleteTerm(id);										

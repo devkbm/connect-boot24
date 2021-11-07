@@ -14,7 +14,7 @@ import com.like.team.domain.model.Team;
 import com.like.team.domain.repository.TeamRepository;
 import com.like.team.infra.jparepository.springdata.JpaTeam;
 import com.like.team.infra.jparepository.springdata.JpaTeamMember;
-import com.like.user.domain.model.User;
+import com.like.user.domain.SystemUser;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository
@@ -56,7 +56,7 @@ public class TeamJpaRepository implements TeamRepository {
 	
 
 	@Override
-	public TeamMember getTeamMember(Team team, User member) {				
+	public TeamMember getTeamMember(Team team, SystemUser member) {				
 		Optional<TeamMember> entity = jpaTeamMember.findById(new TeamMemberId(team.getTeamId(), member.getUserId()));
 		
 		return entity.orElse(null);

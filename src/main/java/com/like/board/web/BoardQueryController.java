@@ -53,8 +53,8 @@ public class BoardQueryController {
 	public ResponseEntity<?> getBoardList(BoardDTO.SearchBoard dto) {						
 		
 		List<Board> list = boardQueryService.getBoardList(dto); 										
-		List<BoardDTO.SaveBoard> dtoList = list.stream()
-											   .map(e -> BoardDTO.SaveBoard.convertDTO(e))
+		List<BoardDTO.FormBoard> dtoList = list.stream()
+											   .map(e -> BoardDTO.FormBoard.convertDTO(e))
 											   .collect(Collectors.toList());
 				
 		return WebControllerUtil.getResponse(dtoList											

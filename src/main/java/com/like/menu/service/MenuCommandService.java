@@ -5,12 +5,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.like.menu.boundary.MenuDTO;
 import com.like.menu.boundary.MenuGroupDTO;
-import com.like.menu.domain.model.Menu;
-import com.like.menu.domain.model.MenuGroup;
-import com.like.menu.domain.model.WebResource;
-import com.like.menu.domain.repository.MenuGroupRepository;
-import com.like.menu.domain.repository.MenuRepository;
-import com.like.menu.domain.repository.WebResourceRepository;
+import com.like.menu.domain.Menu;
+import com.like.menu.domain.MenuGroup;
+import com.like.menu.domain.MenuGroupRepository;
+import com.like.menu.domain.MenuRepository;
+import com.like.menu.domain.WebResource;
+import com.like.menu.domain.WebResourceRepository;
 
 @Service
 @Transactional
@@ -36,7 +36,7 @@ public class MenuCommandService {
 		menuGroupRepository.save(codeGroup);	
 	}
 	
-	public void saveMenuGroup(MenuGroupDTO.SaveMenuGroup dto) {
+	public void saveMenuGroup(MenuGroupDTO.FormMenuGroup dto) {
 		MenuGroup menuGroup = dto.getMenuGroupCode() != null ? menuGroupRepository.findById(dto.getMenuGroupCode()).orElse(null) : null; 			
 		
 		if (menuGroup == null) {
@@ -60,7 +60,7 @@ public class MenuCommandService {
 		menuRepository.save(menu);		
 	}
 	
-	public void saveMenu(MenuDTO.SaveMenu dto) {
+	public void saveMenu(MenuDTO.FormMenu dto) {
 		MenuGroup menuGroup = menuGroupRepository.findById(dto.getMenuGroupCode()).orElse(null);
 		Menu menu = menuRepository.findById(dto.getMenuCode()).orElse(null);
 		Menu parent = dto.getParentMenuCode() != null ? menuRepository.findById(dto.getParentMenuCode()).orElse(null) : null; 

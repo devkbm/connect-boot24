@@ -18,7 +18,7 @@ import com.like.board.domain.model.Article;
 import com.like.board.domain.model.Board;
 import com.like.board.domain.model.QArticle;
 import com.like.board.domain.model.vo.Period;
-import com.like.file.domain.model.FileInfo;
+import com.like.file.domain.FileInfo;
 import com.like.file.dto.FileResponseDTO;
 import com.like.file.infra.file.LocalFileRepository;
 import com.querydsl.core.BooleanBuilder;
@@ -58,17 +58,13 @@ public class ArticleDTO {
 		}
 		
 		private BooleanExpression likeTitle(String title) {
-			if (StringUtils.isEmpty(title)) {
-				return null;
-			}
+			if (!StringUtils.hasText(title)) return null;
 			
 			return qArticle.title.like("%"+title+"%");
 		}
 		
 		private BooleanExpression likeContents(String contents) {
-			if (StringUtils.isEmpty(contents)) {
-				return null;
-			}
+			if (!StringUtils.hasText(contents)) return null;
 			
 			return qArticle.contents.like("%"+contents+"%");
 		}
@@ -81,7 +77,7 @@ public class ArticleDTO {
 	@AllArgsConstructor
 	@Builder
 	@ToString
-	public static class SaveArticleByMuiltiPart implements Serializable {
+	public static class FormArticleByMuiltiPart implements Serializable {
 		
 		private static final long serialVersionUID = -6844786437530688768L;
 		
@@ -161,7 +157,7 @@ public class ArticleDTO {
 	@AllArgsConstructor
 	@Builder
 	@ToString
-	public static class SaveArticleByJson implements Serializable {
+	public static class FormArticleByJson implements Serializable {
 						
 		private static final long serialVersionUID = 919127739529051164L;
 
@@ -238,7 +234,7 @@ public class ArticleDTO {
 	@AllArgsConstructor
 	@Builder
 	@ToString
-	public static class ArticleResponse implements Serializable {
+	public static class ResponseArticle implements Serializable {
 				
 		private static final long serialVersionUID = 7795172502919533138L;
 
@@ -281,14 +277,14 @@ public class ArticleDTO {
 	    
 	    Boolean editable;
 	    
-	    public static ArticleDTO.ArticleResponse converDTO(Article entity) {
+	    public static ArticleDTO.ResponseArticle converDTO(Article entity) {
 			
 			List<FileInfo> fileInfoList = entity.getAttachedFileInfoList();
 			List<FileResponseDTO> responseList = convertFileResponseDTO(fileInfoList);
 			
 			Optional<Period> period = Optional.ofNullable(entity.getPeriod());
 			
-			return ArticleDTO.ArticleResponse
+			return ArticleDTO.ResponseArticle
 							 .builder()
 							 .createdDt(entity.getCreatedDt())
 							 .createdBy(entity.getCreatedBy())

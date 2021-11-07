@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.user.boundary.AuthorityDTO;
-import com.like.user.domain.model.Authority;
-import com.like.user.domain.repository.AuthorityRepository;
+import com.like.user.domain.Authority;
+import com.like.user.domain.AuthorityRepository;
 
 @Transactional
 @Service
@@ -30,7 +30,7 @@ public class AuthorityService {
 	 * 권한 도메인을 등록한다.
 	 * @param authority	권한 도메인
 	 */
-	public void createAuthority(AuthorityDTO.SaveAuthority dto) {
+	public void createAuthority(AuthorityDTO.FormAuthority dto) {
 		Authority authority = null;
 		
 		if (dto.getAuthority() != null) {

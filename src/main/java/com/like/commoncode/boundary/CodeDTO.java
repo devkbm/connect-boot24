@@ -57,49 +57,37 @@ public class CodeDTO {
 		}
 		
 		private BooleanExpression eqId(String id) {
-			if (StringUtils.isEmpty(id)) {
-				return null;
-			}
+			if (!StringUtils.hasText(id)) return null;
 			
 			return qCode.id.eq(id);
 		}
 		
 		private BooleanExpression eqSystemTypeCode(String systemTypeCode) {
-			if (StringUtils.isEmpty(parentId)) {
-				return null;
-			}
+			if (!StringUtils.hasText(parentId)) return null;
 			
 			return qCode.parentCode.id.eq(parentId);
 		}
 		
 		private BooleanExpression eqParentId(String parentId) {
-			if (StringUtils.isEmpty(parentId)) {
-				return null;
-			}
+			if (!StringUtils.hasText(parentId)) return null;
 			
 			return qCode.parentCode.id.eq(parentId);
 		}
 		
 		private BooleanExpression likeCode(String code) {
-			if (StringUtils.isEmpty(code)) {
-				return null;
-			}
+			if (!StringUtils.hasText(code)) return null;
 			
 			return qCode.code.like("%"+code+"%");
 		}
 		
 		private BooleanExpression likeCodeName(String codeName) {
-			if (StringUtils.isEmpty(codeName)) {
-				return null;
-			}
+			if (!StringUtils.hasText(codeName)) return null;
 			
 			return qCode.codeName.like("%"+codeName+"%");
 		}
 		
 		private BooleanExpression likeCodeNameAbbreviation(String codeNameAbbreviation) {
-			if (StringUtils.isEmpty(codeNameAbbreviation)) {
-				return null;
-			}
+			if (!StringUtils.hasText(codeNameAbbreviation)) return null;
 			
 			return qCode.codeNameAbbreviation.like("%"+codeNameAbbreviation+"%");
 		}
@@ -109,7 +97,7 @@ public class CodeDTO {
 	@Builder
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class SaveCode implements Serializable {
+	public static class FormCode implements Serializable {
 				
 		private static final long serialVersionUID = -4482323353197356218L;
 
@@ -175,11 +163,11 @@ public class CodeDTO {
 							 ,this.cmt);
 		}
 		
-		public static CodeDTO.SaveCode convertDTO(Code entity) {					
+		public static CodeDTO.FormCode convertDTO(Code entity) {					
 			
 			Code parent = entity.getParentCode();
 										
-			return SaveCode.builder()
+			return FormCode.builder()
 						   .createdDt(entity.getCreatedDt())
 						   .createdBy(entity.getCreatedBy())
 						   .modifiedDt(entity.getModifiedDt())

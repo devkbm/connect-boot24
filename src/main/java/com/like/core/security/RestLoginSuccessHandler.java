@@ -20,8 +20,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.like.user.domain.model.AuthenticationToken;
-import com.like.user.domain.model.User;
+import com.like.user.domain.AuthenticationToken;
+import com.like.user.domain.SystemUser;
 import com.like.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -54,7 +54,7 @@ public class RestLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandl
  						
  		response.setContentType("application/json;charset=UTF-8");
  		
- 		User user = loginService.getFullUser(authentication.getName());
+ 		SystemUser user = loginService.getFullUser(authentication.getName());
  		// log.info(user.getMenuGroupList().toString());
  								
  		AuthenticationToken token = AuthenticationToken

@@ -27,7 +27,7 @@ public class BizTypeCodeController {
 	@GetMapping("/common/biztype/{id}")
 	public ResponseEntity<?> getBizTypeCode(@PathVariable(value="id") String id) {
 		
-		BizTypeCodeDTO.SaveDTO dto = BizTypeCodeDTO.SaveDTO.convert(service.getBizTypeCode(id));
+		BizTypeCodeDTO.FormBizTypeCode dto = BizTypeCodeDTO.FormBizTypeCode.convert(service.getBizTypeCode(id));
 					
 		return WebControllerUtil.getResponse(dto											
 											,String.format("%d 건 조회되었습니다.", dto == null ? 0 : 1)
@@ -35,7 +35,7 @@ public class BizTypeCodeController {
 	}
 			
 	@PostMapping("/common/biztype")	
-	public ResponseEntity<?> saveHrmType(@RequestBody BizTypeCodeDTO.SaveDTO dto, BindingResult result) {				
+	public ResponseEntity<?> saveHrmType(@RequestBody BizTypeCodeDTO.FormBizTypeCode dto, BindingResult result) {				
 		
 		if ( result.hasErrors()) {			
 			throw new ControllerException(result.toString());

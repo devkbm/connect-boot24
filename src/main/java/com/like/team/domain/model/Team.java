@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.like.core.domain.AuditEntity;
-import com.like.user.domain.model.User;
+import com.like.user.domain.SystemUser;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -60,7 +60,7 @@ public class Team extends AuditEntity implements Serializable {
 		return this.members;
 	}	
 		
-	public List<User> getMemberList() {
+	public List<SystemUser> getMemberList() {
 		/*
 		// Java 7
 		List<Member> memberList = new ArrayList<>();
@@ -76,7 +76,7 @@ public class Team extends AuditEntity implements Serializable {
 				.collect(Collectors.toList());
 	}
 	
-	public void addMember(User user)
+	public void addMember(SystemUser user)
 	{
 		this.members.add(new TeamMember(this, user));
 	}

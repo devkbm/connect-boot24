@@ -75,7 +75,7 @@ public class BizTypeCodeDTO {
 	@Builder
 	@AllArgsConstructor
 	@NoArgsConstructor(access = AccessLevel.PROTECTED)
-	public static class SaveDTO implements Serializable {
+	public static class FormBizTypeCode implements Serializable {
 			
 		private static final long serialVersionUID = 1435877481946094507L;
 
@@ -106,11 +106,11 @@ public class BizTypeCodeDTO {
 			return entity;
 		}
 		
-		public static SaveDTO convert(BizTypeCode entity) {
+		public static FormBizTypeCode convert(BizTypeCode entity) {
 			
 			if (entity == null) return null;
 			
-			return new SaveDTO(entity.getId()
+			return new FormBizTypeCode(entity.getId()
 							  ,entity.getName()
 							  ,entity.getUseYn()
 							  ,entity.getSequence()

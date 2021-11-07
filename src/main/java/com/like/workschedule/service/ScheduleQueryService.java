@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.like.workschedule.boundary.ScheduleDTO;
-import com.like.workschedule.domain.model.Schedule;
-import com.like.workschedule.domain.repository.ScheduleQueryRepository;
+import com.like.workschedule.domain.Schedule;
+import com.like.workschedule.domain.ScheduleQueryRepository;
 
 @Service
 @Transactional(readOnly=true)

@@ -11,8 +11,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.util.StringUtils;
 
-import com.like.workschedule.domain.model.QWorkGroup;
-import com.like.workschedule.domain.model.WorkGroup;
+import com.like.workschedule.domain.WorkGroup;
+import com.like.workschedule.domain.QWorkGroup;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
@@ -22,18 +22,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-public class WorkDTO {
-	
-	public static WorkDTO.SaveWorkGroup convertDTO(WorkGroup entity) {
-		WorkDTO.SaveWorkGroup dto = SaveWorkGroup.builder()
-												 .workGroupId(entity.getId())
-												 .workGroupName(entity.getName())
-												 .color(entity.getColor())
-												 .memberList(entity.getMemberList().stream().map( r -> r.getUser().getUserId()).collect(Collectors.toList()))
-												 .build();
-		
-		return dto;
-	}
+public class WorkDTO {	
 	
 	@Data
 	public static class SearchWorkGroup implements Serializable {
@@ -53,9 +42,7 @@ public class WorkDTO {
 		}
 		
 		private BooleanExpression likeGroupName(String name) {
-			if (StringUtils.isEmpty(name)) {
-				return null;
-			}
+			if (!StringUtils.hasText(name)) return null;
 			
 			return qWorkGroup.name.like("%"+this.name+"%");
 		}
@@ -65,7 +52,7 @@ public class WorkDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class SaveWorkGroup implements Serializable {
+	public static class FormWorkGroup implements Serializable {
 				
 		private static final long serialVersionUID = 8230052719254860669L;
 
@@ -93,6 +80,17 @@ public class WorkDTO {
 		
 		public void modifyWorkGroup(WorkGroup workGroup) {
 			workGroup.modifyEntity(this.workGroupName, color);
+		}
+		
+		public static WorkDTO.FormWorkGroup convertDTO(WorkGroup entity) {
+			WorkDTO.FormWorkGroup dto = FormWorkGroup.builder()
+													 .workGroupId(entity.getId())
+													 .workGroupName(entity.getName())
+													 .color(entity.getColor())
+													 .memberList(entity.getMemberList().stream().map( r -> r.getUser().getUserId()).collect(Collectors.toList()))
+													 .build();
+			
+			return dto;
 		}
 	}
 		

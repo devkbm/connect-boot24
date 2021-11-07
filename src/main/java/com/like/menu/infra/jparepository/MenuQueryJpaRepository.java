@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.like.menu.boundary.MenuDTO;
 import com.like.menu.boundary.MenuDTO.SearchMenu;
 import com.like.menu.boundary.MenuGroupDTO.SearchMenuGroup;
-import com.like.menu.domain.model.Menu;
-import com.like.menu.domain.model.MenuGroup;
-import com.like.menu.domain.model.QMenu;
-import com.like.menu.domain.model.QMenuGroup;
-import com.like.menu.domain.model.QWebResource;
-import com.like.menu.domain.repository.MenuQueryRepository;
+import com.like.menu.boundary.QResponseMenuHierarchy;
+import com.like.menu.boundary.ResponseMenuHierarchy;
+import com.like.menu.domain.Menu;
+import com.like.menu.domain.MenuGroup;
+import com.like.menu.domain.MenuQueryRepository;
+import com.like.menu.domain.QMenu;
+import com.like.menu.domain.QMenuGroup;
+import com.like.menu.domain.QWebResource;
 import com.querydsl.core.types.Expression;
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -57,16 +57,10 @@ public class MenuQueryJpaRepository implements MenuQueryRepository {
 				.fetch();
 	}
 	
-	public List<MenuDTO.MenuHierarchy> getMenuRootList(String menuGroupCode) {
-		
-		Expression<Boolean> isLeaf = new CaseBuilder()											
-											.when(qMenu.parent.menuCode.isNotNull()).then(true)
-											.otherwise(false).as("isLeaf");
+	public List<ResponseMenuHierarchy> getMenuRootList(String menuGroupCode) {			
 						
-		JPAQuery<MenuDTO.MenuHierarchy> query = queryFactory
-				.select(Projections.constructor(MenuDTO.MenuHierarchy.class
-											, qMenu.menuGroup.menuGroupCode, qMenu.menuCode, qMenu.menuName
-											, qMenu.parent.menuCode, qMenu.menuType, qMenu.sequence, qMenu.level, qWebResource.url ,isLeaf))
+		JPAQuery<ResponseMenuHierarchy> query = queryFactory
+				.select(projections(qMenu))
 				.from(qMenu)
 					.leftJoin(qMenu.resource, qWebResource)					
 				.where(qMenu.menuGroup.menuGroupCode.eq(menuGroupCode)
@@ -75,16 +69,18 @@ public class MenuQueryJpaRepository implements MenuQueryRepository {
 		return query.fetch();
 	}
 			
-	public List<MenuDTO.MenuHierarchy> getMenuChildrenList(String menuGroupCode, String parentMenuCode) {					
-		
+	public List<ResponseMenuHierarchy> getMenuChildrenList(String menuGroupCode, String parentMenuCode) {					
+		/*
 		Expression<Boolean> isLeaf = new CaseBuilder()										
 											.when(qMenu.parent.menuCode.isNotNull()).then(true)
 											.otherwise(false).as("isLeaf");
-						
-		JPAQuery<MenuDTO.MenuHierarchy> query = queryFactory
-				.select(Projections.constructor(MenuDTO.MenuHierarchy.class
+		*/
+		
+		JPAQuery<ResponseMenuHierarchy> query = queryFactory
+				/*.select(Projections.constructor(ResponseMenuHierarchy.class
 											, qMenu.menuGroup.menuGroupCode, qMenu.menuCode, qMenu.menuName
-											, qMenu.parent.menuCode, qMenu.menuType, qMenu.sequence, qMenu.level, qWebResource.url, isLeaf))
+											, qMenu.parent.menuCode, qMenu.menuType, qMenu.sequence, qMenu.level, qWebResource.url, isLeaf))*/
+				.select(projections(qMenu))
 				.from(qMenu)				
 					.leftJoin(qMenu.resource, qWebResource)
 				.where(qMenu.menuGroup.menuGroupCode.eq(menuGroupCode)
@@ -95,10 +91,10 @@ public class MenuQueryJpaRepository implements MenuQueryRepository {
 	
 
 	// TODO 계층 쿼리 테스트해보아야함 1 루트 노드 검색 : getMenuChildrenList 2. 하위노드 검색 : getMenuHierarchyDTO
-	public List<MenuDTO.MenuHierarchy> getMenuHierarchyDTO(List<MenuDTO.MenuHierarchy> list) {
-		List<MenuDTO.MenuHierarchy> children = null;
+	public List<ResponseMenuHierarchy> getMenuHierarchyDTO(List<ResponseMenuHierarchy> list) {
+		List<ResponseMenuHierarchy> children = null;
 		
-		for ( MenuDTO.MenuHierarchy dto : list ) {			
+		for ( ResponseMenuHierarchy dto : list ) {			
 			if (dto.isLeaf()) { // leaf 노드이면 다음 리스트 검색
 				continue;
 			} else {				
@@ -110,6 +106,15 @@ public class MenuQueryJpaRepository implements MenuQueryRepository {
 		}
 		
 		return list;
+	}
+	
+	private QResponseMenuHierarchy projections(QMenu qMenu) {
+		Expression<Boolean> isLeaf = new CaseBuilder()										
+				.when(qMenu.parent.menuCode.isNotNull()).then(true)
+				.otherwise(false).as("isLeaf");
+		
+		return new QResponseMenuHierarchy(qMenu.menuGroup.menuGroupCode, qMenu.menuCode, qMenu.menuName
+				, qMenu.parent.menuCode, qMenu.menuType, qMenu.sequence, qMenu.level, qWebResource.url, isLeaf);
 	}
 
 }

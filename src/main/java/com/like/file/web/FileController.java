@@ -14,14 +14,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.like.file.domain.model.FileInfo;
+import com.like.file.domain.FileInfo;
 import com.like.file.dto.FileResponseDTO;
 import com.like.file.infra.file.LocalFileRepository;
 import com.like.file.service.FileService;
@@ -34,8 +36,8 @@ public class FileController {
 	public FileController(FileService fileService) {		
 		this.fileService = fileService;
 	}
-	
-	@RequestMapping(value={"/common/file/{id}"}, method=RequestMethod.GET) 
+		
+	@GetMapping("/common/file/{id}")
 	public HttpServletResponse fileDownLoad(HttpServletResponse response,
 			@PathVariable(value="id") String id) throws Exception {
 								
@@ -47,8 +49,8 @@ public class FileController {
 		
 		return response;
 	}
-	
-	@RequestMapping(value={"/common/fileimage/{id}"}, method=RequestMethod.GET) 
+		
+	@GetMapping("/common/fileimage/{id}")
 	public HttpServletResponse fileImageDownLoad(HttpServletResponse response,
 			@PathVariable(value="id") String id) throws Exception {
 								
@@ -63,8 +65,8 @@ public class FileController {
 		
 		return response;
 	}
-	
-	@RequestMapping(value={"/common/file"}, method=RequestMethod.POST) 
+		
+	@PostMapping("/common/file")
 	public ResponseEntity<?> fileUpload(final MultipartHttpServletRequest request,
 			@RequestParam(value="pgmId", required=false) String pgmId ) throws Exception {
 						
@@ -106,7 +108,8 @@ public class FileController {
 		return new ResponseEntity<List<FileResponseDTO>>(fileList, responseHeaders, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/common/file2"}, method=RequestMethod.POST) 
+	
+	@PostMapping("/common/file2")
 	public void handleFileUpload(@RequestParam("file") MultipartFile file) throws Exception {
 
 		fileService.uploadFile(file, "kbm", "test");

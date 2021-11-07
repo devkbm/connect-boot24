@@ -46,16 +46,16 @@ public abstract class WebControllerUtil {
 	 * @param httpStatus	Http 응답 코드
 	 * @return Rest 요청 결과 
 	 */
-	public static ResponseEntity<ResponseObjectList> getResponse(List<?> data, int size, boolean success, String message, HttpStatus httpStatus) {
+	public static ResponseEntity<ResponseObjectList> getResponse(List<?> data, int size, String message, HttpStatus httpStatus) {
 									
-		ResponseObjectList obj = new ResponseObjectList(data, size, success, message);			      
+		ResponseObjectList obj = new ResponseObjectList(data, size, message);			      
 	    
 	    return new ResponseEntity<ResponseObjectList>(obj, getResponseHeaders(), httpStatus);	    	    	    	    	
 	}
 	
 	public static ResponseEntity<ResponseObjectList> getResponse(List<?> data, String message, HttpStatus httpStatus) {
 		
-		ResponseObjectList obj = new ResponseObjectList(data, data == null ? 0 : data.size(), true, message);			      
+		ResponseObjectList obj = new ResponseObjectList(data, data == null ? 0 : data.size(), message);			      
 	    
 	    return new ResponseEntity<ResponseObjectList>(obj, getResponseHeaders(), httpStatus);	    	    	    	    	
 	}
@@ -69,9 +69,9 @@ public abstract class WebControllerUtil {
 	 * @param httpStatus	Http 응답 코드
 	 * @return Rest 요청 결과 
 	 */	
-	public static <T> ResponseEntity<ResponseObject<T>> getResponse(T data, int size, boolean success, String message, HttpStatus httpStatus) {
+	public static <T> ResponseEntity<ResponseObject<T>> getResponse(T data, int size, String message, HttpStatus httpStatus) {
 		
-		ResponseObject<T> obj = new ResponseObject<T>(data, size, success, message);		
+		ResponseObject<T> obj = new ResponseObject<T>(data, size, message);		
 					    	    
 	    return new ResponseEntity<ResponseObject<T>>(obj, getResponseHeaders(), httpStatus);	    	    	    	    	
 	}
@@ -84,7 +84,7 @@ public abstract class WebControllerUtil {
 	 * @return
 	 */
 	public static<T> ResponseEntity<ResponseObject<T>> getResponse(T data, String message,  HttpStatus httpStatus) {
-		ResponseObject<T> obj = new ResponseObject<T>(data, data == null ? 0 : 1, true, message);
+		ResponseObject<T> obj = new ResponseObject<T>(data, data == null ? 0 : 1, message);
 		
 		return new ResponseEntity<ResponseObject<T>>(obj, getResponseHeaders(), httpStatus);
 	}

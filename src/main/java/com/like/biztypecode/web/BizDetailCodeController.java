@@ -29,7 +29,7 @@ public class BizDetailCodeController {
 	public ResponseEntity<?> getBizDetailCode(@PathVariable(value="typeCode") String typeCode
 											 ,@PathVariable(value="detailCode") String detailCode) {
 		
-		BizDetailCodeDTO.SaveDTO dto = BizDetailCodeDTO.SaveDTO.convert(service.getBizDetailCode(new BizDetailCodeId(typeCode, detailCode)));
+		BizDetailCodeDTO.FormBizDetailCode dto = BizDetailCodeDTO.FormBizDetailCode.convert(service.getBizDetailCode(new BizDetailCodeId(typeCode, detailCode)));
 					
 		return WebControllerUtil.getResponse(dto											
 											,String.format("%d 건 조회되었습니다.", dto == null ? 0 : 1)
@@ -37,7 +37,7 @@ public class BizDetailCodeController {
 	}
 			
 	@PostMapping("/common/biztype/bizdetail")	
-	public ResponseEntity<?> saveBizDetailCode(@RequestBody BizDetailCodeDTO.SaveDTO dto, BindingResult result) {				
+	public ResponseEntity<?> saveBizDetailCode(@RequestBody BizDetailCodeDTO.FormBizDetailCode dto, BindingResult result) {				
 		
 		if ( result.hasErrors()) {			
 			throw new ControllerException(result.toString());

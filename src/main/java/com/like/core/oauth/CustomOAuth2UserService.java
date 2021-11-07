@@ -13,8 +13,8 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import com.like.user.domain.model.User;
-import com.like.user.domain.repository.UserRepository;
+import com.like.user.domain.SystemUser;
+import com.like.user.domain.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,8 +59,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                attributes.getNameAttributeKey());
 	}
 	
-	private User saveOrUpdate(OAuthAttributes attributes) {
-		User user = userRepository.findById(attributes.getEmail()).orElse(null);
+	private SystemUser saveOrUpdate(OAuthAttributes attributes) {
+		SystemUser user = userRepository.findById(attributes.getEmail()).orElse(null);
 	       
 		userRepository.save(user);
 	       

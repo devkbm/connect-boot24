@@ -286,7 +286,9 @@ public class StaffDTO {
 	@AllArgsConstructor
 	@Builder
 	public static class FormFamily implements Serializable {
-		
+				
+		private static final long serialVersionUID = -8291690526903657079L;
+
 		@NotEmpty
 		private String staffId;
 		
@@ -343,7 +345,9 @@ public class StaffDTO {
 	@AllArgsConstructor
 	@Builder
 	public static class FormStaffAppointmentRecord implements Serializable {
-		
+				
+		private static final long serialVersionUID = -907086321137174863L;
+
 		@NotEmpty
 		private String staffId;
 		

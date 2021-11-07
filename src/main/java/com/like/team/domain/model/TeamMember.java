@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.like.core.domain.AuditEntity;
 import com.like.team.domain.model.id.TeamMemberId;
-import com.like.user.domain.model.User;
+import com.like.user.domain.SystemUser;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -35,7 +35,7 @@ public class TeamMember extends AuditEntity implements Serializable {
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="USER_ID", insertable = false, updatable = false)
-	private User user;	
+	private SystemUser user;	
 	
 	// 권한
 	private String authority;
@@ -44,7 +44,7 @@ public class TeamMember extends AuditEntity implements Serializable {
 		this.id = teamMemberId;
 	}
 	
-	public TeamMember(Team team, User user) {
+	public TeamMember(Team team, SystemUser user) {
 		this.id = new TeamMemberId(team.getTeamId(), user.getUserId());
 	}
 		
@@ -52,7 +52,7 @@ public class TeamMember extends AuditEntity implements Serializable {
 		return this.team;
 	}
 		
-	public User getUser() {
+	public SystemUser getUser() {
 		return this.user;
 	}
 	

@@ -6,14 +6,14 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.like.user.domain.model.User;
-import com.like.user.domain.repository.UserRepository;
+import com.like.user.domain.SystemUser;
+import com.like.user.domain.UserRepository;
 import com.like.workschedule.boundary.WorkDTO;
-import com.like.workschedule.domain.model.WorkGroup;
-import com.like.workschedule.domain.model.WorkGroupMember;
-import com.like.workschedule.domain.model.id.WorkGroupMemberId;
-import com.like.workschedule.domain.repository.WorkGroupMemberRepository;
-import com.like.workschedule.domain.repository.WorkGroupRepository;
+import com.like.workschedule.domain.WorkGroup;
+import com.like.workschedule.domain.WorkGroupMember;
+import com.like.workschedule.domain.WorkGroupMemberId;
+import com.like.workschedule.domain.WorkGroupMemberRepository;
+import com.like.workschedule.domain.WorkGroupRepository;
 
 @Service
 @Transactional
@@ -40,7 +40,7 @@ public class WorkGroupService {
 		return repository.findById(id).orElse(null);
 	}			
 	
-	public void saveWorkGroup(WorkDTO.SaveWorkGroup dto) {
+	public void saveWorkGroup(WorkDTO.FormWorkGroup dto) {
 		WorkGroup entity = null;
 		
 		if (dto.getWorkGroupId() != null) {
@@ -57,9 +57,9 @@ public class WorkGroupService {
 		entity.clearWorkGroupMember();
 		
 		if (dtoMemberList != null) {
-			List<User> userList = userRepository.findAllById(dtoMemberList);
+			List<SystemUser> userList = userRepository.findAllById(dtoMemberList);
 			
-			for ( User user: userList ) {
+			for ( SystemUser user: userList ) {
 				WorkGroupMember member = new WorkGroupMember(entity, user);				
 				entity.addWorkGroupMember(member);
 			}
@@ -77,12 +77,12 @@ public class WorkGroupService {
 		return workGroupMemberRepository.findById(id).orElse(null);
 	}
 	
-	public void saveWorkGroupMember(WorkGroup workGroup, User user) {
+	public void saveWorkGroupMember(WorkGroup workGroup, SystemUser user) {
 		workGroup.addWorkGroupMember(new WorkGroupMember(workGroup, user));
 	}
 	
-	public void saveWorkGroupMember(WorkGroup workGroup, List<User> userList) {		
-		for (User user: userList) {
+	public void saveWorkGroupMember(WorkGroup workGroup, List<SystemUser> userList) {		
+		for (SystemUser user: userList) {
 			workGroup.addWorkGroupMember(new WorkGroupMember(workGroup, user));
 		}
 		

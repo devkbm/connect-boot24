@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.like.workschedule.boundary.ScheduleDTO.SearchSchedule;
-import com.like.workschedule.domain.model.QSchedule;
-import com.like.workschedule.domain.model.Schedule;
-import com.like.workschedule.domain.repository.ScheduleQueryRepository;
+import com.like.workschedule.domain.Schedule;
+import com.like.workschedule.domain.QSchedule;
+import com.like.workschedule.domain.ScheduleQueryRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository

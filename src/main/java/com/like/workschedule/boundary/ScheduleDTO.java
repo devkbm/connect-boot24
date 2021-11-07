@@ -14,9 +14,10 @@ import javax.validation.constraints.NotNull;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import com.like.workschedule.domain.model.QSchedule;
-import com.like.workschedule.domain.model.Schedule;
-import com.like.workschedule.domain.model.WorkGroup;
+
+import com.like.workschedule.domain.Schedule;
+import com.like.workschedule.domain.QSchedule;
+import com.like.workschedule.domain.WorkGroup;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.DateTimeExpression;
@@ -27,37 +28,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class ScheduleDTO {
-
-	public static SaveSchedule convertDTO(Schedule entity) {
-		SaveSchedule dto = SaveSchedule.builder()
-									   .id(entity.getId())
-									   .title(entity.getTitle())
-									   .start(entity.getStart())
-									   .end(entity.getEnd())
-									   .allDay(entity.getAllDay())
-									   .workGroupId(entity.getWorkGroup().getId())
-									   .build();
-														
-		return dto;
-	}
-	
-	public static ScheduleResponse convertResDTO(Schedule entity) {
-		
-		WorkGroup workGroup = entity.getWorkGroup();
-		
-		ScheduleResponse dto = ScheduleResponse.builder()
-											   .workGroupId(workGroup.getId())
-											   .id(entity.getId())
-											   .title(entity.getTitle())
-											   .color(workGroup.getColor())
-											   .start(entity.getStart())
-											   .end(entity.getEnd())
-											   .allDay(entity.getAllDay())																							
-											   .build();
-																
-		return dto;
-	}
+public class ScheduleDTO {		
 	
 	@Data
 	public static class SearchSchedule implements Serializable {
@@ -109,9 +80,7 @@ public class ScheduleDTO {
 		}
 		
 		private BooleanExpression likeTitle(String title) {
-			if (StringUtils.isEmpty(title)) {
-				return null;
-			}
+			if (!StringUtils.hasText(title)) return null;
 			
 			return qSchedule.title.like("%"+title+"%");
 		}
@@ -163,7 +132,7 @@ public class ScheduleDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class SaveSchedule implements Serializable {
+	public static class FormSchedule implements Serializable {
 				
 		private static final long serialVersionUID = -4732165212710032658L;
 
@@ -203,13 +172,26 @@ public class ScheduleDTO {
 		public void modifySchedule(Schedule schedule) {
 			schedule.modifyEntity(title, start, end, allDay);
 		}
+		
+		public static FormSchedule convertDTO(Schedule entity) {
+			FormSchedule dto = FormSchedule.builder()
+										   .id(entity.getId())
+										   .title(entity.getTitle())
+										   .start(entity.getStart())
+										   .end(entity.getEnd())
+										   .allDay(entity.getAllDay())
+										   .workGroupId(entity.getWorkGroup().getId())
+										   .build();
+															
+			return dto;
+		}
 	}
 	
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class ScheduleResponse implements Serializable {
+	public static class ResponseSchedule implements Serializable {
 				
 		private static final long serialVersionUID = -8101598433251220343L;
 
@@ -233,6 +215,23 @@ public class ScheduleDTO {
 				
 		OffsetDateTime end;
 		
-		Boolean allDay;			
+		Boolean allDay;		
+		
+		public static ResponseSchedule convertResDTO(Schedule entity) {
+			
+			WorkGroup workGroup = entity.getWorkGroup();
+			
+			ResponseSchedule dto = ResponseSchedule.builder()
+												   .workGroupId(workGroup.getId())
+												   .id(entity.getId())
+												   .title(entity.getTitle())
+												   .color(workGroup.getColor())
+												   .start(entity.getStart())
+												   .end(entity.getEnd())
+												   .allDay(entity.getAllDay())																							
+												   .build();
+																	
+			return dto;
+		}
 	}
 }

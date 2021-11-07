@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.menu.boundary.WebResourceDTO;
-import com.like.menu.boundary.WebResourceDTO.SaveWebResource;
-import com.like.menu.domain.model.WebResource;
+import com.like.menu.boundary.WebResourceDTO.FormWebResource;
+import com.like.menu.domain.WebResource;
 import com.like.menu.service.WebResourceService;
 
 @RestController
@@ -28,20 +28,20 @@ public class WebResourceController {
 		this.service = menuCommandService;		
 	}
 	
-	@GetMapping("/common/webresource/{code}")
+	@GetMapping("/api/common/webresource/{code}")
 	public ResponseEntity<?> getResource(@PathVariable(value="code") String code) {				
 		
 		WebResource resource = service.getResource(code); 							
 		
-		WebResourceDTO.SaveWebResource dto = SaveWebResource.convertDTO(resource);
+		WebResourceDTO.FormWebResource dto = FormWebResource.convertDTO(resource);
 		
 		return WebControllerUtil.getResponse(dto											
 											,String.format("%d 건 조회되었습니다.", dto != null ? 1 : 0)
 											,HttpStatus.OK);
 	}
 		
-	@PostMapping("/common/webresource")
-	public ResponseEntity<?> saveResource(@RequestBody @Valid WebResourceDTO.SaveWebResource dto, BindingResult result) throws Exception {
+	@PostMapping("/api/common/webresource")
+	public ResponseEntity<?> saveResource(@RequestBody @Valid WebResourceDTO.FormWebResource dto, BindingResult result) throws Exception {
 										
 		if ( result.hasErrors()) {
 			throw new ControllerException(result.getAllErrors().toString());
@@ -54,7 +54,7 @@ public class WebResourceController {
 											,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/common/webresource/{code}")
+	@DeleteMapping("/api/common/webresource/{code}")
 	public ResponseEntity<?> delResource(@PathVariable(value="code") String code) {				
 												
 		service.deleteWebResource(code);							

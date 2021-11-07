@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.core.domain.AuditEntity;
-import com.like.file.domain.model.FileInfo;
+import com.like.file.domain.FileInfo;
 
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.like.user.boundary.AuthorityDTO.SearchAuthority;
-import com.like.user.domain.model.Authority;
-import com.like.user.domain.model.QAuthority;
-import com.like.user.domain.repository.AuthorityQueryRepository;
+import com.like.user.domain.Authority;
+import com.like.user.domain.QAuthority;
+import com.like.user.domain.AuthorityQueryRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository

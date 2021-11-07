@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
 import com.like.menu.boundary.WebResourceDTO;
-import com.like.menu.boundary.WebResourceDTO.SaveWebResource;
-import com.like.menu.domain.model.WebResource;
+import com.like.menu.boundary.WebResourceDTO.FormWebResource;
+import com.like.menu.domain.WebResource;
 import com.like.menu.service.WebResourceQueryService;
 
 @RestController
@@ -23,13 +23,13 @@ public class WebResourceQueryController {
 		this.service = service; 
 	}
 	
-	@GetMapping("/common/webresource")
+	@GetMapping("/api/common/webresource")
 	public ResponseEntity<?> getWebResourceList(WebResourceDTO.SearchWebResource condition) {							 			
 		
 		List<WebResource> list = service.getResourceList(condition);
 										
-		List<WebResourceDTO.SaveWebResource> dtoList = list.stream()
-														   .map(e -> SaveWebResource.convertDTO(e))
+		List<WebResourceDTO.FormWebResource> dtoList = list.stream()
+														   .map(e -> FormWebResource.convertDTO(e))
 														   .collect(Collectors.toList());
 		
 		return WebControllerUtil.getResponse(dtoList											

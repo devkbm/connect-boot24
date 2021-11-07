@@ -29,7 +29,7 @@ public class BoardCommandService {
     	return boardRepository.findById(id).orElse(null);
     }
 	
-	public void saveBoard(BoardDTO.SaveBoard dto) {			
+	public void saveBoard(BoardDTO.FormBoard dto) {			
 		Board board = null;			
 		Board parentBoard = dto.getPpkBoard() != null ? boardRepository.findById(dto.getPpkBoard()).orElse(null) : null;			
 																

@@ -18,7 +18,7 @@ import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
 import com.like.user.boundary.PasswordRequestDTO;
 import com.like.user.boundary.UserDTO;
-import com.like.user.domain.model.User;
+import com.like.user.domain.SystemUser;
 import com.like.user.service.UserService;
 
 @RestController
@@ -30,12 +30,12 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@GetMapping(value={"/common/user/myinfo"})
+	@GetMapping(value={"/api/common/user/myinfo"})
 	public ResponseEntity<?> getUserInfo() throws FileNotFoundException, IOException {
 														
-		User user = userService.getUser(SessionUtil.getUserId());				
+		SystemUser user = userService.getUser(SessionUtil.getUserId());				
 		
-		UserDTO.SaveUser dto = UserDTO.convertDTO(user);					
+		UserDTO.FormSystemUser dto = UserDTO.convertDTO(user);					
 		
 		return WebControllerUtil
 				.getResponse(dto							
@@ -43,12 +43,12 @@ public class UserController {
 							,HttpStatus.OK);
 	}
 	
-	@GetMapping(value={"/common/user/{id}"})
+	@GetMapping(value={"/api/common/user/{id}"})
 	public ResponseEntity<?> getUser(@PathVariable(value="id") String userId) throws FileNotFoundException, IOException {
 						
-		User user = userService.getUser(userId);				
+		SystemUser user = userService.getUser(userId);				
 		
-		UserDTO.SaveUser dto = UserDTO.convertDTO(user);					
+		UserDTO.FormSystemUser dto = UserDTO.convertDTO(user);					
 		
 		return WebControllerUtil
 				.getResponse(dto							
@@ -58,8 +58,8 @@ public class UserController {
 		
 	
 	
-	@PostMapping(value={"/common/user"})	
-	public ResponseEntity<?> saveUser(@RequestBody UserDTO.SaveUser dto, BindingResult result) {
+	@PostMapping(value={"/api/common/user"})	
+	public ResponseEntity<?> saveUser(@RequestBody UserDTO.FormSystemUser dto, BindingResult result) {
 		
 		if ( result.hasErrors()) {
 			throw new ControllerException("오류");
@@ -73,7 +73,7 @@ public class UserController {
 							,HttpStatus.OK);
 	}	
 	
-	@DeleteMapping(value={"/common/user/{id}"})
+	@DeleteMapping(value={"/api/common/user/{id}"})
 	public ResponseEntity<?> deleteUser(@PathVariable(value="id") String userId) {
 										
 		userService.deleteUser(userId);															
@@ -84,7 +84,7 @@ public class UserController {
 							,HttpStatus.OK);
 	}
 		
-	@PostMapping(value={"/common/user/{id}/changePassword"})
+	@PostMapping(value={"/api/common/user/{id}/changePassword"})
 	public ResponseEntity<?> changePassword(@RequestBody PasswordRequestDTO dto) {				
 						
 		userService.changePassword(dto.getUserId(), dto.getBeforePassword(), dto.getAfterPassword());													
@@ -95,7 +95,7 @@ public class UserController {
 							,HttpStatus.OK);
 	}
 			
-	@PostMapping(value={"/common/user/{id}/initPassword"})
+	@PostMapping(value={"/api/common/user/{id}/initPassword"})
 	public ResponseEntity<?> initializePassword(@PathVariable(value="id") String userId) {			
 				
 		userService.initPassword(userId);														

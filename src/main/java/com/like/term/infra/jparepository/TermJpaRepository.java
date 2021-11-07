@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.like.term.boundary.TermDTO;
-import com.like.term.domain.model.QTermDictionary;
-import com.like.term.domain.model.TermDictionary;
-import com.like.term.domain.repository.TermRepository;
-import com.like.term.infra.jparepository.springdata.JpaTerm;
+import com.like.term.domain.TermDictionary;
+import com.like.term.domain.JpaTerm;
+import com.like.term.domain.QTermDictionary;
+import com.like.term.domain.TermRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository

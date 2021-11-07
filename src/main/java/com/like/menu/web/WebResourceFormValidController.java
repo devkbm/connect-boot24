@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.util.WebControllerUtil;
-import com.like.menu.domain.model.WebResource;
+import com.like.menu.domain.WebResource;
 import com.like.menu.service.WebResourceService;
 
 @RestController
@@ -19,7 +19,7 @@ public class WebResourceFormValidController {
 		this.service = service;
 	}
 	
-	@GetMapping("/common/webresource/{code}/check")
+	@GetMapping("/api/common/webresource/{code}/check")
 	public ResponseEntity<?> getResource(@PathVariable(value="code") String code) {						
 		WebResource resource = service.getResource(code); 							
 		Boolean isValid = resource == null ? true : false;

@@ -27,8 +27,8 @@ public class ArticleQueryController {
 																	
 		List<Article> list = service.getAritlceList(condition);  							
 		
-		List<ArticleDTO.ArticleResponse> dtoList = list.stream()
-													   .map(e -> ArticleDTO.ArticleResponse.converDTO((e)))
+		List<ArticleDTO.ResponseArticle> dtoList = list.stream()
+													   .map(e -> ArticleDTO.ResponseArticle.converDTO((e)))
 													   .collect(Collectors.toList());		
 		
 		return WebControllerUtil.getResponse(dtoList											

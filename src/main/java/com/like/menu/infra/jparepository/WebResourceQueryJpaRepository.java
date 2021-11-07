@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.like.menu.boundary.WebResourceDTO.SearchWebResource;
-import com.like.menu.domain.model.QWebResource;
-import com.like.menu.domain.model.WebResource;
-import com.like.menu.domain.repository.WebResourceQueryRepository;
+import com.like.menu.domain.QWebResource;
+import com.like.menu.domain.WebResource;
+import com.like.menu.domain.WebResourceQueryRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository

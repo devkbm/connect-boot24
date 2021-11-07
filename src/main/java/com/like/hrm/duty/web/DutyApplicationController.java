@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.like.core.web.exception.ControllerException;
 import com.like.core.web.util.WebControllerUtil;
-import com.like.holiday.domain.service.HolidayUtilService;
+import com.like.holiday.service.DateInfoService;
 import com.like.hrm.duty.boundary.DutyApplicationDTO;
 import com.like.hrm.duty.boundary.DutyApplicationInputLimitRuleDTO;
 import com.like.hrm.duty.domain.model.DutyApplication;
@@ -37,11 +37,11 @@ public class DutyApplicationController {
 	
 	private DutyApplicationQueryService dutyApplicationQueryService;		
 	
-	private HolidayUtilService holidayUtilService;
+	private DateInfoService holidayUtilService;
 	
 	public DutyApplicationController(DutyApplicationCommandService dutyApplicationCommandService
 									,DutyApplicationQueryService dutyApplicationQueryService									
-									,HolidayUtilService holidayUtilService) {
+									,DateInfoService holidayUtilService) {
 		this.dutyApplicationCommandService = dutyApplicationCommandService;
 		this.dutyApplicationQueryService = dutyApplicationQueryService;		
 		this.holidayUtilService = holidayUtilService;
