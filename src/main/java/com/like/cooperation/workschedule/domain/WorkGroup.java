@@ -18,8 +18,8 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.like.core.domain.AuditEntity;
-import com.like.user.domain.SystemUser;
+import com.like.system.core.domain.AuditEntity;
+import com.like.system.user.domain.SystemUser;
 
 import lombok.AccessLevel;
 import lombok.Getter;

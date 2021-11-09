@@ -17,9 +17,9 @@ import com.like.cooperation.board.domain.AttachedFile;
 import com.like.cooperation.board.domain.AttachedFileConverter;
 import com.like.cooperation.board.domain.Board;
 import com.like.cooperation.board.domain.BoardRepository;
-import com.like.core.util.SessionUtil;
-import com.like.file.domain.FileInfo;
-import com.like.file.service.FileService;
+import com.like.system.core.util.SessionUtil;
+import com.like.system.file.domain.FileInfo;
+import com.like.system.file.service.FileService;
 
 @Service
 @Transactional

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.like.core.web.util.WebControllerUtil;
 import com.like.hrm.staff.boundary.StaffDTO;
 import com.like.hrm.staff.domain.model.Staff;
 import com.like.hrm.staff.service.StaffQueryService;
+import com.like.system.core.web.util.WebControllerUtil;
 
 @RestController
 public class StaffQueryController {

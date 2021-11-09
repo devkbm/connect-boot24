@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.like.file.infra.file.LocalFileRepository.FileUploadLocation;
-import com.like.file.service.FileService;
 import com.like.hrm.staff.domain.model.Staff;
 import com.like.hrm.staff.service.StaffService;
+import com.like.system.file.infra.file.LocalFileRepository.FileUploadLocation;
+import com.like.system.file.service.FileService;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -12,8 +12,8 @@ import com.like.cooperation.workschedule.domain.WorkGroupMember;
 import com.like.cooperation.workschedule.domain.WorkGroupMemberId;
 import com.like.cooperation.workschedule.domain.WorkGroupMemberRepository;
 import com.like.cooperation.workschedule.domain.WorkGroupRepository;
-import com.like.user.domain.SystemUser;
-import com.like.user.domain.UserRepository;
+import com.like.system.user.domain.SystemUser;
+import com.like.system.user.domain.UserRepository;
 
 @Service
 @Transactional

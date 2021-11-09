@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.like.cooperation.workschedule.boundary.ScheduleDTO;
 import com.like.cooperation.workschedule.domain.Schedule;
 import com.like.cooperation.workschedule.service.ScheduleQueryService;
-import com.like.core.web.util.WebControllerUtil;
+import com.like.system.core.web.util.WebControllerUtil;
 
 @RestController
 public class ScheduleQueryController {

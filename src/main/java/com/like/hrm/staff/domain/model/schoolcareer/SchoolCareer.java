@@ -17,9 +17,9 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.like.core.domain.AuditEntity;
-import com.like.core.vo.DatePeriod;
 import com.like.hrm.staff.domain.model.Staff;
+import com.like.system.core.domain.AuditEntity;
+import com.like.system.core.vo.DatePeriod;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;

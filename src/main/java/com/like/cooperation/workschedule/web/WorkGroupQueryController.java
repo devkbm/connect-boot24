@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.like.cooperation.workschedule.boundary.WorkDTO;
 import com.like.cooperation.workschedule.domain.WorkGroup;
 import com.like.cooperation.workschedule.service.WorkGroupQueryService;
-import com.like.core.util.SessionUtil;
-import com.like.core.web.util.WebControllerUtil;
+import com.like.system.core.util.SessionUtil;
+import com.like.system.core.web.util.WebControllerUtil;
 
 @RestController
 public class WorkGroupQueryController {

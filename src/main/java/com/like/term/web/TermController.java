@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.like.core.web.exception.ControllerException;
-import com.like.core.web.util.WebControllerUtil;
+import com.like.system.core.web.exception.ControllerException;
+import com.like.system.core.web.util.WebControllerUtil;
 import com.like.term.boundary.TermDTO;
 import com.like.term.domain.TermDictionary;
 import com.like.term.service.TermService;

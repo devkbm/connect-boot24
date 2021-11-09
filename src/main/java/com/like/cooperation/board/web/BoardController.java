@@ -18,8 +18,8 @@ import com.like.cooperation.board.boundary.BoardDTO;
 import com.like.cooperation.board.domain.Board;
 import com.like.cooperation.board.domain.BoardBookmark;
 import com.like.cooperation.board.service.BoardCommandService;
-import com.like.core.web.exception.ControllerException;
-import com.like.core.web.util.WebControllerUtil;
+import com.like.system.core.web.exception.ControllerException;
+import com.like.system.core.web.util.WebControllerUtil;
 
 @RestController
 public class BoardController {

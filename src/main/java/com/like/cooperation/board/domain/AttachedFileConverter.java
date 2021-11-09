@@ -3,7 +3,7 @@ package com.like.cooperation.board.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.like.file.domain.FileInfo;
+import com.like.system.file.domain.FileInfo;
 
 public class AttachedFileConverter {
 

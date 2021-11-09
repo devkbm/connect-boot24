@@ -17,9 +17,9 @@ import org.hibernate.annotations.Formula;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.like.cooperation.board.domain.vo.Period;
-import com.like.core.domain.AuditEntity;
-import com.like.core.util.SessionUtil;
-import com.like.file.domain.FileInfo;
+import com.like.system.core.domain.AuditEntity;
+import com.like.system.core.util.SessionUtil;
+import com.like.system.file.domain.FileInfo;
 
 /**
  * <p>게시글 클래스</p>

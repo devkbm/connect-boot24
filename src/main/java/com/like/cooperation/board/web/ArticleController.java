@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.like.cooperation.board.boundary.ArticleDTO;
 import com.like.cooperation.board.domain.Article;
 import com.like.cooperation.board.service.ArticleCommandService;
-import com.like.core.web.exception.ControllerException;
-import com.like.core.web.util.WebControllerUtil;
+import com.like.system.core.web.exception.ControllerException;
+import com.like.system.core.web.util.WebControllerUtil;
 
 @Controller
 public class ArticleController {	

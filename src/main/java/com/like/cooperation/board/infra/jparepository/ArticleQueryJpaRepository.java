@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.like.file.domain.QFileInfo;
 import com.like.cooperation.board.domain.Article;
 import com.like.cooperation.board.domain.ArticleQueryRepository;
 import com.like.cooperation.board.domain.QArticle;
 import com.like.cooperation.board.domain.QAttachedFile;
+import com.like.system.file.domain.QFileInfo;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 

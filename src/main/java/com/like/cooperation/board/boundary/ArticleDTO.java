@@ -18,9 +18,9 @@ import com.like.cooperation.board.domain.Board;
 import com.like.cooperation.board.domain.Article;
 import com.like.cooperation.board.domain.QArticle;
 import com.like.cooperation.board.domain.vo.Period;
-import com.like.file.domain.FileInfo;
-import com.like.file.dto.FileResponseDTO;
-import com.like.file.infra.file.LocalFileRepository;
+import com.like.system.file.boundary.FileResponseDTO;
+import com.like.system.file.domain.FileInfo;
+import com.like.system.file.infra.file.LocalFileRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 

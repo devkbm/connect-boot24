@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.like.core.web.util.WebControllerUtil;
 import com.like.hrm.hrmtypecode.domain.HrmTypeDetailCodeId;
 import com.like.hrm.hrmtypecode.domain.HrmTypeDetailCodeRepository;
 import com.like.hrm.hrmtypecode.domain.HrmTypeRepository;
+import com.like.system.core.web.util.WebControllerUtil;
 
 @RestController
 public class HrmCodeValidController {

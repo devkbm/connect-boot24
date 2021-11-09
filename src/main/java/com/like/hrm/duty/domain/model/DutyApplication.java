@@ -18,9 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.like.core.domain.AuditEntity;
-import com.like.core.vo.Period;
 import com.like.hrm.duty.domain.model.vo.FamilyEvent;
+import com.like.system.core.domain.AuditEntity;
+import com.like.system.core.vo.Period;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
