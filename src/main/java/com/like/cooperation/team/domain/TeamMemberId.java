@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Embeddable
 public class TeamMemberId implements Serializable {
-	
+		
+	private static final long serialVersionUID = 5478217859961654061L;
+
 	@Column(name="TEAM_ID")
 	Long teamId;
 		

@@ -12,13 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.like.cooperation.team.boundary.TeamDTO;
 import com.like.cooperation.team.domain.Team;
-import com.like.cooperation.team.domain.TeamDTOAssembler;
 import com.like.cooperation.team.domain.TeamMember;
 import com.like.cooperation.team.service.TeamService;
 import com.like.system.core.web.exception.ControllerException;
@@ -40,31 +37,29 @@ public class TeamController {
 		this.userRepository = userRepository;
 	}
 		
-	@GetMapping(value={"/grw/team"})
+	@GetMapping("/grw/team")
 	public ResponseEntity<?> getTeamList(@ModelAttribute TeamDTO.SearchCondition searchCondition) {
 						
 		List<Team> teamList = teamService.getTeamList(searchCondition);				
 		
-		return WebControllerUtil.getResponse(teamList,
-				teamList.size(), 				
+		return WebControllerUtil.getResponse(teamList,				
 				teamList.size() + "건 조회 되었습니다.",
 				HttpStatus.OK);												
 	}
 	
-	@GetMapping(value={"/grw/team/{id}"})
+	@GetMapping("/grw/team/{id}")
 	public ResponseEntity<?> getTeam(@PathVariable(value="id") Long teamId) {
 						
 		Team team = teamService.getTeam(teamId);				
 		
-		TeamDTO.TeamSave dto = TeamDTOAssembler.convertDTO(team);
+		TeamDTO.TeamSave dto = TeamDTO.TeamSave.convertDTO(team);
 		
 		return WebControllerUtil.getResponse(dto,
-				team == null ? 0 : 1, 				
 				"조회 되었습니다.",
 				HttpStatus.OK);													
 	}
-	
-	@RequestMapping(value={"/grw/team"}, method={RequestMethod.POST,RequestMethod.PUT}) 
+		
+	@PostMapping("/grw/team")
 	public ResponseEntity<?> saveTeam(@Valid @RequestBody TeamDTO.TeamSave dto, BindingResult result) {				
 		
 		if ( result.hasErrors()) {			
@@ -86,47 +81,42 @@ public class TeamController {
 		
 		teamService.saveTeam(team, userList);		
 										 					
-		return WebControllerUtil.getResponse(team,
-				team != null ? 1 : 0, 				
+		return WebControllerUtil.getResponse(team,				
 				String.format("%d 건 저장되었습니다.", team != null ? 1 : 0), 
 				HttpStatus.OK);
 	}
 	
-	@GetMapping(value={"/grw/allmember"})
+	@GetMapping("/grw/allmember")
 	public ResponseEntity<?> getAllMemberList(UserDTO.SearchUser condition) {
 				
 		List<SystemUser> userList = teamService.getAllMember(condition);						 				
 		
-		return WebControllerUtil.getResponse(userList,
-				userList.size(), 				
+		return WebControllerUtil.getResponse(userList,				 			
 				"조회 되었습니다.",
 				HttpStatus.OK);
 	}
 	
-	@GetMapping(value={"/grw/team/{id}/member"})
+	@GetMapping("/grw/team/{id}/member")
 	public ResponseEntity<?> getTeamMemberList(@PathVariable(value="id") Long teamId) {
 						
 		List<SystemUser> memberList = teamService.getTeamMemberList(teamId);												
 		
-		return WebControllerUtil.getResponse(memberList,
-				memberList == null ? 0 : 1, 				
+		return WebControllerUtil.getResponse(memberList,			
 				"조회 되었습니다.",
 				HttpStatus.OK);
 	}		
 	
 			
-	@PostMapping(value={"/grw/member/{memberId}/join/{teamId}"})
+	@PostMapping("/grw/member/{memberId}/join/{teamId}")
 	public ResponseEntity<?> joinTeam(
 			@PathVariable(value="teamId") Long teamId,
 			@PathVariable(value="memberId") String memberId) {				
 
 		TeamMember joinTeam = teamService.joinTeam(teamId, memberId);			
 										 					
-		return WebControllerUtil.getResponse(joinTeam,
-				1, 				
+		return WebControllerUtil.getResponse(joinTeam,				
 				String.format("팀에 등록 되었습니다."), 
 				HttpStatus.OK);
 	}
-		
-	
+			
 }
