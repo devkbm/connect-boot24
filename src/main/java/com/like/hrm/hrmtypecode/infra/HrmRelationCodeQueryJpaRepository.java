@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.like.commoncode.domain.model.QCode;
 import com.like.hrm.hrmtypecode.boundary.SaveHrmRelationCode;
 import com.like.hrm.hrmtypecode.boundary.HrmRelationCodeDTO.SearchHrmRelationCode;
 import com.like.hrm.hrmtypecode.boundary.QSaveHrmRelationCode;
@@ -12,6 +11,7 @@ import com.like.hrm.hrmtypecode.domain.HrmRelationCodeQueryRepository;
 import com.like.hrm.hrmtypecode.domain.QHrmRelationCode;
 import com.like.hrm.hrmtypecode.domain.QHrmType;
 import com.like.hrm.hrmtypecode.domain.QHrmTypeDetailCode;
+import com.like.system.hierarchycode.domain.QCode;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository
