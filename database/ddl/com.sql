@@ -1,59 +1,3 @@
-create table if not exists COM.COMCODE (
-	SYS_DT				DATETIME		NULL		COMMENT '최초등록일시',
-	SYS_USER 			VARCHAR(50)		NULL		COMMENT '최초등록유저',
-	UPD_DT				DATETIME		NULL		COMMENT '최종수정일시',
-	UPD_USER			VARCHAR(50)		NULL		COMMENT '최종수정유저',
-    CODE_ID				VARCHAR(255) 	NOT NULL 	COMMENT '코드ID',    
-	SYSTEM_TYPE_CODE	VARCHAR(3)		NOT NULL 	COMMENT '시스템구분코드',    
-    P_CODE_ID			VARCHAR(242)	NULL 		COMMENT '상위코드ID',
-   	CODE				VARCHAR(10) 	NOT NULL 	COMMENT '공통코드',
-	CODE_NAME			VARCHAR(255) 	NOT NULL 	COMMENT '코드명칭',
-	CODE_NAME_ABBR		VARCHAR(255) 	NULL 		COMMENT '코드명칭약어',	
-	FROM_DT				DATETIME		NOT NULL	COMMENT '시작일시',
-	TO_DT				DATETIME		NOT NULL	COMMENT '종료일시'	DEFAULT '9999-12-31',
-	HIERARCHY_LEVEL		INT				NOT NULL	COMMENT '계층단계(1부터 시작)' DEFAULT 1,
-	PRT_SEQ				INT				NULL		COMMENT '출력순서',	
-	FIXED_LENGTH_YN		BOOLEAN			NOT NULL 	COMMENT '고정길이여부',
-   	CODE_LENGTH			INT				NULL		COMMENT '코드길이' DEFAULT 0,
-	CMT					VARCHAR(2000) 	NULL 		COMMENT '비고',
-	constraint pk_comcode primary key(CODE_ID)	
-) COMMENT = '공통코드관리';
-
-create table if not exists COM.COMDEPT (
-	SYS_DT				DATETIME		NULL		COMMENT '최초등록일시',
-	SYS_USER 			VARCHAR(50)		NULL		COMMENT '최초등록유저',
-	UPD_DT				DATETIME		NULL		COMMENT '최종수정일시',
-	UPD_USER			VARCHAR(50)		NULL		COMMENT '최종수정유저',
-    DEPT_CD				VARCHAR(10) 	NOT NULL 	COMMENT '부서코드',
-    P_DEPT_CD			VARCHAR(255)	NULL 		COMMENT '상위부서코드',
-    DEPT_NM_KOR			VARCHAR(255) 	NOT NULL 	COMMENT '부서명(한글)',
-    DEPT_ABBR_KOR		VARCHAR(255) 	NULL 		COMMENT '부서약어(한글)',
-    DEPT_NM_ENG			VARCHAR(255) 	NULL 		COMMENT '부서명(영어)',
-    DEPT_ABBR_ENG		VARCHAR(255) 	NULL 		COMMENT '부서약어(영어)',
-	FROM_DT				DATE			NULL		COMMENT '시작일',
-	TO_DT				DATE			NULL		COMMENT '종료일',	
-	PRT_SEQ				INT				NULL		COMMENT '출력순서',		
-	CMT					VARCHAR(2000) 	NOT NULL 	COMMENT '비고',
-	constraint pk_comdept primary key(DEPT_CD)	
-) COMMENT = '통합부서관리';
-
-create table if not exists COM.COMFILEINFO (
-	SYS_DT				DATETIME		NULL		COMMENT '최초등록일시',
-	SYS_USER 			VARCHAR(50)		NULL		COMMENT '최초등록유저',
-	UPD_DT				DATETIME		NULL		COMMENT '최종수정일시',
-	UPD_USER			VARCHAR(50)		NULL		COMMENT '최종수정유저',
-    PK_FILE				VARCHAR(40) 	NOT NULL 	COMMENT '키',
-    PGM_ID				VARCHAR(10)		NOT NULL 	COMMENT '유저아이디',
-    USER_ID				VARCHAR(20)		NULL		COMMENT '발령코드',
-    CONTENT_TYPE		VARCHAR(50)		NULL 		COMMENT 'CONTENT-TYPE',
-    UUID				VARCHAR(1000)	NOT NULL 	COMMENT 'UUID_서버에저장된파일명',
-    FILE_PATH			VARCHAR(1000)	NULL 		COMMENT '파일경로',
-    FILE_NM				VARCHAR(1000)	NULL 		COMMENT '파일명',
-    FILE_SIZE			INT				NULL 		COMMENT '파일사이즈',
-    DOWNLOAD_CNT		INT				NULL 		COMMENT '다운로드횟수',
-	constraint pk_comfileinfo primary key(PK_FILE)
-) COMMENT = '공통파일관리';
-
 create table if not exists COM.COMUSER (
 	SYS_DT				DATETIME		NULL		COMMENT '최초등록일시',
 	SYS_USER 			VARCHAR(50)		NULL		COMMENT '최초등록유저',
@@ -225,3 +169,58 @@ create table COM.BIZTYPEDETAILCODE (
 	constraint fk_biztypedetailcode foreign key(TYPE_CODE) references BIZTYPECODE(TYPE_CODE)
 ) COMMENT = '업무상세코드정보';
 
+create table if not exists COM.COMCODE (
+	SYS_DT				DATETIME		NULL		COMMENT '최초등록일시',
+	SYS_USER 			VARCHAR(50)		NULL		COMMENT '최초등록유저',
+	UPD_DT				DATETIME		NULL		COMMENT '최종수정일시',
+	UPD_USER			VARCHAR(50)		NULL		COMMENT '최종수정유저',
+    CODE_ID				VARCHAR(255) 	NOT NULL 	COMMENT '코드ID',    
+	SYSTEM_TYPE_CODE	VARCHAR(3)		NOT NULL 	COMMENT '시스템구분코드',    
+    P_CODE_ID			VARCHAR(242)	NULL 		COMMENT '상위코드ID',
+   	CODE				VARCHAR(10) 	NOT NULL 	COMMENT '공통코드',
+	CODE_NAME			VARCHAR(255) 	NOT NULL 	COMMENT '코드명칭',
+	CODE_NAME_ABBR		VARCHAR(255) 	NULL 		COMMENT '코드명칭약어',	
+	FROM_DT				DATETIME		NOT NULL	COMMENT '시작일시',
+	TO_DT				DATETIME		NOT NULL	COMMENT '종료일시'	DEFAULT '9999-12-31',
+	HIERARCHY_LEVEL		INT				NOT NULL	COMMENT '계층단계(1부터 시작)' DEFAULT 1,
+	PRT_SEQ				INT				NULL		COMMENT '출력순서',	
+	FIXED_LENGTH_YN		BOOLEAN			NOT NULL 	COMMENT '고정길이여부',
+   	CODE_LENGTH			INT				NULL		COMMENT '코드길이' DEFAULT 0,
+	CMT					VARCHAR(2000) 	NULL 		COMMENT '비고',
+	constraint pk_comcode primary key(CODE_ID)	
+) COMMENT = '공통코드관리';
+
+create table if not exists COM.COMDEPT (
+	SYS_DT				DATETIME		NULL		COMMENT '최초등록일시',
+	SYS_USER 			VARCHAR(50)		NULL		COMMENT '최초등록유저',
+	UPD_DT				DATETIME		NULL		COMMENT '최종수정일시',
+	UPD_USER			VARCHAR(50)		NULL		COMMENT '최종수정유저',
+    DEPT_CD				VARCHAR(10) 	NOT NULL 	COMMENT '부서코드',
+    P_DEPT_CD			VARCHAR(255)	NULL 		COMMENT '상위부서코드',
+    DEPT_NM_KOR			VARCHAR(255) 	NOT NULL 	COMMENT '부서명(한글)',
+    DEPT_ABBR_KOR		VARCHAR(255) 	NULL 		COMMENT '부서약어(한글)',
+    DEPT_NM_ENG			VARCHAR(255) 	NULL 		COMMENT '부서명(영어)',
+    DEPT_ABBR_ENG		VARCHAR(255) 	NULL 		COMMENT '부서약어(영어)',
+	FROM_DT				DATE			NULL		COMMENT '시작일',
+	TO_DT				DATE			NULL		COMMENT '종료일',	
+	PRT_SEQ				INT				NULL		COMMENT '출력순서',		
+	CMT					VARCHAR(2000) 	NOT NULL 	COMMENT '비고',
+	constraint pk_comdept primary key(DEPT_CD)	
+) COMMENT = '통합부서관리';
+
+create table if not exists COM.COMFILEINFO (
+	SYS_DT				DATETIME		NULL		COMMENT '최초등록일시',
+	SYS_USER 			VARCHAR(50)		NULL		COMMENT '최초등록유저',
+	UPD_DT				DATETIME		NULL		COMMENT '최종수정일시',
+	UPD_USER			VARCHAR(50)		NULL		COMMENT '최종수정유저',
+    PK_FILE				VARCHAR(40) 	NOT NULL 	COMMENT '키',
+    PGM_ID				VARCHAR(10)		NOT NULL 	COMMENT '유저아이디',
+    USER_ID				VARCHAR(20)		NULL		COMMENT '발령코드',
+    CONTENT_TYPE		VARCHAR(50)		NULL 		COMMENT 'CONTENT-TYPE',
+    UUID				VARCHAR(1000)	NOT NULL 	COMMENT 'UUID_서버에저장된파일명',
+    FILE_PATH			VARCHAR(1000)	NULL 		COMMENT '파일경로',
+    FILE_NM				VARCHAR(1000)	NULL 		COMMENT '파일명',
+    FILE_SIZE			INT				NULL 		COMMENT '파일사이즈',
+    DOWNLOAD_CNT		INT				NULL 		COMMENT '다운로드횟수',
+	constraint pk_comfileinfo primary key(PK_FILE)
+) COMMENT = '공통파일관리';
