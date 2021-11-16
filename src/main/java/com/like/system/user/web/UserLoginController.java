@@ -37,19 +37,6 @@ public class UserLoginController {
 		this.authenticationManager = authenticationManager;
 		this.userService = userService;
 	}
-
-	private void authentication(String username, String password, List<GrantedAuthority> authorities, HttpSession session) {
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password, authorities);
-		
-		Authentication authentication = authenticationManager.authenticate(token); 
-							
-		SecurityContextHolder.getContext().setAuthentication(authentication); 						
-		
-		session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-		
-		// log.info(SecurityContextHolder.getContext().getAuthentication().getName() + " 로그인 되었습니다.");
-		// log.info(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-	}
 		 
 	@PostMapping(value={"/common/user/login"})
 	public AuthenticationToken login(@RequestBody @Valid LoginRequestDTO dto, HttpSession session, BindingResult result, HttpServletRequest request) {
@@ -93,6 +80,19 @@ public class UserLoginController {
         //logger.info(">>>> Result : IP Address : "+ip);
  
         return ip; 
-    }          
+    }
+    
+    private void authentication(String username, String password, List<GrantedAuthority> authorities, HttpSession session) {
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password, authorities);
+		
+		Authentication authentication = authenticationManager.authenticate(token); 
+							
+		SecurityContextHolder.getContext().setAuthentication(authentication); 						
+		
+		session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+		
+		// log.info(SecurityContextHolder.getContext().getAuthentication().getName() + " 로그인 되었습니다.");
+		// log.info(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+	}
     
 }

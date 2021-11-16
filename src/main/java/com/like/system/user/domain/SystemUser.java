@@ -29,6 +29,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @ToString(callSuper=true, includeFieldNames=true, exclude = {"menuGroupList"})
@@ -66,12 +67,14 @@ public class SystemUser extends AuditEntity implements UserDetails {
 	@JoinColumn(name = "dept_cd", nullable = true)
 	Dept dept;
 		
+	@Setter
 	@ManyToMany(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="comuserauthority",
     		joinColumns= @JoinColumn(name="user_id"),
     		inverseJoinColumns=@JoinColumn(name="authority_name"))	
 	List<Authority> authorities = new ArrayList<>();
 			
+	@Setter
 	@ManyToMany(fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="comusermenugroup",
     		joinColumns= @JoinColumn(name="user_id"),
@@ -80,14 +83,14 @@ public class SystemUser extends AuditEntity implements UserDetails {
 		
 	@Builder
 	public SystemUser(String userId
-			   ,String name
-			   ,UserPassword password
-			   ,Dept dept
-			   ,String mobileNum
-			   ,String email
-			   ,AccountSpec accountSpec
-			   ,List<Authority> authorities
-			   ,List<MenuGroup> menuGroupList) {		
+					 ,String name
+					 ,UserPassword password
+					 ,Dept dept
+					 ,String mobileNum
+					 ,String email
+					 ,AccountSpec accountSpec
+					 ,List<Authority> authorities
+					 ,List<MenuGroup> menuGroupList) {		
 		this.userId = userId;
 		this.name = name;
 		this.password = password;
@@ -119,6 +122,10 @@ public class SystemUser extends AuditEntity implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
+	
+	public List<Authority> getAuthoritiesList() {
+		return this.authorities;
+	}
 			
 	@Override	
 	public String getUsername() {		
@@ -148,43 +155,19 @@ public class SystemUser extends AuditEntity implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return accountSpec.getIsEnabled();
-	}
-			
-	public String getUserId() {
-		return this.userId;
-	}
-	
-	public String getName() {
-		return name;
-	}
+	}			
 	
 	public boolean isVaild(String password) {
 		return this.password.matchPassword(password);
 	}		
-	
-	public List<Authority> getAuthorityList() {
-		return authorities;
-	}
-	
-	public void setAuthorities(List<Authority> authorities) {
-		this.authorities = authorities;		
-	}
-	
+		
 	public void addAuthoritiy(Authority authority) {
 		if (this.authorities == null) {
 			this.authorities = new ArrayList<>();
 		}
 		
 		this.authorities.add(authority);
-	}	
-			
-	public List<MenuGroup> getMenuGroupList() {
-		return menuGroupList;
-	}
-					
-	public void setMenuGroupList(List<MenuGroup> menuGroupList) {
-		this.menuGroupList = menuGroupList;
-	}
+	}								
 	
 	public void changePassword(String password) {
 		this.password = new UserPassword(password);
@@ -195,15 +178,15 @@ public class SystemUser extends AuditEntity implements UserDetails {
 	 * 초기화 비밀번호 : 12345678
 	 */
 	public void initPassword() {
-		this.password = new UserPassword("12345678");	
+		if (this.password == null) {
+			this.password = new UserPassword();
+		} else {
+			this.password.init();
+		}							
 	}
 	
-	public void ChangeImage(String imageFileInfo) {
+	public void changeImage(String imageFileInfo) {
 		this.image = imageFileInfo;
-	}
-	
-	public String getImage() {
-		return this.image;
-	}
+	}	
 	
 }

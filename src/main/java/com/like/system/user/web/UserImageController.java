@@ -63,7 +63,7 @@ public class UserImageController {
 		
 		SystemUser user = userService.getUser(userId);
 				
-		user.ChangeImage(uuid);
+		user.changeImage(uuid);
 		
 		userService.saveUser(user);
 		

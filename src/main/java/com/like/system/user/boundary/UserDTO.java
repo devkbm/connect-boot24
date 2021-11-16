@@ -51,7 +51,7 @@ public class UserDTO {
 								.accountNonExpired(entity.isAccountNonExpired())
 								.accountNonLocked(entity.isAccountNonLocked())
 								.credentialsNonExpired(entity.isCredentialsNonExpired())
-								.authorityList(entity.getAuthorityList()
+								.authorityList(entity.getAuthoritiesList()
 													.stream()
 													.map(auth -> auth.getAuthority())
 													.collect(Collectors.toList()))

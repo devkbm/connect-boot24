@@ -81,7 +81,7 @@ public class UserService {
 			new IllegalArgumentException("유저 아이디가 존재하지 않습니다.");
 		}
 		
-		if ( user.getAuthorityList().isEmpty() ) {
+		if ( user.getAuthoritiesList().isEmpty() ) {
 			initAuthority(user);
 		}			
 		
@@ -131,7 +131,7 @@ public class UserService {
 	 * @return 사용자 권한 리스트
 	 */
 	public List<Authority> getUserAuthorities(String userId) {        									
-        return repository.findById(userId).orElse(null).getAuthorityList();
+        return repository.findById(userId).orElse(null).getAuthoritiesList();
 	}
 					
 	

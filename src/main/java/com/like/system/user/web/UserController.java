@@ -30,7 +30,7 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@GetMapping(value={"/api/common/user/myinfo"})
+	@GetMapping("/api/common/user/myinfo")
 	public ResponseEntity<?> getUserInfo() throws FileNotFoundException, IOException {
 														
 		SystemUser user = userService.getUser(SessionUtil.getUserId());				
@@ -43,7 +43,7 @@ public class UserController {
 							,HttpStatus.OK);
 	}
 	
-	@GetMapping(value={"/api/common/user/{id}"})
+	@GetMapping("/api/common/user/{id}")
 	public ResponseEntity<?> getUser(@PathVariable(value="id") String userId) throws FileNotFoundException, IOException {
 						
 		SystemUser user = userService.getUser(userId);				
@@ -58,7 +58,7 @@ public class UserController {
 		
 	
 	
-	@PostMapping(value={"/api/common/user"})	
+	@PostMapping("/api/common/user")	
 	public ResponseEntity<?> saveUser(@RequestBody UserDTO.FormSystemUser dto, BindingResult result) {
 		
 		if ( result.hasErrors()) {
@@ -73,7 +73,7 @@ public class UserController {
 							,HttpStatus.OK);
 	}	
 	
-	@DeleteMapping(value={"/api/common/user/{id}"})
+	@DeleteMapping("/api/common/user/{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable(value="id") String userId) {
 										
 		userService.deleteUser(userId);															
@@ -84,7 +84,7 @@ public class UserController {
 							,HttpStatus.OK);
 	}
 		
-	@PostMapping(value={"/api/common/user/{id}/changePassword"})
+	@PostMapping("/api/common/user/{id}/changePassword")
 	public ResponseEntity<?> changePassword(@RequestBody PasswordRequestDTO dto) {				
 						
 		userService.changePassword(dto.getUserId(), dto.getBeforePassword(), dto.getAfterPassword());													
@@ -95,7 +95,7 @@ public class UserController {
 							,HttpStatus.OK);
 	}
 			
-	@PostMapping(value={"/api/common/user/{id}/initPassword"})
+	@PostMapping("/api/common/user/{id}/initPassword")
 	public ResponseEntity<?> initializePassword(@PathVariable(value="id") String userId) {			
 				
 		userService.initPassword(userId);														
