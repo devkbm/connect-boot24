@@ -12,9 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,8 +33,8 @@ public class UserImageController {
 		this.fileService = fileService;
 		this.userService = userService;
 	}
-
-	@RequestMapping(value={"/api/common/user/image"}, method=RequestMethod.GET) 
+	
+	@GetMapping("/api/common/user/image")
 	public HttpServletResponse downloadUserImage(HttpServletResponse response,
 											     @RequestParam("userId") String userId) throws Exception {
 				
@@ -50,13 +49,13 @@ public class UserImageController {
 		return response;
 	}
 	
-	@PostMapping(value={"/api/common/user/image"})
+	@PostMapping("/api/common/user/image")
 	public ResponseEntity<?> changeUserImage(@RequestParam("file") MultipartFile file,
 											 @RequestParam("userId") String userId) throws Exception {				
 		
 		Map<String, Object> response = new HashMap<>();
 		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);				
+		responseHeaders.setContentType(MediaType.APPLICATION_JSON);				
 		
 		String uuid = UUID.randomUUID().toString();
 		String path = fileService.fileTransefer(file, uuid, FileUploadLocation.STATIC_PATH);

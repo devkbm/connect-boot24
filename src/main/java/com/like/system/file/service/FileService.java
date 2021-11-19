@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
@@ -16,18 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.like.system.file.domain.FileInfo;
+import com.like.system.file.domain.FileInfoRepository;
 import com.like.system.file.infra.file.LocalFileRepository;
 import com.like.system.file.infra.file.LocalFileRepository.FileUploadLocation;
-import com.like.system.file.infra.jparepository.FileInfoJpaRepository;
 
 @Service
 public class FileService {
+			
+	private FileInfoRepository fileInfoRepository;	
 		
-	@Resource(name="fileInfoJpaRepository")
-	private FileInfoJpaRepository fileInfoRepository;	
-	
-	@Resource(name="localFileRepository")
 	private LocalFileRepository localFileRepository;	
+	
+	public FileService(FileInfoRepository fileInfoRepository
+			          ,LocalFileRepository localFileRepository) {
+		this.fileInfoRepository = fileInfoRepository;
+		this.localFileRepository = localFileRepository;
+	}
 	
 	@Transactional
 	public FileInfo uploadFile(MultipartFile sourceFile, String userId, String pgmId) throws FileNotFoundException, IOException {
@@ -91,15 +94,15 @@ public class FileService {
 		
 		localFileRepository.deleteFile(fileInfo.getPath(), fileInfo.getUuid());
 		
-		fileInfoRepository.delete(fileInfo.getPkFile());											
+		fileInfoRepository.delete(fileInfo);											
 	}
 	
 	public FileInfo getFileInfo(String id) {
-		return fileInfoRepository.getFileInfo(id);
+		return fileInfoRepository.findById(id).orElse(null);
 	}
 	
 	public List<FileInfo> getFileInfoList(List<String> id) {		
-		return fileInfoRepository.getFileInfoList(id);
+		return fileInfoRepository.findAllById(id);
 	}
 	
 	public String fileTransefer(MultipartFile sourceFile, String fileName, FileUploadLocation location) throws FileNotFoundException, IOException {
@@ -107,7 +110,7 @@ public class FileService {
 	}
 	
 	public String downloadBase64(String id) throws FileNotFoundException, IOException {
-		FileInfo info = fileInfoRepository.getFileInfo(id);
+		FileInfo info = fileInfoRepository.findById(id).orElse(null);
 					
 		return localFileRepository.fileToBase64String(info.getPath(), info.getUuid());		
 	}

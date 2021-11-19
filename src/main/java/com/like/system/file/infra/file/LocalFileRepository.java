@@ -49,7 +49,7 @@ public class LocalFileRepository {
 	
 	@Value("${fileDownLoadUrl}")
 	private void setFileDownLoadUrl(String url) {
-		this.fileDownLoadUrl = url;
+		LocalFileRepository.fileDownLoadUrl = url;
 	}	
 	
 	public File getStaticPathFile(String uuid) {

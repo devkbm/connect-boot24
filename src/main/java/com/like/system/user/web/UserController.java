@@ -84,7 +84,7 @@ public class UserController {
 							,HttpStatus.OK);
 	}
 		
-	@PostMapping("/api/common/user/{id}/changePassword")
+	@PostMapping("/api/common/user/{id}/changepassword")
 	public ResponseEntity<?> changePassword(@RequestBody PasswordRequestDTO dto) {				
 						
 		userService.changePassword(dto.getUserId(), dto.getBeforePassword(), dto.getAfterPassword());													
@@ -95,7 +95,7 @@ public class UserController {
 							,HttpStatus.OK);
 	}
 			
-	@PostMapping("/api/common/user/{id}/initPassword")
+	@PostMapping("/api/common/user/{id}/initpassword")
 	public ResponseEntity<?> initializePassword(@PathVariable(value="id") String userId) {			
 				
 		userService.initPassword(userId);														

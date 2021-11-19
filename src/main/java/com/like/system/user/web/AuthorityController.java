@@ -32,7 +32,7 @@ public class AuthorityController {
 		
 		return WebControllerUtil
 				.getResponse(authority							
-							,String.format("%d 건 조회되었습니다.", 1)
+							,String.format("%d 건 조회되었습니다.", authority == null ? 0 : 1)
 							,HttpStatus.OK);
 	}
 		

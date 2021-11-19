@@ -1,6 +1,6 @@
 package com.like.system.user.web;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +38,7 @@ public class UserLoginController {
 		this.userService = userService;
 	}
 		 
-	@PostMapping(value={"/common/user/login"})
+	@PostMapping("/common/user/login")
 	public AuthenticationToken login(@RequestBody @Valid LoginRequestDTO dto, HttpSession session, BindingResult result, HttpServletRequest request) {
 		
 		if ( result.hasErrors() ) {			
@@ -49,9 +49,8 @@ public class UserLoginController {
 		String password = dto.getPassword();
 		log.info(username);
 		SystemUser user = userService.getUser(username);
-		
-		List<GrantedAuthority> authorities = (List<GrantedAuthority>)user.getAuthorities();           						
-        authentication(username, password, authorities, session);         		 							       
+				           					
+        authentication(username, password, user.getAuthorities(), session);         		 							       
         
         //userService.saveLogInOutHistory(new LogInOutHistory(dto.getUsername(), "LOGIN", this.getClientIp(request), true));
         
@@ -82,8 +81,8 @@ public class UserLoginController {
         return ip; 
     }
     
-    private void authentication(String username, String password, List<GrantedAuthority> authorities, HttpSession session) {
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password, authorities);
+    private void authentication(String username, String password, Collection<? extends GrantedAuthority> collection, HttpSession session) {
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password, collection);
 		
 		Authentication authentication = authenticationManager.authenticate(token); 
 							

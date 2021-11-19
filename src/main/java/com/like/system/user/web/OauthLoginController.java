@@ -1,13 +1,11 @@
 package com.like.system.user.web;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -84,8 +82,8 @@ public class OauthLoginController {
     	log.info(client.getRefreshToken() != null ? client.getRefreshToken().getTokenValue() : "null");
     	
     	SystemUser user = userService.getUser("1");
-		
-		List<GrantedAuthority> authorities = (List<GrantedAuthority>)user.getAuthorities();           						
+		    	
+		//List<GrantedAuthority> authorities = (List<GrantedAuthority>)user.getAuthorities();           						
         //authentication("1", "1234", authorities, session);         		 							       
         
         //userService.saveLogInOutHistory(new LogInOutHistory("1", "LOGIN", this.getClientIp(request), true));
