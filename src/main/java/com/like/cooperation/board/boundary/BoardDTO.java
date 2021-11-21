@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.like.cooperation.board.domain.Board;
 import com.like.cooperation.board.domain.BoardType;
 import com.like.cooperation.board.domain.QBoard;
-import com.like.cooperation.board.domain.vo.Period;
+import com.like.system.core.vo.LocalDatePeriod;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.annotations.QueryProjection;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -123,7 +123,7 @@ public class BoardDTO {
 						.boardName(this.boardName)
 						.boardType(BoardType.valueOf(this.boardType))
 						.boardDescription(this.boardDescription)
-						.period(new Period(this.fromDate, this.toDate))
+						.period(new LocalDatePeriod(this.fromDate, this.toDate))
 						.useYn(this.useYn)
 						.sequence(this.sequence)
 						.build();
@@ -134,7 +134,7 @@ public class BoardDTO {
 					          ,BoardType.valueOf(this.boardType)
 					          ,this.boardName
 					          ,this.boardDescription
-					          ,new Period(this.fromDate, this.toDate)
+					          ,new LocalDatePeriod(this.fromDate, this.toDate)
 					          ,this.useYn
 					          ,this.sequence);
 		}
@@ -145,7 +145,7 @@ public class BoardDTO {
 				return null;
 			
 			Optional<Board> parent = Optional.ofNullable(entity.getParent());
-			Optional<Period> period = Optional.ofNullable(entity.getPeriod());
+			Optional<LocalDatePeriod> period = Optional.ofNullable(entity.getPeriod());
 			
 			return FormBoard.builder()
 						    .createdDt(entity.getCreatedDt())
@@ -157,8 +157,8 @@ public class BoardDTO {
 						    .boardType(entity.getBoardType().toString())
 						    .boardName(entity.getBoardName())
 						    .boardDescription(entity.getBoardDescription())						   
-						    .fromDate(period.map(Period::getFromDate).orElse(null))
-						    .toDate(period.map(Period::getToDate).orElse(null))
+						    .fromDate(period.map(LocalDatePeriod::getFrom).orElse(null))
+						    .toDate(period.map(LocalDatePeriod::getTo).orElse(null))
 						    .useYn(entity.getUseYn())
 						    .articleCount(entity.getArticleCount())
 						    .sequence(entity.getSequence())

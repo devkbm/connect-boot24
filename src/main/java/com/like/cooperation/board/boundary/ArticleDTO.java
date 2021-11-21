@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.like.cooperation.board.domain.Board;
 import com.like.cooperation.board.domain.Article;
 import com.like.cooperation.board.domain.QArticle;
-import com.like.cooperation.board.domain.vo.Period;
+import com.like.system.core.vo.LocalDatePeriod;
 import com.like.system.file.boundary.FileResponseDTO;
 import com.like.system.file.domain.FileInfo;
 import com.like.system.file.infra.file.LocalFileRepository;
@@ -130,20 +130,20 @@ public class ArticleDTO {
 						  .ppkArticle(this.ppkArticle)
 						  .title(this.title)
 						  .contents(this.contents)
-						  .period(new Period(this.fromDate, this.toDate))						  
+						  .period(new LocalDatePeriod(this.fromDate, this.toDate))						  
 						  .pwd(this.pwd)
 						  .build();
 		}
 	    
 	    public void modifyArticle(Article entity) {
 	    	if (this.fromDate == null || this.toDate == null) {
-				this.fromDate = entity.getPeriod().getFromDate();
-				this.toDate = entity.getPeriod().getToDate();
+				this.fromDate = entity.getPeriod().getFrom();
+				this.toDate = entity.getPeriod().getTo();
 			}	    	
 	    	
 	    	entity.modifyEntity(title
 	    					   ,contents
-	    					   ,new Period(fromDate, toDate)
+	    					   ,new LocalDatePeriod(fromDate, toDate)
 	    					   ,seq);								
 		}
 	    
@@ -210,20 +210,20 @@ public class ArticleDTO {
 						  .ppkArticle(this.ppkArticle)
 						  .title(this.title)
 						  .contents(this.contents)
-						  .period(new Period(this.fromDate, this.toDate))	
+						  .period(new LocalDatePeriod(this.fromDate, this.toDate))	
 						  .pwd(this.pwd)
 						  .build();
 		}
 	    
 	    public void modifyArticle(Article entity) {
 	    	if (this.fromDate == null || this.toDate == null) {
-				this.fromDate = entity.getPeriod().getFromDate();
-				this.toDate = entity.getPeriod().getToDate();
+				this.fromDate = entity.getPeriod().getFrom();
+				this.toDate = entity.getPeriod().getTo();
 			}	   
 	    	
 	    	entity.modifyEntity(title
 	    					   ,contents
-	    					   ,new Period(fromDate, toDate)
+	    					   ,new LocalDatePeriod(fromDate, toDate)
 	    					   ,seq);								
 		}
 	}
@@ -282,7 +282,7 @@ public class ArticleDTO {
 			List<FileInfo> fileInfoList = entity.getAttachedFileInfoList();
 			List<FileResponseDTO> responseList = convertFileResponseDTO(fileInfoList);
 			
-			Optional<Period> period = Optional.ofNullable(entity.getPeriod());
+			Optional<LocalDatePeriod> period = Optional.ofNullable(entity.getPeriod());
 			
 			return ArticleDTO.ResponseArticle
 							 .builder()
@@ -292,8 +292,8 @@ public class ArticleDTO {
 							 .modifiedBy(entity.getModifiedBy())
 							 .pkArticle(entity.getPkArticle())
 							 .ppkArticle(entity.getPpkArticle())
-							 .fromDate(period.map(Period::getFromDate).orElse(null))
-							 .toDate(period.map(Period::getToDate).orElse(null))
+							 .fromDate(period.map(LocalDatePeriod::getFrom).orElse(null))
+							 .toDate(period.map(LocalDatePeriod::getTo).orElse(null))
 							 .userName(entity.getUserName())
 							 .fkBoard(entity.getBoard().getPkBoard())				
 							 .title(entity.getTitle())

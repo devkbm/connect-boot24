@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +46,7 @@ public class Team extends AuditEntity implements Serializable {
 	private User manager;*/ 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="team", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="team", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	List<TeamMember> members = new ArrayList<TeamMember>();			
 	
 	public Team(String teamName) {

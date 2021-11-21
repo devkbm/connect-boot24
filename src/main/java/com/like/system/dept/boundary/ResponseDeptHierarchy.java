@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.like.system.core.vo.DatePeriod;
+import com.like.system.core.vo.LocalDatePeriod;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,7 +62,7 @@ public class ResponseDeptHierarchy {
 
 	public ResponseDeptHierarchy(LocalDateTime createdDt, String createdBy, LocalDateTime modifiedDt, String modifiedBy,
 			String parentDeptCode, String deptCode, String deptNameKorean, String deptAbbreviationKorean,
-			String deptNameEnglish, String deptAbbreviationEnglish, DatePeriod period,
+			String deptNameEnglish, String deptAbbreviationEnglish, LocalDatePeriod period,
 			Integer seq, String comment) {		
 		this.createdDt = createdDt;
 		this.createdBy = createdBy;

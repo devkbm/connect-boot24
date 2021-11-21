@@ -19,7 +19,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.like.hrm.staff.domain.model.Staff;
 import com.like.system.core.domain.AuditEntity;
-import com.like.system.core.vo.DatePeriod;
+import com.like.system.core.vo.LocalDatePeriod;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -66,7 +66,7 @@ public class SchoolCareer extends AuditEntity implements Serializable {
 	
 	
 	@Embedded
-	DatePeriod period;
+	LocalDatePeriod period;
 	
 	/**
 	 * 전공학과명

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +19,6 @@ import com.like.cooperation.team.domain.TeamMember;
 import com.like.cooperation.team.service.TeamService;
 import com.like.system.core.web.exception.ControllerException;
 import com.like.system.core.web.util.WebControllerUtil;
-import com.like.system.user.boundary.UserDTO;
 import com.like.system.user.domain.SystemUser;
 import com.like.system.user.domain.UserRepository;
 
@@ -28,7 +26,7 @@ import com.like.system.user.domain.UserRepository;
 @RestController
 public class TeamController {
 		
-	private TeamService teamService;		
+	private TeamService teamService;			
 	private UserRepository userRepository;
 	
 	public TeamController(TeamService teamService
@@ -37,15 +35,7 @@ public class TeamController {
 		this.userRepository = userRepository;
 	}
 		
-	@GetMapping("/grw/team")
-	public ResponseEntity<?> getTeamList(@ModelAttribute TeamDTO.SearchCondition searchCondition) {
-						
-		List<Team> teamList = teamService.getTeamList(searchCondition);				
-		
-		return WebControllerUtil.getResponse(teamList,				
-				teamList.size() + "건 조회 되었습니다.",
-				HttpStatus.OK);												
-	}
+	
 	
 	@GetMapping("/grw/team/{id}")
 	public ResponseEntity<?> getTeam(@PathVariable(value="id") Long teamId) {
@@ -86,16 +76,6 @@ public class TeamController {
 				HttpStatus.OK);
 	}
 	
-	@GetMapping("/grw/allmember")
-	public ResponseEntity<?> getAllMemberList(UserDTO.SearchUser condition) {
-				
-		List<SystemUser> userList = teamService.getAllMember(condition);						 				
-		
-		return WebControllerUtil.getResponse(userList,				 			
-				"조회 되었습니다.",
-				HttpStatus.OK);
-	}
-	
 	@GetMapping("/grw/team/{id}/member")
 	public ResponseEntity<?> getTeamMemberList(@PathVariable(value="id") Long teamId) {
 						
@@ -112,9 +92,9 @@ public class TeamController {
 			@PathVariable(value="teamId") Long teamId,
 			@PathVariable(value="memberId") String memberId) {				
 
-		TeamMember joinTeam = teamService.joinTeam(teamId, memberId);			
+		//TeamMember joinTeam = teamService.joinTeam(teamId, memberId);			
 										 					
-		return WebControllerUtil.getResponse(joinTeam,				
+		return WebControllerUtil.getResponse(null,				
 				String.format("팀에 등록 되었습니다."), 
 				HttpStatus.OK);
 	}

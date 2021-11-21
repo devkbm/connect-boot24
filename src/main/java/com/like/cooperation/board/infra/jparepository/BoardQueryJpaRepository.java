@@ -72,8 +72,8 @@ public class BoardQueryJpaRepository implements BoardQueryRepository {
 		JPAQuery<BoardDTO.BoardHierarchy> query = queryFactory
 				.select(Projections.constructor(BoardDTO.BoardHierarchy.class
 						, qBoard.pkBoard, qBoard.parent.pkBoard, qBoard.boardType
-						, qBoard.boardName, qBoard.boardDescription, qBoard.period.fromDate
-						, qBoard.period.toDate, qBoard.articleCount, qBoard.sequence))
+						, qBoard.boardName, qBoard.boardDescription, qBoard.period.from
+						, qBoard.period.to, qBoard.articleCount, qBoard.sequence))
 				.from(qBoard)
 				.where(qBoard.isRootNode());
 													
@@ -86,8 +86,8 @@ public class BoardQueryJpaRepository implements BoardQueryRepository {
 		JPAQuery<BoardDTO.BoardHierarchy> query = queryFactory
 				.select(Projections.constructor(BoardDTO.BoardHierarchy.class
 						, qBoard.pkBoard, qBoard.parent.pkBoard, qBoard.boardType
-						, qBoard.boardName, qBoard.boardDescription, qBoard.period.fromDate
-						, qBoard.period.toDate, qBoard.articleCount, qBoard.sequence))
+						, qBoard.boardName, qBoard.boardDescription, qBoard.period.from
+						, qBoard.period.to, qBoard.articleCount, qBoard.sequence))
 				.from(qBoard)
 				.where(qBoard.parent.pkBoard.eq(parentPkBoard));								
 		

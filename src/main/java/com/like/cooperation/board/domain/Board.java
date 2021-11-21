@@ -7,8 +7,8 @@ import javax.persistence.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.*;
-import com.like.cooperation.board.domain.vo.Period;
 import com.like.system.core.domain.AuditEntity;
+import com.like.system.core.vo.LocalDatePeriod;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -72,7 +72,7 @@ public class Board extends AuditEntity {
 	String boardDescription;
     
 	@Embedded
-    Period period;
+    LocalDatePeriod period;
 	
     /**
      * 사용여부
@@ -106,7 +106,7 @@ public class Board extends AuditEntity {
 						    ,BoardType boardType
 						    ,String boardName
 						    ,String boardDescription
-						    ,Period period
+						    ,LocalDatePeriod period
 						    ,Boolean useYn
 						    ,long sequence) {
 		this.parent = parent;

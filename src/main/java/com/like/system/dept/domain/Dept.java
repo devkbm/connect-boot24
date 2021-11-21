@@ -16,7 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.Assert;
 
 import com.like.system.core.domain.AuditEntity;
-import com.like.system.core.vo.DatePeriod;
+import com.like.system.core.vo.LocalDatePeriod;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -54,7 +54,7 @@ public class Dept extends AuditEntity implements Serializable {
 	String deptAbbreviationEnglish;
 	
 	@Embedded
-	DatePeriod period;
+	LocalDatePeriod period;
 	
 	@Builder.Default
 	@Column(name="prt_seq")
@@ -88,7 +88,7 @@ public class Dept extends AuditEntity implements Serializable {
 							,String deptAbbreviationKorean
 							,String deptNameEnglish
 							,String deptAbbreviationEnglish
-							,DatePeriod period
+							,LocalDatePeriod period
 							,int seq
 							,String comment
 							,Dept parentDept) {

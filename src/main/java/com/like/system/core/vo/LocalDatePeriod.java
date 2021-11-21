@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Embeddable
-public class DatePeriod implements Serializable {
+public class LocalDatePeriod implements Serializable {
 	
 	private static final long serialVersionUID = -5440169980662476619L;
 
@@ -23,7 +23,7 @@ public class DatePeriod implements Serializable {
 	@Column(name="TO_DT")
 	private LocalDate to;
 	
-	public DatePeriod(LocalDate from
+	public LocalDatePeriod(LocalDate from
 				 	 ,LocalDate to) {
 		this.from = from;
 		this.to = to;
@@ -41,8 +41,8 @@ public class DatePeriod implements Serializable {
 	}
 	
 	public static void main(String[] args) {
-		DatePeriod p1 = new DatePeriod(LocalDate.of(1991, 1, 1), LocalDate.of(1991, 1, 2));
-		DatePeriod p2 = new DatePeriod(LocalDate.of(1990, 1, 1), LocalDate.of(1991, 1, 2));
+		LocalDatePeriod p1 = new LocalDatePeriod(LocalDate.of(1991, 1, 1), LocalDate.of(1991, 1, 2));
+		LocalDatePeriod p2 = new LocalDatePeriod(LocalDate.of(1990, 1, 1), LocalDate.of(1991, 1, 2));
 		
 		System.out.println(p1.toString());
 		System.out.println(p2.toString());

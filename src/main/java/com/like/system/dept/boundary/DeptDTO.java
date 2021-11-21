@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
-import com.like.system.core.vo.DatePeriod;
+import com.like.system.core.vo.LocalDatePeriod;
 import com.like.system.dept.domain.Dept;
 import com.like.system.dept.domain.QDept;
 import com.querydsl.core.BooleanBuilder;
@@ -107,7 +107,7 @@ public class DeptDTO {
 					   .deptAbbreviationKorean(this.deptAbbreviationKorean)
 					   .deptNameEnglish(this.deptNameEnglish)
 					   .deptAbbreviationEnglish(this.deptAbbreviationEnglish)
-					   .period(new DatePeriod(this.fromDate, this.toDate))					   
+					   .period(new LocalDatePeriod(this.fromDate, this.toDate))					   
 					   .seq(this.seq)
 					   .comment(this.comment)
 					   .parentDept(parentDept)
@@ -119,7 +119,7 @@ public class DeptDTO {
 							 ,deptAbbreviationKorean
 							 ,deptNameEnglish
 							 ,deptAbbreviationEnglish
-							 ,new DatePeriod(this.fromDate, this.toDate)
+							 ,new LocalDatePeriod(this.fromDate, this.toDate)
 							 ,seq
 							 ,comment
 							 ,parentDept);
@@ -130,7 +130,7 @@ public class DeptDTO {
 	public static DeptDTO.FormDept convertDTO(Dept entity) {							
 												
 		Optional<Dept> parent = Optional.ofNullable(entity.getParentDept());
-		Optional<DatePeriod> period= Optional.ofNullable(entity.getPeriod());
+		Optional<LocalDatePeriod> period= Optional.ofNullable(entity.getPeriod());
 		
 		FormDept dto = FormDept.builder()
 								.createdDt(entity.getCreatedDt())
@@ -143,8 +143,8 @@ public class DeptDTO {
 								.deptAbbreviationKorean(entity.getDeptAbbreviationKorean())
 								.deptNameEnglish(entity.getDeptNameEnglish())
 								.deptAbbreviationEnglish(entity.getDeptAbbreviationEnglish())
-								.fromDate(period.map(DatePeriod::getFrom).orElse(null))
-								.toDate(period.map(DatePeriod::getTo).orElse(null))
+								.fromDate(period.map(LocalDatePeriod::getFrom).orElse(null))
+								.toDate(period.map(LocalDatePeriod::getTo).orElse(null))
 								.seq(entity.getSeq())
 								.comment(entity.getComment())
 								.build();		

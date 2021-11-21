@@ -16,9 +16,9 @@ import lombok.ToString;
 import org.hibernate.annotations.Formula;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.like.cooperation.board.domain.vo.Period;
 import com.like.system.core.domain.AuditEntity;
 import com.like.system.core.util.SessionUtil;
+import com.like.system.core.vo.LocalDatePeriod;
 import com.like.system.file.domain.FileInfo;
 
 /**
@@ -75,7 +75,7 @@ public class Article extends AuditEntity {
 	 * 게시기간
 	 */
 	@Embedded
-    Period period;
+    LocalDatePeriod period;
 	
     /**
      * 출력순서
@@ -133,7 +133,7 @@ public class Article extends AuditEntity {
 	 */
 	public void modifyEntity(String title
 							,String contents
-							,Period period
+							,LocalDatePeriod period
 							,Integer seq) {
 		this.title = title;
 		this.contents = contents;
