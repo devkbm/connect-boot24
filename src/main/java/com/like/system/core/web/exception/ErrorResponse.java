@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
 
-	private String message;
-    private int status;
-    private List<FieldError> errors;
-    private String code;
+	private int status;
+	private String code;
+	private String message;    
+    private List<FieldError> errors;    
     
     private ErrorResponse(final ErrorCode code, final List<FieldError> errors) {
         this.message = code.getMessage();
@@ -33,6 +33,13 @@ public class ErrorResponse {
         this.code = code.getCode();
         this.errors = new ArrayList<>();
     }
+    
+    private ErrorResponse(final ErrorCode code, String message) {
+        this.message = message;
+        this.status = code.getStatus();
+        this.code = code.getCode();
+        this.errors = new ArrayList<>();
+    }
 
 
     public static ErrorResponse of(final ErrorCode code, final BindingResult bindingResult) {
@@ -41,6 +48,10 @@ public class ErrorResponse {
 
     public static ErrorResponse of(final ErrorCode code) {
         return new ErrorResponse(code);
+    }
+    
+    public static ErrorResponse of(final ErrorCode code, String message) {
+        return new ErrorResponse(code, message);
     }
 
     public static ErrorResponse of(final ErrorCode code, final List<FieldError> errors) {

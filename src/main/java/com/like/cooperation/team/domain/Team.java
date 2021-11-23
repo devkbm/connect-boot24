@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.like.system.core.domain.AuditEntity;
+import com.like.system.core.web.exception.BusinessException;
+import com.like.system.core.web.exception.ErrorCode;
 import com.like.system.user.domain.SystemUser;
 
 import lombok.AccessLevel;
@@ -79,6 +81,13 @@ public class Team extends AuditEntity implements Serializable {
 	
 	public void addMember(SystemUser user)
 	{
+		boolean isExist = this.members.stream()
+									  .map(r -> r.getUser())					
+									  .anyMatch(e -> e.equals(user));
+		
+		if (isExist)
+			throw new BusinessException("동일한 데이터가 존재합니다. 아이디 : " + user.getUserId(), ErrorCode.ID_DUPLICATION);
+		
 		this.members.add(new TeamMember(this, user));
 	}
 	

@@ -54,7 +54,7 @@ public class TeamDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class TeamSave implements Serializable {
+	public static class FormTeam implements Serializable {
 						
 		private static final long serialVersionUID = -3606614600656958895L;
 
@@ -72,12 +72,21 @@ public class TeamDTO {
 		
 		List<String> memberList;
 		
-		public static TeamDTO.TeamSave convertDTO(Team entity) {					
+		public Team newEntity() {						
+			return new Team(teamName);
+		}
+		
+		public Team modify(Team entity) {
+			entity.changeTeamName(teamName);
 			
-			if (entity == null)
-				return null;
+			return entity;
+		}
+		
+		public static TeamDTO.FormTeam convert(Team entity) {					
 			
-			TeamDTO.TeamSave dto = TeamDTO.TeamSave.builder()
+			if (entity == null) return null;
+			
+			TeamDTO.FormTeam dto = TeamDTO.FormTeam.builder()
 									.createdDt(entity.getCreatedDt())
 									.createdBy(entity.getCreatedBy())
 									.modifiedDt(entity.getModifiedDt())
@@ -91,5 +100,8 @@ public class TeamDTO {
 			return dto;
 		}
 	}
+	
+	
+	
 		
 }
